@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/30 15:12:38 by lifranco          #+#    #+#             */
-/*   Updated: 2026/03/30 15:16:28 by lifranco         ###   ########.fr       */
+/*   Created: 2026/03/30 16:25:21 by lifranco          #+#    #+#             */
+/*   Updated: 2026/03/30 16:39:36 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#ifndef	PARSING_H
+# define PARSING_H 
+# include "minishell.h"
 
-int	parse(char **argv, char **envp)
+enum redirect
 {
-	
-}
+	RED_IN,
+	RED_OUT,
+	RED_LIM,
+	RED_APP
+};
+
+typedef struct s_cmd
+{
+	char	**cmd;
+	int		red_type;
+	char	*filename;
+
+	struct s_cmd	*next;
+}	t_cmd;
+
+#endif
