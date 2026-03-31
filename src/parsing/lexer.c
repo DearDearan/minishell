@@ -6,11 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 13:44:49 by lifranco          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/03/31 16:11:21 by lifranco         ###   ########.fr       */
-=======
-/*   Updated: 2026/03/31 16:03:27 by lifranco         ###   ########.fr       */
->>>>>>> d56ba79 (feat!: Trying to do a lexer, did if there's no quotes, working on a split_quotes rn (help i wanna break my screen)
+/*   Updated: 2026/03/31 16:28:16 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
