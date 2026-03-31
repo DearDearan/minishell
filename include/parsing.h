@@ -6,11 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 16:25:21 by lifranco          #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2026/03/31 16:18:20 by lifranco         ###   ########.fr       */
-=======
-/*   Updated: 2026/03/31 14:32:22 by lifranco         ###   ########.fr       */
->>>>>>> 205b94e (rename: Renamed the delimiters in the enum to be shorter)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +29,6 @@ typedef struct s_lexer
 	char	*content;
 	int		type;
 	t_lexer	*next;
-<<<<<<< HEAD
-=======
-
->>>>>>> 205b94e (rename: Renamed the delimiters in the enum to be shorter)
 }	t_lexer;
 
 #endif
