@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command.h                                          :+:      :+:    :+:   */
+/*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 13:39:18 by Camille           #+#    #+#             */
-/*   Updated: 2026/03/31 14:53:45 by Camille          ###   ########.fr       */
+/*   Created: 2026/04/07 17:05:26 by Camille           #+#    #+#             */
+/*   Updated: 2026/04/07 17:08:35 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMAND_H
-# define COMMAND_H
+#include "minishell.h"
 
-# include <unistd.h>
-
-typedef struct s_cmd
+void	set_pipe(t_cmd *current, t_cmd *next)
 {
-	char			*path;
-	char			**argv;
-	int				fds[2];
-	pid_t			pid;
-} t_cmd;
+	int	fds;
 
-#endif
+	if (pipe(fds) == -1)
+		exit(EXIT_FAILURE);//TODO: error clean exit
+}

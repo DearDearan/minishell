@@ -19,24 +19,26 @@ MAKEFLAGS += --no-print-directory
 
 CC := cc
 CFLAGS := -Wall -Werror -Wextra -Iinclude -I$(LIBFT_DIR)include
-ifeq ($(DEBUG),1)
+ifeq ($(DEBUG),true)
     CFLAGS += -g
 endif
 
 SRC_DIR := src/
-PARSE_DIR := src/parsing
-LEXER_DIR := src/parsing/lexer
-EXPAND_DIR := src/expander
-#ALGO_DIR := algorithm/
+PARSE_DIR := parsing/
+LEXER_DIR := parsing/lexer/
+EXPAND_DIR := expander/
 
-EXPAND_BASENAMES := expand get_var is_in_sq
 SRC_BASENAMES := minishell ft_freeall
 PARSE_BASENAMES := fill_io parsing trim_quotes
 LEXER_BASENAMES := ft_lexlast lexer split_quotes
+EXEC_BASENAMES := redirections
+EXPAND_BASENAMES := expand get_var is_in_sq
+
 SRCS := $(addprefix $(SRC_DIR), $(addsuffix .c,$(SRC_BASENAMES))) \
-		$(addprefix $(PARSE_DIR)/, $(addsuffix .c,$(PARSE_BASENAMES))) \
-		$(addprefix $(LEXER_DIR)/, $(addsuffix .c,$(LEXER_BASENAMES))) \
-		$(addprefix $(EXPAND_DIR)/, $(addsuffix .c,$(EXPAND_BASENAMES)))
+		$(addprefix $(SRC_DIR)$(PARSE_DIR), $(addsuffix .c,$(PARSE_BASENAMES))) \
+		$(addprefix $(SRC_DIR)$(LEXER_DIR), $(addsuffix .c,$(LEXER_BASENAMES))) \
+		$(addprefix $(SRC_DIR)$(EXEC_DIR), $(addsuffix .c,$(EXEC_BASENAMES))) \
+		$(addprefix $(SRC_DIR)$(EXPAND_DIR), $(addsuffix .c,$(EXPAND_BASENAMES)))
 
 OBJ_DIR := .build/
 OBJS := $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)

@@ -12,23 +12,41 @@
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
 # include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "command.h"
-# include "parsing.h"
+# include "ft_list.h"
 # include "ft_stdio.h"
 # include "ft_stdlib.h"
 # include "ft_string.h"
 # include "strutils.h"
-# include "ft_list.h"
 # include "ft_ctype.h"
-# include <fcntl.h>
 # include "structs.h"
+# include "command.h"
+# include "parsing.h"
 
+typedef struct s_io
+{
+	char		*infile;
+	char		*outfile;
+	bool		is_lim;
+	int			outfile_flags;
+	struct s_io	*next;
+}	t_io;
+
+typedef struct s_minishell
+{
+	int		exit_c;
+	char	**envp;
+	size_t	nb_cmds;
+	t_cmd	**cmds;
+	t_io	**ios;
+}	t_minishell;
 
 //static int	g_signal;
 
