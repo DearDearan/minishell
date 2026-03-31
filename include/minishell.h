@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 11:12:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/03/31 16:16:55 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/03/31 16:19:19 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,5 @@ typedef struct s_fds
 }	t_fds;
 
 static int	g_signal;
-
 
 #endif
