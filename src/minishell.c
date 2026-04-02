@@ -6,24 +6,29 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/01 16:11:39 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/02 16:44:33 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+static char	*get_pwd(void)
 {
-	t_lexer *test;
-	if (argc != 2)
-		return (1);
-	(void)envp;
-	test = lex(argv[1]);
-	while (test)
-	{
-		printf("Content : %s et type : %d\n", test->content, test->type);
-		test = test->next;
-	}
+	char	*path;
+
+	path = getenv("PWD");
+	return (path);
+}
+
+int	main(void)
+{
+	char	*line;
+	char	*prompt;
+	
+	prompt = ft_strjoin("Bush_Shell:", get_pwd());
+	prompt = ft_strjoin(prompt, "$ ");
+	line = readline(prompt);
+	printf("%s\n", line);
 	return 0;
 }
 
