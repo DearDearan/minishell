@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 11:12:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/02 11:14:52 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/02 16:24:01 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <unistd.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "command.h"
 # include "parsing.h"
 # include "ft_stdio.h"
@@ -24,13 +26,6 @@
 # include "strutils.h"
 # include "ft_list.h"
 
-typedef struct s_bushell
-{
-	int			exit_c;
-	char		**envp;
-	t_cmd		*cmd;
-	struct s_io	*io;
-}	t_bushell;
 
 typedef struct s_io
 {
@@ -38,8 +33,17 @@ typedef struct s_io
 	char	*outfile;
 	char	*limiter;
 	int		outfile_flags;
-
+	struct s_io		*io;
 }	t_io;
+
+typedef struct s_bushshell
+{
+	int		exit_c;
+	char	**envp;
+	size_t	nb_cmds;
+	t_cmd	**cmds;
+	t_io	*io;
+}	t_bushell;
 
 static int	g_signal;
 
