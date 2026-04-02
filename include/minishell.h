@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 11:12:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/02 10:50:24 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/02 10:57:27 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ typedef struct s_bushell
 	char	**envp;
 	t_cmd	*cmd;
 	int		type;
-	t_fds	*fds;
+	t_io	*io;
 }	t_bushell;
 
-typedef struct s_fds
+typedef struct s_io
 {
-	char	*fdin;
-	char	*fdout;
+	char	*infile;
+	char	*outfile;
 	char	*limiter;
-}	t_fds;
+}	t_io;
 
 static int	g_signal;
 
