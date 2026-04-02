@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 11:12:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/03/31 16:19:19 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/02 10:50:24 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "ft_stdlib.h"
 # include "ft_string.h"
 # include "strutils.h"
+# include "ft_list.h"
 
 typedef struct s_bushell
 {
@@ -29,7 +30,7 @@ typedef struct s_bushell
 	char	**envp;
 	t_cmd	*cmd;
 	int		type;
-	//	t_pipe		exec;
+	t_fds	*fds;
 }	t_bushell;
 
 typedef struct s_fds
@@ -40,5 +41,9 @@ typedef struct s_fds
 }	t_fds;
 
 static int	g_signal;
+
+/* FT_FREEALL_C */
+void	ft_freeall(char **strs);
+
 
 #endif
