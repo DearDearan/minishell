@@ -6,7 +6,7 @@
 #    By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/20 10:13:22 by Camille           #+#    #+#              #
-#    Updated: 2026/04/01 16:32:03 by lifranco         ###   ########.fr        #
+#    Updated: 2026/04/02 16:40:39 by lifranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,13 @@ ifeq ($(DEBUG),1)
 endif
 
 SRC_DIR := src/
-PARSE_DIR := src/parsing
+#PARSE_DIR := src/parsing
 #ALGO_DIR := algorithm/
 
-SRC_BASENAMES := minishell ft_freeall
-PARSE_BASENAMES := split_quotes lexer ft_lexlast
+SRC_BASENAMES := minishell #ft_freeall
+#PARSE_BASENAMES := split_quotes lexer ft_lexlast
 SRCS := $(addprefix $(SRC_DIR), $(addsuffix .c,$(SRC_BASENAMES))) \
-		$(addprefix $(PARSE_DIR)/, $(addsuffix .c,$(PARSE_BASENAMES)))
+		#$(addprefix $(PARSE_DIR)/, $(addsuffix .c,$(PARSE_BASENAMES)))
 
 OBJ_DIR := .build/
 OBJS := $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
@@ -38,7 +38,7 @@ OBJS := $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	@$(CC) $(CFLAGS) $^ -o $@
+	@$(CC) $(CFLAGS) $^ -o $@ -lreadline
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
