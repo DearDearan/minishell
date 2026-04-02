@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 13:44:49 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/02 10:40:51 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/02 16:53:30 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ t_lexer *lex(char *argv)
 		ft_lst_addback(&ret_lex, new); 
 		i++;
 	}
+	ft_freeall(args);
 	return (ret_lex);
 }
