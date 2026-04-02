@@ -1,34 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   ft_lexlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/30 15:12:38 by lifranco          #+#    #+#             */
-/*   Updated: 2026/03/31 17:53:26 by lifranco         ###   ########.fr       */
+/*   Created: 2026/04/01 16:26:19 by lifranco          #+#    #+#             */
+/*   Updated: 2026/04/01 16:32:32 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_cmd *parse(int argc, char **argv, char **envp)
+t_lexer	*ft_lexlast(t_lexer *lst)
 {
-	int 	i;
-	char	**cmds;
-    t_cmd	*parsing;
-
-	parsing.fds[0] = -1;
-	parsing.fds[1] = -1;
-	parsing.pid = -1;
-	i = 0;
-	parsing = ft_calloc(argc, sizeof(t_cmd));
-	cmds = ft_calloc(sizeof(char *), argc);
-	while (i < argc)
-	{
-		cmds[i] = ft_split(argv[i + 1], ' ');
-		i++;
-	}
-
- 	return (parsing);
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }
