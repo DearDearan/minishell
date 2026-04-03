@@ -6,17 +6,12 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 16:25:21 by lifranco          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/04/02 16:52:06 by lifranco         ###   ########.fr       */
-=======
-/*   Updated: 2026/03/31 16:18:20 by lifranco         ###   ########.fr       */
->>>>>>> 8851e7e (Fix merge conflict in parsing.h)
+/*   Updated: 2026/04/03 17:51:38 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef	PARSING_H
 # define PARSING_H 
-
 
 typedef enum e_type
 {

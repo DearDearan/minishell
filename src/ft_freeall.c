@@ -6,13 +6,13 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/01 15:36:46 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/01 16:23:43 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/03 10:52:09 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_freeall(char **strs)
+void	ft_freetabs(char **strs)
 {
 	int	i;
 

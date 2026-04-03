@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:07:53 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/01 11:56:32 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/03 10:51:30 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ static size_t	to_next_c(const char *str, char c)
 	char	quote_c;
 
 	i = 0;
-	quote_c = '"';
+	quote_c = '\"';
 	while (str[i] && str[i] != c)
 	{
-		if (str[i] == '"' || str[i] == 39)
+		if (str[i] == '\"' || str[i] == '\'')
 		{
 			quote_c = str[i];
 			i++;

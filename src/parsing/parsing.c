@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 15:12:38 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/02 16:08:02 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/03 17:42:20 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	init_cmd(t_cmd *cmd)
 	cmd->fds[1] = -1;
 }
 
-static int  count_words(t_lexer *lexed)
+static int  w_cnt(t_lexer *lexed)
 {
 int count;
     count = 0;
@@ -46,49 +46,57 @@ static unsigned int	count_pipes(t_lexer *lexed)
 	return (count);
 }
 
-void	fill_cmds(t_bushell *parsing, t_lexer *lexed)
+static void	fill_cmds(t_bushell *parse, t_lexer *lex)
 {
 	int		j;
 	int 	i;
 
 	i = 0;
 	j = 0;
-	parsing->cmds[i]->argv = ft_calloc(count_words(lexed) + 1, sizeof(char *));
-	while (lexed)
+	parse->cmds[i]->argv = ft_calloc(w_cnt(lex) + 1, sizeof(char *));
+	while (lex)
 	{
-		if (lexed->type == WORDS)
+		if (lex->type == WORDS)
 		{
-			parsing->cmds[i]->argv[j] = lexed->content;
-			lexed = lexed->next;
+			parse->cmds[i]->argv[j] = lex->content;
+			lex = lex->next;
 			j++;
 		}
-		else if (lexed->type == PIPES )
+		else if (lex->type == PIPES)
 		{
-			i++;
-			lexed = lexed->next;
-			parsing->cmds[i]->argv = ft_calloc(count_words(lexed) + 1,
-				sizeof(char *));
+			lex = lex->next;
+			parse->cmds[++i]->argv = ft_calloc(w_cnt(lex) + 1, sizeof(char *));
 			j = 0;
 		}
+		else if (lex->type > PIPES)
+			lex = fill_io(parse, lex, i);
 		else
-			lexed = lexed->next;
+			lex = lex->next;
 	}
 }
 
-t_bushell *parse(char *line, char **envp)
+t_bushell *parse(char *line)
 {
 	t_bushell		*parsing;
 	t_lexer			*lexed;
-	int 			i;
+	size_t 			i;
 
 	lexed = lex(line);
 	i = -1;
 	parsing = ft_calloc(1, sizeof(t_bushell));
+	if (!parsing)
+		return (NULL);
 	parsing->nb_cmds = count_pipes(lexed) + 1;
 	parsing->cmds = ft_calloc(parsing->nb_cmds, sizeof(t_cmd *));
+	parsing->io = ft_calloc(parsing->nb_cmds, sizeof(t_io *));
+	if (!parsing->cmds || !parsing->io)
+		return (NULL);
 	while (++i < parsing->nb_cmds)
 	{
 		parsing->cmds[i] = ft_calloc(1, sizeof(t_cmd));
+		parsing->io[i] = ft_calloc(1, sizeof(t_io));
+		if (!parsing->cmds[i] || !parsing->io[i])
+			return (NULL);
 		init_cmd(parsing->cmds[i]);
 	}
 	i = -1;

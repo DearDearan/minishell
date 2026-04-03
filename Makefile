@@ -6,7 +6,7 @@
 #    By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/20 10:13:22 by Camille           #+#    #+#              #
-#    Updated: 2026/04/02 16:40:39 by lifranco         ###   ########.fr        #
+#    Updated: 2026/04/03 17:29:44 by lifranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,16 @@ ifeq ($(DEBUG),1)
 endif
 
 SRC_DIR := src/
-#PARSE_DIR := src/parsing
+PARSE_DIR := src/parsing
+LEXER_DIR := src/parsing/lexer
 #ALGO_DIR := algorithm/
 
-SRC_BASENAMES := minishell #ft_freeall
-#PARSE_BASENAMES := split_quotes lexer ft_lexlast
+SRC_BASENAMES := minishell ft_freeall
+PARSE_BASENAMES := fill_io parsing
+LEXER_BASENAMES := ft_lexlast lexer split_quotes
 SRCS := $(addprefix $(SRC_DIR), $(addsuffix .c,$(SRC_BASENAMES))) \
-		#$(addprefix $(PARSE_DIR)/, $(addsuffix .c,$(PARSE_BASENAMES)))
+		$(addprefix $(PARSE_DIR)/, $(addsuffix .c,$(PARSE_BASENAMES))) \
+		$(addprefix $(LEXER_DIR)/, $(addsuffix .c,$(LEXER_BASENAMES)))
 
 OBJ_DIR := .build/
 OBJS := $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)

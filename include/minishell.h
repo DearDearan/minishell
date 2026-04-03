@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 11:12:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/02 16:24:01 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/03 17:51:17 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,30 +25,33 @@
 # include "ft_string.h"
 # include "strutils.h"
 # include "ft_list.h"
-
+# include <fcntl.h>
 
 typedef struct s_io
 {
-	char	*infile;
-	char	*outfile;
-	char	*limiter;
-	int		outfile_flags;
-	struct s_io		*io;
+	char		*infile;
+	char		*outfile;
+	bool		is_lim;
+	int			outfile_flags;
+	struct s_io	*next;
 }	t_io;
 
-typedef struct s_bushshell
+typedef struct s_bushell
 {
 	int		exit_c;
 	char	**envp;
 	size_t	nb_cmds;
 	t_cmd	**cmds;
-	t_io	*io;
+	t_io	**io;
 }	t_bushell;
 
 static int	g_signal;
 
 /* FT_FREEALL_C */
-void	ft_freeall(char **strs);
-
+void	ft_freetabs(char **strs);
+/* FILL_IO_C */
+t_lexer *fill_io(t_bushell *shell, t_lexer *lexed, int i);
+/* PARSING_C */
+t_bushell *parse(char *line);
 
 #endif

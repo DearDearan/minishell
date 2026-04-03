@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 13:44:49 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/02 16:53:30 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/03 17:38:51 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,15 @@ t_lexer *lex(char *argv)
 	while (args[i])
 	{
 		new = ft_newnode(args[i]);
+		if (!new)
+			return (NULL);
 		type = get_type(args[i], type);
 		new->type = type;
 		ft_lst_addback(&ret_lex, new); 
 		i++;
 	}
-	ft_freeall(args);
+	ft_freetabs(args);
 	return (ret_lex);
 }
+
+
