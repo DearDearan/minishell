@@ -3,37 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   fill_io.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dearan <dearan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 16:07:59 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/03 18:19:24 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/04 19:13:05 by dearan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_lexer *fill_io(t_bushell *shell, t_lexer *lexed, int i)
+static t_io	*ft_newnode(void)
 {
+	t_io	*node;
+
+	node = ft_calloc(sizeof(t_io), 1);
+	if (!node)
+		return (NULL);
+	node->next = NULL;
+	return (node);
+}
+
+static t_io	*add_io(t_lexer *lexed)
+{
+	t_io	*io;
+	
+	io = ft_newnode();
 	if (lexed->type == IN && lexed->next != NULL)
 	{
-		shell->io[i]->infile = lexed->next->content;
-		shell->io[i]->is_lim = false;		
+		io->infile = lexed->next->content;
+		io->is_lim = false;		
 	}
 	else if (lexed->type == OUT && lexed->next != NULL)
 	{
-		shell->io[i]->outfile = lexed->next->content;
-		shell->io[i]->outfile_flags = O_CREAT | O_TRUNC | O_WRONLY;
+		io->outfile = lexed->next->content;
+		io->outfile_flags = O_CREAT | O_TRUNC | O_WRONLY;
 	}
 	else if (lexed->type == LIM && lexed->next != NULL)
 	{
-		shell->io[i]->infile = lexed->next->content;
-		shell->io[i]->is_lim = true;
+		io->infile = lexed->next->content;
+		io->is_lim = true;
 	}
 	else if (lexed->type == APP && lexed->next != NULL)
 	{
-		shell->io[i]->outfile = lexed->next->content;
-		shell->io[i]->outfile_flags = O_CREAT | O_APPEND | O_WRONLY;
+		io->outfile = lexed->next->content;
+		io->outfile_flags = O_CREAT | O_APPEND | O_WRONLY;
 	}
+	return (io);
+}
+
+t_lexer *fill_io(t_bushell *shell, t_lexer *lexed, int i)
+{
+	
+	t_io *content;
+
+	content = add_io(lexed);
+	
 	return (lexed->next);
 }
 
