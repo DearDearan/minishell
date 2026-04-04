@@ -25,6 +25,7 @@ int	main(void)
 	// char	*line;
 	char	*prompt;
 	t_bushell	*shell;
+	char		*line;
 	size_t i = 0;
 	size_t j = 0;
 	
@@ -32,7 +33,9 @@ int	main(void)
 	prompt = ft_strjoin(prompt, "$ ");
 	while (1)
 	{
-	 	shell = parse(readline(prompt));
+		line = readline(prompt);
+		add_history(line);
+	 	shell = parse(line);
 		i = 0;
 		while (i < shell->nb_cmds)
 		{

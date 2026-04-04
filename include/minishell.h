@@ -45,7 +45,7 @@ typedef struct s_bushell
 	t_io	**io;
 }	t_bushell;
 
-static int	g_signal;
+//static int	g_signal;
 
 /* FT_FREEALL_C */
 void	ft_freetabs(char **strs);
