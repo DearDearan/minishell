@@ -26,12 +26,13 @@ endif
 SRC_DIR := src/
 PARSE_DIR := parsing/
 LEXER_DIR := parsing/lexer/
+EXEC_DIR := exec/
 EXPAND_DIR := expander/
 
 SRC_BASENAMES := minishell ft_freeall
 PARSE_BASENAMES := fill_io parsing trim_quotes
 LEXER_BASENAMES := ft_lexlast lexer split_quotes
-EXEC_BASENAMES := redirections
+EXEC_BASENAMES := exec redirections pipes
 EXPAND_BASENAMES := expand get_var is_in_sq
 
 SRCS := $(addprefix $(SRC_DIR), $(addsuffix .c,$(SRC_BASENAMES))) \

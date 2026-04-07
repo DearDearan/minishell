@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "exec.h"
 
 int	main(int argc, char *argv[], char *envp[])
 {
