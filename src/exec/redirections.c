@@ -18,15 +18,20 @@ static int	get_fd_heredoc(char *limiter, int size);
 
 void	set_redirections(t_cmd *cmd, t_io *io)
 {
-	if (io->infile)
+	while (io)
 	{
-		if (io->is_lim)
-			cmd->fds[0] = get_fd_heredoc(io->infile, ft_strlen(io->infile));
-		else
-			cmd->fds[0] = open_io(io->infile, O_RDONLY);
+		if (io->infile)
+		{
+			close_fd(&cmd->fds[0]);
+			if (io->is_lim)
+				cmd->fds[0] = get_fd_heredoc(io->infile, ft_strlen(io->infile));
+			else
+				cmd->fds[0] = open_io(io->infile, O_RDONLY);
+		}
+		if (io->outfile)
+			cmd->fds[1] = open_io(io->infile, io->outfile_flags);
+		io = io->next;
 	}
-	if (io->outfile)
-		cmd->fds[1] = open_io(io->infile, io->outfile_flags);
 }
 
 static int	open_io(char *path, int flags)

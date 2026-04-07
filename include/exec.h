@@ -6,7 +6,7 @@
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 15:31:30 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/02 12:05:57 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/07 17:52:53 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	exec(t_minishell *sh, int nb_cmds);
 void	set_redirections(t_cmd *cmd, t_io *io);
 
 // pipes.c
-void	set_pipe(t_cmd *current, t_cmd *next);
+void	set_pipe(int *curr_cmd_fd_out, int *next_cmd_fd_in);
+void	close_fds(int (*fds)[2]);
+void	close_fd(int *fd);
 
 #endif

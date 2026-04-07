@@ -6,7 +6,7 @@
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 11:54:27 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/02 12:05:51 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/07 17:56:59 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,15 @@ int	exec(t_minishell *sh, int nb_cmds)
 	int	next;
 
 	i = 0;
+	next = 1;
 	while (i < nb_cmds)
 	{
-		next++;
 		set_redirections(sh->cmds[i], sh->ios[i]);
 		if (next != nb_cmds)
-			set_pipe(sh->cmds[i], sh->cmds[next]);
+			set_pipe(&sh->cmds[i]->fds[1], &sh->cmds[next]->fds[0]);
 		// make_child
 		i++;
+		next++;
 	}
 	//TODO:get_cmds_paths avec getenv
 	//TODO:get exit code

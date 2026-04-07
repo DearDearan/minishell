@@ -63,7 +63,7 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 ## TODO
 
 - tester dautres comportements de bash et voir si yen a dautres a connaitre concernant les pipes et redirections, etc 
-- free a la sortie de lexec cmds et le contenu de io et mettre a NULL
+- free a la sortie de lexec cmds et le contenu de io et mettre a NULL (fonctions de liam ou moi ??)
 - fonctions qui peuvent maider a tester les dossiers et fichiers ainsi que leurs permissions : stat, fstat, lstat et access. Voir leurs differences et utilisations
 
 comportements bash:
