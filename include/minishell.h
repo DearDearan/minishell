@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 11:12:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/06 14:08:42 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/07 14:59:01 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,23 @@ typedef struct s_io
 	struct s_io	*next;
 }	t_io;
 
-typedef struct s_bushell
+typedef struct s_minishell
 {
 	int		exit_c;
 	char	**envp;
 	size_t	nb_cmds;
 	t_cmd	**cmds;
-	t_io	**io;
-}	t_bushell;
+	t_io	**ios;
+}	t_minishell;
 
 //static int	g_signal;
 
 /* FT_FREEALL_C */
 void	ft_freetabs(char **strs);
 /* FILL_IO_C */
-t_lexer *fill_io(t_bushell *shell, t_lexer *lexed, int i);
+t_lexer *fill_io(t_minishell *shell, t_lexer *lexed, int i);
 /* PARSING_C */
-t_bushell *parse(char *line);
+t_minishell *parse(char *line);
 /* FILL_IO_C */
 t_io	*ft_iolast(t_io *lst);
 t_io	*ft_iolast(t_io *lst);

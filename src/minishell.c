@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/06 15:28:12 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/07 14:59:45 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)	argv;
 	(void) envp;
 	char	*prompt;
-	t_bushell	*shell;
+	t_minishell	*shell;
 	char		*line;
 	size_t i = 0;
 	size_t j = 0;
@@ -51,7 +51,7 @@ int	main(int argc, char **argv, char **envp)
 				j++;
 			}
 			i++;
-			curr = shell->io[i - 1];
+			curr = shell->ios[i - 1];
 			while (curr)
 			{
 				printf("Outfile = %s\n", curr->outfile);
