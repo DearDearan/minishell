@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_io.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dearan <dearan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 16:07:59 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/04 19:13:05 by dearan           ###   ########.fr       */
+/*   Updated: 2026/04/06 13:40:33 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,16 @@ t_lexer *fill_io(t_bushell *shell, t_lexer *lexed, int i)
 {
 	
 	t_io *content;
+	t_io *last;
 
-	content = add_io(lexed);
-	
+	if (!shell->io[i]->infile && !shell->io[i]->outfile)
+		*shell->io[i] = *add_io(lexed);
+	else 
+	{
+		last = ft_iolast(shell->io[i]);	
+		content = add_io(lexed);
+		last->next = content;
+	}
 	return (lexed->next);
 }
 

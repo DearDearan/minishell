@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 11:12:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/03 17:51:17 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/06 14:08:42 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,8 @@ void	ft_freetabs(char **strs);
 t_lexer *fill_io(t_bushell *shell, t_lexer *lexed, int i);
 /* PARSING_C */
 t_bushell *parse(char *line);
+/* FILL_IO_C */
+t_io	*ft_iolast(t_io *lst);
+t_io	*ft_iolast(t_io *lst);
 
 #endif

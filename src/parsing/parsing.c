@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 15:12:38 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/03 17:42:20 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/07 12:18:19 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	fill_cmds(t_bushell *parse, t_lexer *lex)
 	{
 		if (lex->type == WORDS)
 		{
-			parse->cmds[i]->argv[j] = lex->content;
+			parse->cmds[i]->argv[j] = trim_quotes(lex->content);
 			lex = lex->next;
 			j++;
 		}

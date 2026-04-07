@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/03 18:11:54 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/06 15:28:12 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,25 @@
 	return (path);
 }
 
-int	main(void)
+int	main(int argc, char **argv, char **envp)
 {
-	// char	*line;
+	(void) argc;
+	(void)	argv;
+	(void) envp;
 	char	*prompt;
 	t_bushell	*shell;
 	char		*line;
 	size_t i = 0;
 	size_t j = 0;
 	
+	t_io *curr;
 	prompt = ft_strjoin("Bush_Shell:", get_pwd());
 	prompt = ft_strjoin(prompt, "$ ");
 	while (1)
 	{
 		line = readline(prompt);
-		add_history(line);
+		if (line[0] != '\0')
+			add_history(line);
 	 	shell = parse(line);
 		i = 0;
 		while (i < shell->nb_cmds)
@@ -47,10 +51,15 @@ int	main(void)
 				j++;
 			}
 			i++;
-			printf("Outfile = %s\n", shell->io[i - 1]->outfile);
-			printf("Infile = %s\n", shell->io[i - 1]->infile);
-			printf("is_lim = %d\n", shell->io[i - 1] ->is_lim);
-			printf("outflags = %i\n", shell->io[i - 1] ->outfile_flags);
+			curr = shell->io[i - 1];
+			while (curr)
+			{
+				printf("Outfile = %s\n", curr->outfile);
+				printf("Infile = %s\n", curr->infile);
+				printf("is_lim = %d\n", curr->is_lim);
+				printf("outflags = %i\n", curr->outfile_flags);
+				curr = curr->next;
+			}
 		}
 	}
 }

@@ -6,7 +6,7 @@
 #    By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/20 10:13:22 by Camille           #+#    #+#              #
-#    Updated: 2026/04/03 17:29:44 by lifranco         ###   ########.fr        #
+#    Updated: 2026/04/07 12:16:19 by lifranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ LEXER_DIR := src/parsing/lexer
 #ALGO_DIR := algorithm/
 
 SRC_BASENAMES := minishell ft_freeall
-PARSE_BASENAMES := fill_io parsing
+PARSE_BASENAMES := fill_io parsing trim_quotes
 LEXER_BASENAMES := ft_lexlast lexer split_quotes
 SRCS := $(addprefix $(SRC_DIR), $(addsuffix .c,$(SRC_BASENAMES))) \
 		$(addprefix $(PARSE_DIR)/, $(addsuffix .c,$(PARSE_BASENAMES))) \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dearan <dearan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 16:25:21 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/04 18:55:38 by dearan           ###   ########.fr       */
+/*   Updated: 2026/04/07 12:15:20 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_lexer *lex(char *argv);
 char	**ft_split_outquote(char const *s, char c);
 /* FT_LEXLAST_C */
 t_lexer	*ft_lexlast(t_lexer *lst);
-t_io	*ft_iolast(t_io *lst);
+/* TRIM_QUOTES_C */
+char	*trim_quotes(char *str);
 
 #endif
