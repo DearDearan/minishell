@@ -6,7 +6,7 @@
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:52:32 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/02 12:06:49 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/10 17:41:01 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	main(int argc, char *argv[], char *envp[])
 	cmd1.fds[1] = -1, cmd2.fds[1] = -1, cmd3.fds[1] = -1;
 	cmd1.pid = -1, cmd2.pid = -1, cmd3.pid = -1;
 
-	io1.infile = NULL, io1.outfile = NULL, io1.is_lim = false, io1.outfile_flags = O_CREAT | O_TRUNC | O_WRONLY, io1.next = &io2;
-	io2.infile = NULL, io2.outfile = NULL, io2.is_lim = false, io2.outfile_flags = O_CREAT | O_TRUNC | O_WRONLY, io2.next = &io3;
-	io3.infile = NULL, io3.outfile = NULL, io3.is_lim = false, io3.outfile_flags = O_CREAT | O_TRUNC | O_WRONLY, io3.next = NULL;
+	io1.infile = "infile", io1.outfile = "outfile", io1.is_lim = false, io1.outfile_flags = O_CREAT | O_TRUNC | O_WRONLY, io1.next = NULL;
+	io2.infile = NULL, io2.outfile = NULL, io2.is_lim = false, io2.outfile_flags = O_CREAT | O_TRUNC | O_WRONLY, io2.next = NULL;
+	io3.infile = NULL, io3.outfile = "outfile3", io3.is_lim = false, io3.outfile_flags = O_CREAT | O_TRUNC | O_WRONLY, io3.next = NULL;
 
 	exec(&sh, sh.nb_cmds);
 	return (0);

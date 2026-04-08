@@ -43,6 +43,8 @@ To use the minishell program, simply run minishell. It will wait for a prompt an
 
 On ne gere pas les caracteres speciaux y compris les \n du coups. On les consideres evidemment comme des caracteres a part entieres si ils sont dans les quotes.
 
+On n'executera pas la commande et le child des la premiere redirection invalide
+
 todo
 
 ## Improvement Suggestions
@@ -62,7 +64,10 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 
 ## TODO
 
-- tester dautres comportements de bash et voir si yen a dautres a connaitre concernant les pipes et redirections, etc 
+starting minishell lundi 30:
+1 semaine : 4 jours de reflexion en commun et prototypage des structures
+2 semaine : 1 journee de test comportements bash, 3 jours de code
+- strace pour regarder les commandes de bash
 - free a la sortie de lexec cmds et le contenu de io et mettre a NULL (fonctions de liam ou moi ??)
 - fonctions qui peuvent maider a tester les dossiers et fichiers ainsi que leurs permissions : stat, fstat, lstat et access. Voir leurs differences et utilisations
 

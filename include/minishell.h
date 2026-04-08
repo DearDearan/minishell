@@ -27,7 +27,6 @@
 # include "strutils.h"
 # include "ft_ctype.h"
 # include "structs.h"
-# include "command.h"
 # include "parsing.h"
 
 typedef struct s_io
