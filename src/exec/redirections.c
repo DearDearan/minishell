@@ -6,7 +6,7 @@
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:49:58 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/07 17:56:49 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/10 15:45:14 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "exec.h"
 
 static int	open_io(char *path, int flags);
-static int	get_fd_heredoc(char *limiter, int size);
+static int	get_fd_heredoc(t_minishell *sh, char *limiter, int size);
 
-void	set_redirections(t_cmd *cmd, t_io *io)
+bool	set_redirections(t_minishell *sh, t_cmd *cmd, t_io *io)
 {
 	while (io)
 	{
@@ -24,14 +24,21 @@ void	set_redirections(t_cmd *cmd, t_io *io)
 		{
 			close_fd(&cmd->fds[0]);
 			if (io->is_lim)
-				cmd->fds[0] = get_fd_heredoc(io->infile, ft_strlen(io->infile));
+				cmd->fds[0] = get_fd_heredoc(sh, io->infile, ft_strlen(io->infile));
 			else
 				cmd->fds[0] = open_io(io->infile, O_RDONLY);
+			if (cmd->fds[0] == -1)
+				return (false);
 		}
 		if (io->outfile)
+		{
 			cmd->fds[1] = open_io(io->infile, io->outfile_flags);
+			if (cmd->fds[1] == -1)
+				return (false);
+		}
 		io = io->next;
 	}
+	return (true);
 }
 
 static int	open_io(char *path, int flags)
@@ -44,13 +51,13 @@ static int	open_io(char *path, int flags)
 	return (fd);
 }
 
-static int	get_fd_heredoc(char *limiter, int size)
+static int	get_fd_heredoc(t_minishell *sh, char *limiter, int size)
 {
 	int		fds[2];
 	char	*s;
 
 	if (pipe(fds) == -1)
-		exit(EXIT_FAILURE); //TODO: liam clean_exit fonction
+		error_exit(sh, sh->nb_cmds);
 	s = NULL;
 	while (1)
 	{

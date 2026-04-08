@@ -29,7 +29,7 @@ LEXER_DIR := parsing/lexer/
 EXEC_DIR := exec/
 EXPAND_DIR := expander/
 
-SRC_BASENAMES := minishell ft_freeall
+SRC_BASENAMES := minishell ft_freeall cleaning
 PARSE_BASENAMES := fill_io parsing trim_quotes
 LEXER_BASENAMES := ft_lexlast lexer split_quotes
 EXEC_BASENAMES := exec redirections pipes
