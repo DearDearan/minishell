@@ -6,7 +6,7 @@
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 13:39:18 by Camille           #+#    #+#             */
-/*   Updated: 2026/03/31 14:53:45 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/12 12:25:38 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 
 typedef struct s_cmd
 {
-	char			*path;
-	char			**argv;
-	int				fds[2];
-	pid_t			pid;
+	char	*path;
+	char	**argv;
+	int		fds[2];
+	pid_t	pid;
 } t_cmd;
 
 #endif

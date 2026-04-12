@@ -6,7 +6,7 @@
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 15:31:30 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/10 15:50:16 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/12 14:10:53 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # define WARN_EOF \
 	"minishell: warning: here-document delimited by end-of-file (wanted '%s')"
 
+# define EXIT_NOTFOUND 127
+
 # include "minishell.h"
 
 //exec.c
@@ -24,16 +26,22 @@ int		exec(t_minishell *sh, int nb_cmds);
 // redirections.c
 bool	set_redirections(t_minishell *sh, t_cmd *cmd, t_io *io);
 
-// pipes.c
-void	set_pipe(t_minishell *sh, int *curr_cmd_fd_out, int *next_cmd_fd_in);
+// fds_utils.c
 void	close_fds(int (*fds)[2]);
 void	close_fd(int *fd);
+void	duplicate_fds(t_cmd *cmd);
+void	close_all_fds(t_cmd **cmds, int nb_cmds);
+
+// pipes.c
+void	set_pipe(t_minishell *sh, int *curr_cmd_fd_out, int *next_cmd_fd_in);
 
 // children.c
-//int		make_child(t_cmd *cmd);
+void	make_child(t_minishell *sh, t_cmd *cmd);
+void	wait_children(t_cmd **cmds, int nb_cmds, int *wstatus);
 
 //cleaning.c
 void	cleaning(t_minishell *sh, int nb_cmds);
+void	cleaning_for_next_prompt(t_minishell *sh, int nb_cmds);
 void	error_exit(t_minishell *sh, int nb_cmds);
 
 #endif
