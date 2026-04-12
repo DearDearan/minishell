@@ -6,7 +6,7 @@
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 11:54:27 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/10 16:55:24 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/12 14:44:53 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,19 @@
 #include "exec.h"
 
 static char	**extract_env_path(t_minishell *sh, char **envp);
+static void	exec_cmds(t_minishell *sh, int nb_cmds, char **env_path);
 static char	*get_executable_path(char *bin, char **env_path);
 static char	*get_path_in_env(char *bin, char**paths);
 
 int	exec(t_minishell *sh, int nb_cmds)
 {
-	int		i;
-	int		next;
 	char	**env_path;
 
-	i = 0;
-	next = 1;
 	env_path = extract_env_path(sh, sh->envp);
-	while (i < nb_cmds)
-	{
-		sh->exit_c = EXIT_FAILURE;
-		if (set_redirections(sh, sh->cmds[i], sh->ios[i]))
-		{
-			sh->cmds[i]->path = get_executable_path(sh->cmds[i]->argv[0], env_path);
-			if (!sh->cmds[i]->path)
-				error_exit(sh, nb_cmds);
-			if (next != nb_cmds)
-				set_pipe(sh, &sh->cmds[i]->fds[1], &sh->cmds[next]->fds[0]);
-			//sh->exit_c = make_child(sh->cmds[i]);TODO: make child func et retourner exit code
-		}
-		close_fds(&sh->cmds[i]->fds);//INFO:a verif plus tard si faut tout liberer ou pas
-		i++;
-		next++;
-	}
-	cleaning(sh, nb_cmds);
+	exec_cmds(sh, nb_cmds, env_path);
+	cleaning_for_next_prompt(sh, nb_cmds);
+	//TODO:mettre prototype de fonctions ici de acess children etc
+	//sh->exit_c = acess and wait children
 	return (sh->exit_c);
 }
 
@@ -68,6 +52,32 @@ static char	**extract_env_path(t_minishell *sh, char **envp)
 	if (!splitted_env_path)
 		error_exit(sh, sh->nb_cmds);
 	return (splitted_env_path);
+}
+
+static void	exec_cmds(t_minishell *sh, int nb_cmds, char **env_path)
+{
+	int		i;
+	int		next;
+	t_cmd	*cmd;
+
+	i = 0;
+	next = 1;
+	while (i < nb_cmds)
+	{
+		cmd = sh->cmds[i];
+		if (set_redirections(sh, cmd, sh->ios[i]))
+		{
+			cmd->path = get_executable_path(cmd->argv[0], env_path);
+			if (!cmd->path)
+				error_exit(sh, nb_cmds);
+			if (next != nb_cmds)
+				set_pipe(sh, &cmd->fds[1], &sh->cmds[next]->fds[0]);
+			make_child(sh, cmd);
+		}
+		close_fds(&cmd->fds);//INFO:a verif plus tard si faut tout liberer ou pas
+		i++;
+		next++;
+	}
 }
 
 static char	*get_executable_path(char *bin, char **env_path)

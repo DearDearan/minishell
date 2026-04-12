@@ -6,7 +6,7 @@
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 13:53:30 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/10 16:56:09 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/12 12:31:40 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 #include "exec.h"
 
 void	cleaning(t_minishell *sh, int nb_cmds)
+{
+	cleaning_for_next_prompt(sh, nb_cmds);
+	ft_free_strs(sh->envp);
+}
+
+void	cleaning_for_next_prompt(t_minishell *sh, int nb_cmds)
 {
 	int		i;
 	t_io	*io;
@@ -45,6 +51,5 @@ void	error_exit(t_minishell *sh, int nb_cmds)
 {
 	perror("minishell");
 	cleaning(sh, nb_cmds);
-	ft_free_strs(sh->envp);
 	exit(EXIT_FAILURE);
 }
