@@ -1,17 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command.h                                          :+:      :+:    :+:   */
+/*   ft_freeall.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 10:24:31 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/12 14:33:37 by lifranco         ###   ########.fr       */
+/*   Created: 2026/04/01 15:36:46 by lifranco          #+#    #+#             */
+/*   Updated: 2026/04/03 10:52:09 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMAND_H
-# define COMMAND_H
-# include "structs.h"
+#include "minishell.h"
 
-#endif
+void	ft_freetabs(char **strs)
+{
+	int	i;
+
+	i = 0;
+	while (strs[i])
+	{
+		free(strs[i]);
+		i++;
+	}
+	free(strs);
+}

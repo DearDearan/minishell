@@ -1,0 +1,70 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fill_io.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/02 16:07:59 by lifranco          #+#    #+#             */
+/*   Updated: 2026/04/07 15:00:27 by lifranco         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+static t_io	*ft_newnode(void)
+{
+	t_io	*node;
+
+	node = ft_calloc(sizeof(t_io), 1);
+	if (!node)
+		return (NULL);
+	node->next = NULL;
+	return (node);
+}
+
+static t_io	*add_io(t_lexer *lexed)
+{
+	t_io	*io;
+	
+	io = ft_newnode();
+	if (lexed->type == IN && lexed->next != NULL)
+	{
+		io->infile = lexed->next->content;
+		io->is_lim = false;		
+	}
+	else if (lexed->type == OUT && lexed->next != NULL)
+	{
+		io->outfile = lexed->next->content;
+		io->outfile_flags = O_CREAT | O_TRUNC | O_WRONLY;
+	}
+	else if (lexed->type == LIM && lexed->next != NULL)
+	{
+		io->infile = lexed->next->content;
+		io->is_lim = true;
+	}
+	else if (lexed->type == APP && lexed->next != NULL)
+	{
+		io->outfile = lexed->next->content;
+		io->outfile_flags = O_CREAT | O_APPEND | O_WRONLY;
+	}
+	return (io);
+}
+
+t_lexer *fill_io(t_minishell *shell, t_lexer *lexed, int i)
+{
+	
+	t_io *content;
+	t_io *last;
+
+	if (!shell->ios[i]->infile && !shell->ios[i]->outfile)
+		*shell->ios[i] = *add_io(lexed);
+	else 
+	{
+		last = ft_iolast(shell->ios[i]);	
+		content = add_io(lexed);
+		last->next = content;
+	}
+	return (lexed->next);
+}
+

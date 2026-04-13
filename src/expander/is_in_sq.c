@@ -1,45 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   is_in_sq.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 13:44:49 by lifranco          #+#    #+#             */
-/*   Updated: 2026/03/31 16:28:16 by lifranco         ###   ########.fr       */
+/*   Created: 2026/04/13 13:08:56 by lifranco          #+#    #+#             */
+/*   Updated: 2026/04/13 14:21:37 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_lexer *lex(char *argv)
+bool	is_in_sq(char *str, int pos)
 {
-	t_lexer *new;
-	char	**args;
 	int		i;
-	bool	pipes;
+	bool	sq;
+	bool	dq;
 
+	dq = false;
+	sq = false;
 	i = 0;
-	if (count_quotes % 2 == 0)
-		args = ""; // will have to write something
-	else
-		args = ft_split(argv, ' ');
-	while (args[i])
+	while (i < pos)
 	{
-		if (args[i] == '|')
-			pipes = true;
-		if (args[i] != '|')
-			new->content = args[i];
-		new->type = get_type(args[i], pipes)
+		if (str[i] == '\'' && !dq)
+			sq = !sq;
+		else if (str[i] == '\"' && !sq)
+			dq = !dq;
 		i++;
-		new->next;
 	}
-	new->next = NULL;
-	return (new);
-}
-
-void get_type(char *arg, int pipe)
-{
-
-
+	return (sq);
 }

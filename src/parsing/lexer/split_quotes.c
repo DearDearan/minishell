@@ -1,44 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   split_quotes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:07:53 by lifranco          #+#    #+#             */
-/*   Updated: 2026/03/31 16:03:23 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/13 16:41:01 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
 
-static size_t	strcount(const char *str, char c)
+static size_t   strcount(const char *str, char c)
 {
 	size_t	i;
-	size_t	j;
+	size_t	count;
+	bool	is_sq;
+	bool	is_dq;
 
 	i = 0;
-	j = 0;
-	while (*str)
+	count = 0;
+	is_sq = false;
+	is_dq = false;
+	while (str[i])
 	{
-		if (*str != c && j == 0)
-		{
-			j = 1;
-			i++;
-		}
-		else if (*str == c)
-			j = 0;
-		str++;
+		if (str[i] == '\'' && !is_dq)
+			is_sq = !is_sq;
+		else if (str[i] == '"' && !is_sq)
+			is_dq = !is_dq;
+		else if (str[i] == c && !is_sq && !is_dq)
+			count++;
+		i++;
 	}
-	return (i);
+	return (count + 1);
 }
 
 static size_t	to_next_c(const char *str, char c)
 {
 	size_t	i;
-
+	bool	is_sq;
+	bool	is_dq;
+	
+	is_dq = false;
+	is_sq = false;
 	i = 0;
-	while (str[i] && str[i] != c)
+	while (str[i] && (str[i] != c || is_sq || is_dq))
+	{
+		if (str[i] == '\'' && !is_dq)
+			is_sq = !is_sq;
+		else if (str[i] == '\"' && !is_sq)
+			is_dq = !is_dq;
 		i++;
+	}
 	return (i);
 }
 
@@ -81,7 +95,7 @@ static char	**fill_tab(char **tab, char const *s, char c)
 	return (tab);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split_outquote(char const *s, char c)
 {
 	char	**tab;
 
