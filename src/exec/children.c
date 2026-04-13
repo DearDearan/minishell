@@ -6,14 +6,17 @@
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 17:48:49 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/12 14:18:06 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/13 17:09:32 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_stdio.h"
+#include "ft_string.h"
 #include "minishell.h"
 #include "exec.h"
 
-static int	exit_child(t_minishell *sh, int nb_cmds);
+static void	print_error(char *path, char *bin);
+static void	exit_child(t_minishell *sh, int nb_cmds);
 
 void	make_child(t_minishell *sh, t_cmd *cmd)
 {
@@ -25,9 +28,12 @@ void	make_child(t_minishell *sh, t_cmd *cmd)
 		duplicate_fds(cmd);
 		close_all_fds(sh->cmds, sh->nb_cmds);
 		if (execve(cmd->path, cmd->argv, sh->envp) == -1)
+		{
+			print_error(cmd->path, cmd->argv[0]);
 			exit_child(sh, sh->nb_cmds);
+		}
 	}
-	else if (cmd->pid != -1)
+	else if (cmd->pid == -1)
 	{
 		wait_children(sh->cmds, sh->nb_cmds, &wstatus);
 		error_exit(sh, sh->nb_cmds);
@@ -47,8 +53,30 @@ void	wait_children(t_cmd **cmds, int nb_cmds, int *wstatus)
 	}
 }
 
-static int	exit_child(t_minishell *sh, int nb_cmds)
+static void	print_error(char *path, char *bin)
+{
+	struct stat	sb;
+
+	if (stat(path, &sb) == -1)
+	{
+		if (ft_strchr(bin, '/'))
+			ft_dprintf(2, "minishell: %s: No such file or directory\n", bin);
+		else
+			ft_dprintf(2, "minishell: %s: command not found\n", bin);
+	}
+	else
+	{
+		if (S_ISDIR(sb.st_mode))
+			ft_dprintf(2, "minishell: %s: Is a directory\n", bin);
+		else if (access(path, X_OK) == -1)
+			ft_dprintf(2, "minishell: %s: permission denied\n", bin);
+		else
+			ft_dprintf(2, "minishell: %s: Not an handled file\n", bin);
+	}
+}
+
+static void	exit_child(t_minishell *sh, int nb_cmds)
 {
 	cleaning(sh, nb_cmds);
-	return (EXIT_NOTFOUND);
+	exit(EXIT_NOTFOUND);
 }

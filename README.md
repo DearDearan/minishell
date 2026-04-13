@@ -66,7 +66,10 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 
 starting minishell lundi 30:
 1 semaine : 4 jours de reflexion en commun et prototypage des structures
-2 semaine : 1 journee de test comportements bash, 3 jours de code
+2 semaine : 1 journee de test comportements bash, 4 jours de code
+3 semaine : 1 jour de code
+- get exit code ( si pid = -1 retourner 1)
+- tenter de rebase (puis faire un merge ?)
 - strace pour regarder les commandes de bash
 - free a la sortie de lexec cmds et le contenu de io et mettre a NULL (fonctions de liam ou moi ??)
 - fonctions qui peuvent maider a tester les dossiers et fichiers ainsi que leurs permissions : stat, fstat, lstat et access. Voir leurs differences et utilisations

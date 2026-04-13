@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 11:12:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/14 13:56:14 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/14 15:33:29 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <unistd.h>
+# include <sys/types.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -29,6 +31,8 @@
 # include "ft_ctype.h"
 # include "structs.h"
 # include "parsing.h"
+# include "exec.h"
+# include "cleaning.h"
 
 typedef struct s_io
 {
