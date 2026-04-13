@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 13:44:49 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/13 10:58:10 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/13 17:10:23 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ t_lexer *lex(char *argv)
 			return (NULL);
 		type = get_type(args[i], type);
 		new->type = type;
-		new->is_sq = NULL; // TODO Helper function to verify if i'm effectively in a sq 
 		ft_lst_addback(&ret_lex, new); 
 		i++;
 	}

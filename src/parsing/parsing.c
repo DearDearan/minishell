@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 15:12:38 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/13 12:48:13 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/13 17:28:20 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ static void	init_cmd(t_cmd *cmd)
 
 static int  w_cnt(t_lexer *lexed)
 {
-int count;
+	int count;
     count = 0;
-while(lexed && lexed->type != PIPES)
+	while (lexed && lexed->type != PIPES)
     {
-if (lexed->type == WORDS)
-            count++;
+		if (lexed->type == WORDS)
+        	count++;
         lexed = lexed->next;
     }
-return (count);
+	return (count);
 }
 static unsigned int	count_pipes(t_lexer *lexed)
 {

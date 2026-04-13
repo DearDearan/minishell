@@ -6,48 +6,58 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 14:34:46 by lifranco          #+#    #+#             */
+/*   Updated: 2026/04/13 17:03:12 by lifranco         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   trim_quotes.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/06 14:34:46 by lifranco          #+#    #+#             */
 /*   Updated: 2026/04/07 12:15:23 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	fill_trim(char *str, char *trim, bool is_dq, bool is_sq)
+static void	fill_trim(char *str, char *trim)
 {
-	int	i;
-	int	j;
+	int		i = 0;
+	int		j = 0;
+	bool	in_sq;
+	bool	in_dq;
 
-	i = 0;
-	j = 0;
-	while(str[i])
+	in_sq = false;
+	in_dq = false;
+	while (str[i])
 	{
-		if (str[i] == '\"' && !is_dq && !is_sq)
-			is_dq = true;
-		else if (str[i] == '\"' && is_dq && !is_sq)
-			is_dq = false;
-		else if (str[i] == '\'' && !is_sq && !is_dq)
-			is_sq = true;
-		else if (str[i] == '\'' && !is_dq && is_sq)
-			is_sq = false;
-		else
+		if (str[i] == '\'' && !in_dq)
 		{
-			trim[j] = str[i];
-			j++;
+			in_sq = !in_sq;
+			i++;
+			continue;
 		}
-		i++;
+		if (str[i] == '"' && !in_sq)
+		{
+			in_dq = !in_dq;
+			i++;
+			continue;
+		}
+		trim[j++] = str[i++];
 	}
 }
 
-
-char	*trim_quotes(char *str)
+char *trim_quotes(char *str)
 {
-	bool	is_sq;
-	bool	is_dq;
-	char	*trim;
+	char *trim;
 
-	is_dq = false;
-	is_sq = false;
 	trim = ft_calloc(ft_strlen(str) + 1, sizeof(char));
-	fill_trim(str, trim, is_dq, is_sq);
+	fill_trim(str, trim);
 	return (trim);
 }

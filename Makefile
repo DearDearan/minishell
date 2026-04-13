@@ -6,7 +6,7 @@
 #    By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/20 10:13:22 by Camille           #+#    #+#              #
-#    Updated: 2026/04/13 11:54:16 by lifranco         ###   ########.fr        #
+#    Updated: 2026/04/13 17:47:32 by lifranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ LEXER_DIR := src/parsing/lexer
 EXPAND_DIR := src/expander
 #ALGO_DIR := algorithm/
 
-EXPAND_BASENAMES := expand get_var
+EXPAND_BASENAMES := expand get_var is_in_sq
 SRC_BASENAMES := minishell ft_freeall
 PARSE_BASENAMES := fill_io parsing trim_quotes
 LEXER_BASENAMES := ft_lexlast lexer split_quotes
