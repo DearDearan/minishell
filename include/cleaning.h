@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command.h                                          :+:      :+:    :+:   */
+/*   cleaning.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/31 13:39:18 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/12 12:25:38 by Camille          ###   ########.fr       */
+/*   Created: 2026/04/14 15:22:30 by Camille           #+#    #+#             */
+/*   Updated: 2026/04/14 15:24:54 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMAND_H
-# define COMMAND_H
+#ifndef CLEANING_H
+# define CLEANING_H
 
-# include <unistd.h>
+# include "structs.h"
 
-typedef struct s_cmd
-{
-	char	*path;
-	char	**argv;
-	int		fds[2];
-	pid_t	pid;
-} t_cmd;
+void	cleaning(t_minishell *sh, int nb_cmds);
+void	cleaning_for_next_prompt(t_minishell *sh, int nb_cmds);
+void	error_exit(t_minishell *sh, int nb_cmds);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 11:54:27 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/12 14:44:53 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/13 17:02:39 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ static char	*get_path_in_env(char *bin, char**paths);
 int	exec(t_minishell *sh, int nb_cmds)
 {
 	char	**env_path;
+	int		wstatus;
 
 	env_path = extract_env_path(sh, sh->envp);
 	exec_cmds(sh, nb_cmds, env_path);
+	wait_children(sh->cmds, sh->nb_cmds, &wstatus);
+	//TODO:sh->exit_c = get_exit_code(sh->cmds[nb_cmds - 1]) FAIRE DANS UN FICHIER .C a part
 	cleaning_for_next_prompt(sh, nb_cmds);
-	//TODO:mettre prototype de fonctions ici de acess children etc
-	//sh->exit_c = acess and wait children
 	return (sh->exit_c);
 }
 
