@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/07 14:59:45 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/13 12:49:56 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,26 @@ int	main(int argc, char **argv, char **envp)
 {
 	(void) argc;
 	(void)	argv;
-	(void) envp;
 	char	*prompt;
-	t_minishell	*shell;
+	t_minishell *shell;
 	char		*line;
 	size_t i = 0;
 	size_t j = 0;
-	
 	t_io *curr;
+	
 	prompt = ft_strjoin("Bush_Shell:", get_pwd());
 	prompt = ft_strjoin(prompt, "$ ");
 	while (1)
 	{
 		line = readline(prompt);
+		if (!line)
+			continue ;
 		if (line[0] != '\0')
 			add_history(line);
-	 	shell = parse(line);
+	 	shell = parse(line, envp);
+		if (!shell)
+			continue ;
+		shell->envp = envp;
 		i = 0;
 		while (i < shell->nb_cmds)
 		{
@@ -61,5 +65,6 @@ int	main(int argc, char **argv, char **envp)
 				curr = curr->next;
 			}
 		}
+		free(line);
 	}
 }

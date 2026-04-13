@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 15:12:38 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/07 15:00:57 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/13 12:48:13 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	fill_cmds(t_minishell *parse, t_lexer *lex)
 	{
 		if (lex->type == WORDS)
 		{
-			parse->cmds[i]->argv[j] = trim_quotes(lex->content);
+			parse->cmds[i]->argv[j] = trim_quotes(expand(lex->content, parse));
 			lex = lex->next;
 			j++;
 		}
@@ -75,7 +75,7 @@ static void	fill_cmds(t_minishell *parse, t_lexer *lex)
 	}
 }
 
-t_minishell *parse(char *line)
+t_minishell *parse(char *line, char **envp)
 {
 	t_minishell		*parsing;
 	t_lexer			*lexed;
@@ -86,6 +86,7 @@ t_minishell *parse(char *line)
 	parsing = ft_calloc(1, sizeof(t_minishell));
 	if (!parsing)
 		return (NULL);
+	parsing->envp = envp;
 	parsing->nb_cmds = count_pipes(lexed) + 1;
 	parsing->cmds = ft_calloc(parsing->nb_cmds, sizeof(t_cmd *));
 	parsing->ios = ft_calloc(parsing->nb_cmds, sizeof(t_io *));
@@ -99,7 +100,6 @@ t_minishell *parse(char *line)
 			return (NULL);
 		init_cmd(parsing->cmds[i]);
 	}
-	i = -1;
 	fill_cmds(parsing, lexed);	
  	return (parsing);
 }

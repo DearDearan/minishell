@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 11:12:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/07 14:59:01 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/13 12:49:28 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,10 @@
 # include "ft_string.h"
 # include "strutils.h"
 # include "ft_list.h"
+# include "ft_ctype.h"
 # include <fcntl.h>
+# include "structs.h"
 
-typedef struct s_io
-{
-	char		*infile;
-	char		*outfile;
-	bool		is_lim;
-	int			outfile_flags;
-	struct s_io	*next;
-}	t_io;
-
-typedef struct s_minishell
-{
-	int		exit_c;
-	char	**envp;
-	size_t	nb_cmds;
-	t_cmd	**cmds;
-	t_io	**ios;
-}	t_minishell;
 
 //static int	g_signal;
 
@@ -52,7 +37,7 @@ void	ft_freetabs(char **strs);
 /* FILL_IO_C */
 t_lexer *fill_io(t_minishell *shell, t_lexer *lexed, int i);
 /* PARSING_C */
-t_minishell *parse(char *line);
+t_minishell *parse(char *line, char **envp);
 /* FILL_IO_C */
 t_io	*ft_iolast(t_io *lst);
 t_io	*ft_iolast(t_io *lst);

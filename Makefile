@@ -6,7 +6,7 @@
 #    By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/20 10:13:22 by Camille           #+#    #+#              #
-#    Updated: 2026/04/07 12:16:19 by lifranco         ###   ########.fr        #
+#    Updated: 2026/04/13 11:54:16 by lifranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,14 +26,17 @@ endif
 SRC_DIR := src/
 PARSE_DIR := src/parsing
 LEXER_DIR := src/parsing/lexer
+EXPAND_DIR := src/expander
 #ALGO_DIR := algorithm/
 
+EXPAND_BASENAMES := expand get_var
 SRC_BASENAMES := minishell ft_freeall
 PARSE_BASENAMES := fill_io parsing trim_quotes
 LEXER_BASENAMES := ft_lexlast lexer split_quotes
 SRCS := $(addprefix $(SRC_DIR), $(addsuffix .c,$(SRC_BASENAMES))) \
 		$(addprefix $(PARSE_DIR)/, $(addsuffix .c,$(PARSE_BASENAMES))) \
-		$(addprefix $(LEXER_DIR)/, $(addsuffix .c,$(LEXER_BASENAMES)))
+		$(addprefix $(LEXER_DIR)/, $(addsuffix .c,$(LEXER_BASENAMES))) \
+		$(addprefix $(EXPAND_DIR)/, $(addsuffix .c,$(EXPAND_BASENAMES)))
 
 OBJ_DIR := .build/
 OBJS := $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)%.o)
