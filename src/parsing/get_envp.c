@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 13:44:05 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/14 15:07:06 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/14 18:28:33 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ void	get_envp(char **envp, t_minishell *shell)
 			error_exit(shell, shell->nb_cmds);
 		i++;
 	}
-	env[i] == NULL;
+	env[i] = NULL;
 	shell->envp = env;
 }
+
+
+int main(int c, ch)
