@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 16:07:59 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/07 15:00:27 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:24:56 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static t_io	*add_io(t_lexer *lexed)
 
 t_lexer *fill_io(t_minishell *shell, t_lexer *lexed, int i)
 {
-	
 	t_io *content;
 	t_io *last;
 
@@ -62,6 +61,8 @@ t_lexer *fill_io(t_minishell *shell, t_lexer *lexed, int i)
 	else 
 	{
 		last = ft_iolast(shell->ios[i]);	
+		if (!last)
+			return (NULL);
 		content = add_io(lexed);
 		last->next = content;
 	}

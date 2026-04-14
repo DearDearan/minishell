@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 14:34:46 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/13 17:03:12 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:23:02 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ char *trim_quotes(char *str)
 	char *trim;
 
 	trim = ft_calloc(ft_strlen(str) + 1, sizeof(char));
+	if (!trim)
+		return (NULL);
 	fill_trim(str, trim);
 	return (trim);
 }

@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 11:12:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/13 12:49:28 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:56:14 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ t_minishell *parse(char *line, char **envp);
 /* FILL_IO_C */
 t_io	*ft_iolast(t_io *lst);
 t_io	*ft_iolast(t_io *lst);
+void    error_exit(t_minishell *sh, int nb_cmds);
 
 #endif

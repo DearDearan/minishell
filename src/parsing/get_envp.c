@@ -1,38 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   get_envp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/03 10:39:07 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/14 18:26:34 by lifranco         ###   ########.fr       */
+/*   Created: 2026/04/14 13:44:05 by lifranco          #+#    #+#             */
+/*   Updated: 2026/04/14 15:07:06 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_pwd(t_minishell sh)
+static int	get_tab_size(char **str)
 {
-	char	*path;
-	int		i;
+	int	i;
+
+	if (!str || !*str)
+		return (-1);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+void	get_envp(char **envp, t_minishell *shell)
+{
+	int	i;
+	char **env;
 
 	i = 0;
-	if (!sh->envp)
-		error_exit(sh, sh->nb_cmds);
-	while(sh->envp[i])
+	env = ft_calloc(sizeof(char *), get_tab_size(envp) + 1);
+	if (!shell || !*shell)
+		error_exit(shell, shell->nb_cmds);
+	while (envp[i])
 	{
-		if (!ft_strncmp(sh->envp[i], "PWD=", 4))
-		{
-			path = getenv("PWD");
-			break ;
-		}
-		else if (!ft_strncmp(sh->envp[i], "OLD_PWD=", 8))
-		{
-			path = get_env("OLD_PWD");
-			break ;
-		}
+		env[i] = ft_strdup(envp[i]);
+		if (!env[i])
+			error_exit(shell, shell->nb_cmds);
 		i++;
 	}
-	printf("%s\n", path);
+	env[i] == NULL;
+	shell->envp = env;
 }

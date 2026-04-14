@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 15:12:38 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/13 17:28:20 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/14 13:22:37 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static void	init_cmd(t_cmd *cmd)
 {
+	if (!cmd || !*cmd)
+		return ;
 	cmd->path = NULL;
 	cmd->pid = -1;
 	cmd->fds[0] = -1;
@@ -84,7 +86,7 @@ t_minishell *parse(char *line, char **envp)
 	lexed = lex(line);
 	i = -1;
 	parsing = ft_calloc(1, sizeof(t_minishell));
-	if (!parsing)
+	if (!parsing || !lexed)
 		return (NULL);
 	parsing->envp = envp;
 	parsing->nb_cmds = count_pipes(lexed) + 1;
