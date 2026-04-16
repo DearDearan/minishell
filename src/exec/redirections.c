@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "exec.h"
 
-static int	open_io(char *path, int flags);
+static int	open_io(char *path, int flags, bool to_read);
 static int	get_fd_heredoc(t_minishell *sh, char *limiter, int size);
 
 bool	set_redirections(t_minishell *sh, t_cmd *cmd, t_io *io)
@@ -26,13 +25,14 @@ bool	set_redirections(t_minishell *sh, t_cmd *cmd, t_io *io)
 			if (io->is_lim)
 				cmd->fds[0] = get_fd_heredoc(sh, io->infile, ft_strlen(io->infile));
 			else
-				cmd->fds[0] = open_io(io->infile, O_RDONLY);
+				cmd->fds[0] = open_io(io->infile, O_RDONLY, true);
 			if (cmd->fds[0] == -1)
 				return (false);
 		}
 		if (io->outfile)
 		{
-			cmd->fds[1] = open_io(io->infile, io->outfile_flags);
+			close_fd(&cmd->fds[1]);
+			cmd->fds[1] = open_io(io->outfile, io->outfile_flags, false);
 			if (cmd->fds[1] == -1)
 				return (false);
 		}
@@ -41,11 +41,14 @@ bool	set_redirections(t_minishell *sh, t_cmd *cmd, t_io *io)
 	return (true);
 }
 
-static int	open_io(char *path, int flags)
+static int	open_io(char *path, int flags, bool to_read)
 {
 	int	fd;
 
-	fd = open(path, flags);
+	if (to_read)
+		fd = open(path, flags);
+	else
+		fd = open(path, flags, 0644);
 	if (fd == -1)
 		perror("minishell");
 	return (fd);
@@ -64,7 +67,7 @@ static int	get_fd_heredoc(t_minishell *sh, char *limiter, int size)
 		s = readline("> ");
 		if (!s || ((int)ft_strlen(s) == size && !ft_strncmp(s, limiter, size)))
 			break ;
-		ft_dprintf(fds[1], s);
+		ft_dprintf(fds[1], "%s\n", s);
 		free(s);
 	}
 	free(s);

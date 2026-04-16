@@ -34,24 +34,6 @@
 # include "exec.h"
 # include "cleaning.h"
 
-typedef struct s_io
-{
-	char		*infile;
-	char		*outfile;
-	bool		is_lim;
-	int			outfile_flags;
-	struct s_io	*next;
-}	t_io;
-
-typedef struct s_minishell
-{
-	int		exit_c;
-	char	**envp;
-	size_t	nb_cmds;
-	t_cmd	**cmds;
-	t_io	**ios;
-}	t_minishell;
-
 //static int	g_signal;
 
 /* FT_FREEALL_C */
@@ -63,6 +45,5 @@ t_minishell *parse(char *line, char **envp);
 /* FILL_IO_C */
 t_io	*ft_iolast(t_io *lst);
 t_io	*ft_iolast(t_io *lst);
-void    error_exit(t_minishell *sh, int nb_cmds);
 
 #endif

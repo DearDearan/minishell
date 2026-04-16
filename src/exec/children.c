@@ -10,10 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_stdio.h"
-#include "ft_string.h"
 #include "minishell.h"
-#include "exec.h"
 
 static void	print_error(char *path, char *bin);
 static void	exit_child(t_minishell *sh, int nb_cmds);

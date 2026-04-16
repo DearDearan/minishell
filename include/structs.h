@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 14:25:25 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/12 14:32:44 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/16 19:23:08 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_cmd
 	char	**argv;
 	int		fds[2];
 	pid_t	pid;
-	int		exit_code;
+	int		exit_code;//TODO:a supprimer, plus besoin anymore
 } t_cmd;
 
 typedef struct s_io

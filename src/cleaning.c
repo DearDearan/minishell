@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "exec.h"
 
 void	cleaning(t_minishell *sh, int nb_cmds)
 {

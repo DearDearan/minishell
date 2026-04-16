@@ -14,7 +14,7 @@
 
 static void	init_cmd(t_cmd *cmd)
 {
-	if (!cmd || !*cmd)
+	if (!cmd)
 		return ;
 	cmd->path = NULL;
 	cmd->pid = -1;

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "exec.h"
 
 void	set_pipe(t_minishell *sh, int *curr_cmd_fd_out, int *next_cmd_fd_in)
 {
