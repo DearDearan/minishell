@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 15:12:38 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/14 13:22:37 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/16 13:56:34 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	init_cmd(t_cmd *cmd)
 {
-	if (!cmd || !*cmd)
+	if (!cmd)
 		return ;
 	cmd->path = NULL;
 	cmd->pid = -1;
