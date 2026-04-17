@@ -6,7 +6,7 @@
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 17:48:49 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/13 17:09:32 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/17 17:58:43 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	print_error(char *path, char *bin);
 static void	exit_child(t_minishell *sh, int nb_cmds);
 
-void	make_child(t_minishell *sh, t_cmd *cmd)
+void	make_child(t_minishell *sh, t_cmd *cmd)//TODO:launch builtin si il est set
 {
 	int	wstatus;
 
