@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 16:25:21 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/14 18:28:31 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/17 13:55:53 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,6 @@ int		get_size(char *str, t_minishell *shell, int i);
 char	*expand(char *str, t_minishell *shell);
 /* IS_IN_SQ_C*/
 bool	is_in_sq(char *str, int pos);
+/* PARSING_C */
+void	parse(char *line, t_minishell *parsing);
 #endif

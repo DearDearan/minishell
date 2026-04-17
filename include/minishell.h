@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 11:12:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/14 15:33:29 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/17 13:34:12 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # include "parsing.h"
 # include "exec.h"
 # include "cleaning.h"
+# include "builts_in.h"
 
 //static int	g_signal;
 
@@ -40,8 +41,6 @@
 void	ft_freetabs(char **strs);
 /* FILL_IO_C */
 t_lexer *fill_io(t_minishell *shell, t_lexer *lexed, int i);
-/* PARSING_C */
-t_minishell *parse(char *line, char **envp);
 /* FILL_IO_C */
 t_io	*ft_iolast(t_io *lst);
 t_io	*ft_iolast(t_io *lst);

@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   builts_in.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/16 17:48:36 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/17 14:02:16 by lifranco         ###   ########.fr       */
+/*   Created: 2026/04/17 13:13:34 by lifranco          #+#    #+#             */
+/*   Updated: 2026/04/17 13:27:04 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef BUILTS_IN_H
+# define BUILTS_IN_H
 
-void	unset_and_free()
-{
-	
-}
+/* FT_PWD_C */
+void	ft_pwd(t_minishell *sh);
 
+/* GET_ENVP_C */
+void	get_envp(char **envp, t_minishell *shell);
 
-void	unset_env(char **env, char *var)
-{
-	char	*tmp;
-	int		i;
-
-	tmp = ft_strjoin(var, "=");
-	i = 0;
-	while (env && env[i])
-	{
-		if (!ft_strncmp(tmp, envp[i], ft_strlen(tmp)))
-			free(envp[i]);
-		i++;
-	}
-}
+/* SET_ENVP_C*/
+void	set_envp(t_minishell *sh, char **env, char *var);
+#endif

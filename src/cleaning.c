@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleaning.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Camille <private_mail>                     +#+  +:+       +#+        */
+/*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 13:53:30 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/12 12:31:40 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/17 11:59:11 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	cleaning_for_next_prompt(t_minishell *sh, int nb_cmds)
 void	error_exit(t_minishell *sh, int nb_cmds)
 {
 	perror("minishell");
-	cleaning(sh, nb_cmds);
+	if (sh)
+		cleaning(sh, nb_cmds);
 	exit(EXIT_FAILURE);
 }

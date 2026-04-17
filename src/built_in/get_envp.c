@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 13:44:05 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/17 11:45:09 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/17 17:08:10 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ static int	get_tab_size(char **str)
 	return (i);
 }
 
-void	get_envp(char **envp, t_minishell *shell)
+int	get_envp(char **envp, t_minishell *shell)
 {
 	int	i;
 	char **env;
 
 	i = 0;
 	env = ft_calloc(sizeof(char *), get_tab_size(envp) + 1);
-	if (!env || !*env)
+	if (!env)
 		error_exit(shell, shell->nb_cmds);
 	while (envp[i])
 	{

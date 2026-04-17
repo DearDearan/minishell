@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 15:16:55 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/16 17:29:37 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/17 16:59:40 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	put_into_env(char *var, char **envp, t_minishell *shell)
 	shell->envp = env;
 }
 
-void	set_envp(t_minishell *sh, char **env, char *var)
+int	set_envp(t_minishell *sh, int cmd)
 {
 	int		i;
 	char	*equal;
@@ -56,7 +56,7 @@ void	set_envp(t_minishell *sh, char **env, char *var)
 
 	i = 0;
 	j = 0;
-	equal = ft_strjoin(get_var_name(var), "=");
+	equal = ft_strjoin(get_var_name(sh->cmds), "=");
 	while (env && env[i])
 	{
 		if (!ft_strncmp(equal, env[i], ft_strlen(equal)))

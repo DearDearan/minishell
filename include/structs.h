@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 14:25:25 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/16 19:23:08 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/17 17:11:57 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,17 @@ typedef struct s_lexer
 {
 	char			*content;
 	int				type;
-	bool			is_sq;
 	struct s_lexer	*next;
 }	t_lexer;
 
+typedef struct s_minishell
+{
+	int		exit_c;
+	char	**envp;
+	size_t	nb_cmds;
+	struct s_cmd	**cmds;
+	struct s_io	**ios;
+}	t_minishell;
 
 typedef struct s_cmd
 {
@@ -39,7 +46,8 @@ typedef struct s_cmd
 	char	**argv;
 	int		fds[2];
 	pid_t	pid;
-	int		exit_code;//TODO:a supprimer, plus besoin anymore
+	int		(*built_in)(t_minishell *, struct s_cmd *);
+	
 } t_cmd;
 
 typedef struct s_io
@@ -51,14 +59,7 @@ typedef struct s_io
 	struct s_io	*next;
 }	t_io;
 
-typedef struct s_minishell
-{
-	int		exit_c;
-	char	**envp;
-	size_t	nb_cmds;
-	t_cmd	**cmds;
-	t_io	**ios;
-}	t_minishell;
+
 
 
 #endif
