@@ -7,10 +7,14 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 13:44:05 by lifranco          #+#    #+#             */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2026/04/16 17:35:20 by lifranco         ###   ########.fr       */
 =======
 /*   Updated: 2026/04/16 13:23:30 by lifranco         ###   ########.fr       */
 >>>>>>> 3650a83731399c22c14a46ae13621ed809345e30
+=======
+/*   Updated: 2026/04/16 18:34:15 by lifranco         ###   ########.fr       */
+>>>>>>> 8f51444 (	modified:   src/built_in/ft_pwd.c)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +51,5 @@ void	get_envp(char **envp, t_minishell *shell)
 	env[i] = NULL;
 	shell->envp = env;
 }
+
 
