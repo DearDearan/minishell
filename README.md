@@ -67,12 +67,11 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 starting minishell lundi 30:
 1 semaine : 4 jours de reflexion en commun et prototypage des structures
 2 semaine : 1 journee de test comportements bash, 4 jours de code
-3 semaine : 1 jour de code, 1 aprem pour apprendre git rebase -i et squash etc
-- get exit code ( si pid = -1 retourner 1)
-- tenter de rebase (puis faire un merge ?)
+3 semaine : 2 jour de code, 1 aprem pour apprendre git rebase -i et squash etc
+- Note pour la prochaine fois : ne pas ecraser exit_c et envp de la structure minishell dans parse.c
+
+En theorie il faudrait allouer minishell en tout premier lieu du main et ne pas reallouer plus tard.
 - strace pour regarder les commandes de bash
-- free a la sortie de lexec cmds et le contenu de io et mettre a NULL (fonctions de liam ou moi ??)
-- fonctions qui peuvent maider a tester les dossiers et fichiers ainsi que leurs permissions : stat, fstat, lstat et access. Voir leurs differences et utilisations
 
 comportements bash:
 - chaque commande de bash gere leurs propres infile et outfile et prends en compte les derniers. ainsi chaque commande de pipe peut gerer son propre infile et oufile.

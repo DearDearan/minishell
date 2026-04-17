@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/16 11:28:04 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/17 11:46:12 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		if (line[0] != '\0')
 			add_history(line);
-	 	shell = parse(line, envp);
+		shell = parse(line, envp);
 		if (!shell)
 			continue ;
 		shell->envp = envp;
@@ -65,6 +65,7 @@ int	main(int argc, char **argv, char **envp)
 				curr = curr->next;
 			}
 		}
+		exec(shell, shell->nb_cmds);
 		free(line);
 	}
 }

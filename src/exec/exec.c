@@ -6,12 +6,11 @@
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 11:54:27 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/13 17:02:39 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/16 18:33:19 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "exec.h"
 
 static char	**extract_env_path(t_minishell *sh, char **envp);
 static void	exec_cmds(t_minishell *sh, int nb_cmds, char **env_path);
@@ -26,7 +25,7 @@ int	exec(t_minishell *sh, int nb_cmds)
 	env_path = extract_env_path(sh, sh->envp);
 	exec_cmds(sh, nb_cmds, env_path);
 	wait_children(sh->cmds, sh->nb_cmds, &wstatus);
-	//TODO:sh->exit_c = get_exit_code(sh->cmds[nb_cmds - 1]) FAIRE DANS UN FICHIER .C a part
+	sh->exit_c = get_exit_code(wstatus);
 	cleaning_for_next_prompt(sh, nb_cmds);
 	return (sh->exit_c);
 }

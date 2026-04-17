@@ -6,7 +6,7 @@
 #    By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/20 10:13:22 by Camille           #+#    #+#              #
-#    Updated: 2026/04/13 17:47:32 by lifranco         ###   ########.fr        #
+#    Updated: 2026/04/16 17:40:13 by Camille          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ EXPAND_DIR := expander/
 SRC_BASENAMES := minishell ft_freeall cleaning
 PARSE_BASENAMES := fill_io parsing trim_quotes
 LEXER_BASENAMES := ft_lexlast lexer split_quotes
-EXEC_BASENAMES := exec redirections fds_utils pipes children
+EXEC_BASENAMES := exec redirections fds_utils pipes children exit_code
 EXPAND_BASENAMES := expand get_var is_in_sq
 
 SRCS := $(addprefix $(SRC_DIR), $(addsuffix .c,$(SRC_BASENAMES))) \
