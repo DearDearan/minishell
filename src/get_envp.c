@@ -6,23 +6,10 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 13:44:05 by lifranco          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/04/18 15:34:43 by lifranco         ###   ########.fr       */
-=======
-<<<<<<<< HEAD:src/built_in/get_envp.c
-<<<<<<< HEAD
-/*   Updated: 2026/04/18 15:37:53 by lifranco         ###   ########.fr       */
-=======
-/*   Updated: 2026/04/17 17:08:10 by lifranco         ###   ########.fr       */
->>>>>>> a8dd686 (	modified:   Makefile)
-========
-/*   Updated: 2026/04/18 14:41:33 by lifranco         ###   ########.fr       */
->>>>>>>> f3ae237 (	modified:   Makefile):src/get_envp.c
->>>>>>> f3ae237 (	modified:   Makefile)
+/*   Updated: 2026/04/18 15:48:11 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
 
 static int	get_tab_size(char **str)
 {

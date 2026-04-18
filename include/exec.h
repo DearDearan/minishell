@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Camille <private_mail>                     +#+  +:+       +#+        */
+/*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 15:31:30 by Camille           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/04/17 17:50:12 by Camille          ###   ########.fr       */
-=======
-/*   Updated: 2026/04/16 17:39:21 by Camille          ###   ########.fr       */
->>>>>>> b118b2e (feat: linking parsing & execution & fixing some bugs)
+/*   Updated: 2026/04/18 15:45:23 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +43,7 @@ void	make_child(t_minishell *sh, t_cmd *cmd);
 void	wait_children(t_cmd **cmds, int nb_cmds, int *wstatus);
 
 // exit_code.c
-<<<<<<< HEAD
 int		get_exit_code(pid_t last_cmd_pid, int wstatus);
 int		parse_wait_status(int wstatus);
-=======
-int	get_exit_code(int wstatus);
->>>>>>> b118b2e (feat: linking parsing & execution & fixing some bugs)
 
 #endif

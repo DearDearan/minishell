@@ -68,13 +68,9 @@ starting minishell lundi 30:
 1 semaine : 4 jours de reflexion en commun et prototypage des structures
 2 semaine : 1 journee de test comportements bash, 4 jours de code
 3 semaine : 2 jour de code, 1 aprem pour apprendre git rebase -i et squash etc
-<<<<<<< HEAD
-
-=======
 - Note pour la prochaine fois : ne pas ecraser exit_c et envp de la structure minishell dans parse.c
 
 En theorie il faudrait allouer minishell en tout premier lieu du main et ne pas reallouer plus tard.
->>>>>>> b118b2e (feat: linking parsing & execution & fixing some bugs)
 - strace pour regarder les commandes de bash
 
 comportements bash:
