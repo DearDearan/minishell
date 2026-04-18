@@ -6,37 +6,22 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 10:39:07 by lifranco          #+#    #+#             */
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*   Updated: 2026/04/16 13:43:14 by lifranco         ###   ########.fr       */
-=======
-/*   Updated: 2026/04/16 12:02:06 by lifranco         ###   ########.fr       */
->>>>>>> 3650a83 (	modified:   src/built_in/ft_pwd.c)
-<<<<<<< HEAD
-/*   Updated: 2026/04/16 18:32:59 by lifranco         ###   ########.fr       */
-=======
-/*   Updated: 2026/04/16 18:33:45 by lifranco         ###   ########.fr       */
->>>>>>> 8f51444 (	modified:   src/built_in/ft_pwd.c)
-=======
-/*   Updated: 2026/04/17 11:45:25 by lifranco         ###   ########.fr       */
->>>>>>> 61de3e8 (modified:   src/built_in/ft_pwd.c)
+/*   Updated: 2026/04/18 15:39:21 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-<<<<<<< HEAD
-void	ft_pwd(t_minishell *sh)
-=======
-void	ft_pwd(t_minishell sh)
->>>>>>> 3650a83 (	modified:   src/built_in/ft_pwd.c)
+int	ft_pwd(t_minishell *sh, t_cmd *cmd)
 {
 	char	*path;
 	int		i;
 
+	(void) cmd;
+	path = NULL;
 	i = 0;
 	if (!sh->envp)
-		error_exit(sh, sh->nb_cmds);
+		exit(2);
 	while(sh->envp[i])
 	{
 		if (!ft_strncmp(sh->envp[i], "PWD=", 4))
@@ -46,7 +31,7 @@ void	ft_pwd(t_minishell sh)
 		}
 		else if (!ft_strncmp(sh->envp[i], "OLD_PWD=", 8))
 		{
-			path = get_env("OLD_PWD");
+			path = getenv("OLD_PWD");
 			break ;
 		}
 		i++;

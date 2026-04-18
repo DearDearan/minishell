@@ -6,13 +6,19 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:48:36 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/16 18:07:54 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/17 14:02:16 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void unset_env(char **env, char *var)
+void	unset_and_free()
+{
+	
+}
+
+
+void	unset_env(char **env, char *var)
 {
 	char	*tmp;
 	int		i;

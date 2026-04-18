@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 15:12:38 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/16 13:56:34 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/17 17:08:40 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	init_cmd(t_cmd *cmd)
 	cmd->pid = -1;
 	cmd->fds[0] = -1;
 	cmd->fds[1] = -1;
+	cmd->built_in = NULL;
 }
 
 static int  w_cnt(t_lexer *lexed)
@@ -77,31 +78,25 @@ static void	fill_cmds(t_minishell *parse, t_lexer *lex)
 	}
 }
 
-t_minishell *parse(char *line, char **envp)
+void parse(char *line, t_minishell *parsing)
 {
-	t_minishell		*parsing;
 	t_lexer			*lexed;
 	size_t 			i;
 
 	lexed = lex(line);
 	i = -1;
-	parsing = ft_calloc(1, sizeof(t_minishell));
-	if (!parsing || !lexed)
-		return (NULL);
-	parsing->envp = envp;
 	parsing->nb_cmds = count_pipes(lexed) + 1;
 	parsing->cmds = ft_calloc(parsing->nb_cmds, sizeof(t_cmd *));
 	parsing->ios = ft_calloc(parsing->nb_cmds, sizeof(t_io *));
 	if (!parsing->cmds || !parsing->ios)
-		return (NULL);
+		error_exit(parsing, parsing->nb_cmds);
 	while (++i < parsing->nb_cmds)
 	{
 		parsing->cmds[i] = ft_calloc(1, sizeof(t_cmd));
 		parsing->ios[i] = ft_calloc(1, sizeof(t_io));
 		if (!parsing->cmds[i] || !parsing->ios[i])
-			return (NULL);
+			error_exit(parsing, parsing->nb_cmds);
 		init_cmd(parsing->cmds[i]);
 	}
 	fill_cmds(parsing, lexed);	
- 	return (parsing);
 }

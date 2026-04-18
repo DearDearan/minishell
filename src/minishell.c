@@ -7,14 +7,31 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2026/04/18 15:36:00 by lifranco         ###   ########.fr       */
 =======
 /*   Updated: 2026/04/17 11:46:12 by lifranco         ###   ########.fr       */
 >>>>>>> b118b2e (feat: linking parsing & execution & fixing some bugs)
+=======
+/*   Updated: 2026/04/17 15:49:22 by lifranco         ###   ########.fr       */
+>>>>>>> a8dd686 (	modified:   Makefile)
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_minishell *init_sh(char **envp)
+{
+	t_minishell	*shell;
+
+	shell = ft_calloc(1, sizeof(t_minishell));
+	if (!shell)
+		error_exit(shell, 0);
+	if (!shell->envp)
+		get_envp(envp, shell);
+	return (shell);
+}
+
 
  char	*get_pwd(void)
 {
@@ -26,15 +43,13 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	(void) argc;
-	(void)	argv;
-	char	*prompt;
-	t_minishell *shell;
+	(void)		argc;
+	(void)		argv;
+	char		*prompt;
+	t_minishell	shell;
 	char		*line;
-	size_t i = 0;
-	size_t j = 0;
-	t_io *curr;
 	
+	shell = *init_sh(envp);
 	prompt = ft_strjoin("Bush_Shell:", get_pwd());
 	prompt = ft_strjoin(prompt, "$ ");
 	while (1)
@@ -43,33 +58,12 @@ int	main(int argc, char **argv, char **envp)
 		if (!line)
 			continue ;
 		if (line[0] != '\0')
-			add_history(line);
-		shell = parse(line, envp);
-		if (!shell)
-			continue ;
-		shell->envp = envp;
-		i = 0;
-		while (i < shell->nb_cmds)
 		{
-			j = 0;
-			printf("------------------------\n");
-			while (shell->cmds[i]->argv[j])
-			{
-				printf("Commande = %s\n", shell->cmds[i]->argv[j]);
-				j++;
-			}
-			i++;
-			curr = shell->ios[i - 1];
-			while (curr)
-			{
-				printf("Outfile = %s\n", curr->outfile);
-				printf("Infile = %s\n", curr->infile);
-				printf("is_lim = %d\n", curr->is_lim);
-				printf("outflags = %i\n", curr->outfile_flags);
-				curr = curr->next;
-			}
+			add_history(line);
+			parse(line, &shell);
+			exec(&shell, shell.nb_cmds);
 		}
-		exec(shell, shell->nb_cmds);
 		free(line);
 	}
+	rl_clear_history();
 }

@@ -1,48 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_envp.c                                         :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 13:44:05 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/14 18:28:33 by lifranco         ###   ########.fr       */
+/*   Created: 2026/04/17 15:54:50 by lifranco          #+#    #+#             */
+/*   Updated: 2026/04/17 17:02:36 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	get_tab_size(char **str)
+static int	count_args(char **args)
 {
 	int	i;
 
-	if (!str || !*str)
-		return (-1);
-	i = 0;
-	while (str[i])
+	while (args && args[i])
 		i++;
 	return (i);
 }
 
-void	get_envp(char **envp, t_minishell *shell)
+int ft_exit(t_minishell *shell, t_cmd *cmd)
 {
-	int	i;
-	char **env;
+	int	exit_c;
 
-	i = 0;
-	env = ft_calloc(sizeof(char *), get_tab_size(envp) + 1);
-	if (!shell || !*shell)
-		error_exit(shell, shell->nb_cmds);
-	while (envp[i])
+	(void) shell;
+	(void) cmd;
+	if (count_args(args) > 2)
 	{
-		env[i] = ft_strdup(envp[i]);
-		if (!env[i])
-			error_exit(shell, shell->nb_cmds);
-		i++;
+		ft_dprintf(2, "Syntax Error: more than 1 arguments.\n");
+		return (-1);
 	}
-	env[i] = NULL;
-	shell->envp = env;
+	else if (count_args == 1)
+		exit(0);
+	else
+		exit_c = ft_atoi(args[1]);
+	if (exit_c < 0 || exit_c > 255)
+		exit(0);
+	exit(exit_c);
 }
-
-
-int main(int c, ch)
