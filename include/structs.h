@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 14:25:25 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/17 17:11:57 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/18 12:07:14 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef enum e_type
 	OUT,
 	LIM,
 	APP
-} t_type;
+}	t_type;
 
 typedef struct s_lexer
 {
@@ -33,11 +33,11 @@ typedef struct s_lexer
 
 typedef struct s_minishell
 {
-	int		exit_c;
-	char	**envp;
-	size_t	nb_cmds;
+	int				exit_c;
+	char			**envp;
+	size_t			nb_cmds;
 	struct s_cmd	**cmds;
-	struct s_io	**ios;
+	struct s_io		**ios;
 }	t_minishell;
 
 typedef struct s_cmd

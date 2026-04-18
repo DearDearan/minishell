@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 11:12:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/17 13:34:12 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/18 14:41:27 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,7 @@ t_lexer *fill_io(t_minishell *shell, t_lexer *lexed, int i);
 /* FILL_IO_C */
 t_io	*ft_iolast(t_io *lst);
 t_io	*ft_iolast(t_io *lst);
+/* GET_ENVP_C */
+void	get_envp(char **envp, t_minishell *shell);
 
 #endif

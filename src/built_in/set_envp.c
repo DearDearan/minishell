@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 15:16:55 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/17 16:59:40 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/18 12:01:32 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	put_into_env(char *var, char **envp, t_minishell *shell)
 	shell->envp = env;
 }
 
-int	set_envp(t_minishell *sh, int cmd)
+int	set_envp(t_minishell *sh, t_cmd *cmd)
 {
 	int		i;
 	char	*equal;
@@ -56,18 +56,20 @@ int	set_envp(t_minishell *sh, int cmd)
 
 	i = 0;
 	j = 0;
-	equal = ft_strjoin(get_var_name(sh->cmds), "=");
-	while (env && env[i])
+	equal = ft_strjoin(get_var_name(cmd->argv[1]), "=");
+	while (sh->envp && sh->envp[i])
 	{
-		if (!ft_strncmp(equal, env[i], ft_strlen(equal)))
+		if (!ft_strncmp(equal, sh->envp[i], ft_strlen(equal)))
 		{
-			free(env[i]);
-			env[i] = ft_strdup(var);
-			if (!env[i])
+			free(sh->envp[i]);
+			sh->envp[i] = ft_strdup(cmd->argv[1]);
+			if (!sh->envp[i])
 				error_exit(sh, sh->nb_cmds);
 		}
 		i++;
 	}
-	if (!env[i])
-		put_into_env(var, env, sh);
+	if (!sh->envp[i])
+		put_into_env(cmd->argv[1], sh->envp, sh);
+	free(equal);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 16:25:21 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/17 13:55:53 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/18 15:22:04 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,9 @@ char	*expand(char *str, t_minishell *shell);
 bool	is_in_sq(char *str, int pos);
 /* PARSING_C */
 void	parse(char *line, t_minishell *parsing);
+/* PROCESS_C */
+t_lexer	*fill_cmds_words(t_minishell *parse, t_lexer *lex, int cmd_i);
+t_lexer *process_io(t_minishell *parse, t_lexer *lex, int cmd_i);
+char	*process_word(char *content, t_minishell *parse);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 10:39:07 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/17 17:04:16 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/18 12:02:23 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,5 @@ int	ft_pwd(t_minishell *sh, t_cmd *cmd)
 		i++;
 	}
 	printf("%s\n", path);
+	return (0);
 }

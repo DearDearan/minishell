@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 15:12:38 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/17 17:08:40 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/18 15:21:53 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,39 +49,35 @@ static unsigned int	count_pipes(t_lexer *lexed)
 	return (count);
 }
 
-static void	fill_cmds(t_minishell *parse, t_lexer *lex)
+static void fill_cmds(t_minishell *parse, t_lexer *lex)
 {
-	int		j;
-	int 	i;
+    int i;
 
-	i = 0;
-	j = 0;
-	parse->cmds[i]->argv = ft_calloc(w_cnt(lex) + 1, sizeof(char *));
-	while (lex)
-	{
-		if (lex->type == WORDS)
-		{
-			parse->cmds[i]->argv[j] = trim_quotes(expand(lex->content, parse));
-			lex = lex->next;
-			j++;
-		}
-		else if (lex->type == PIPES)
-		{
-			lex = lex->next;
-			parse->cmds[++i]->argv = ft_calloc(w_cnt(lex) + 1, sizeof(char *));
-			j = 0;
-		}
-		else if (lex->type > PIPES)
-			lex = fill_io(parse, lex, i);
-		else
-			lex = lex->next;
-	}
+    i = 0;
+    while (lex)
+    {
+        parse->cmds[i]->argv = ft_calloc(w_cnt(lex) + 1, sizeof(char *));
+        if (!parse->cmds[i]->argv)
+            error_exit(parse, parse->nb_cmds);
+    	lex = fill_cmds_words(parse, lex, i);
+        while (lex && lex->type != PIPES)
+        {
+            if (lex->type > PIPES)
+                lex = process_io(parse, lex, i);
+            else
+                lex = lex->next;
+        }
+        if (lex && lex->type == PIPES)
+            lex = lex->next;
+        i++;
+    }
 }
 
 void parse(char *line, t_minishell *parsing)
 {
-	t_lexer			*lexed;
-	size_t 			i;
+	t_lexer	*lexed;
+	int 	i;
+	int		j;
 
 	lexed = lex(line);
 	i = -1;
@@ -90,7 +86,7 @@ void parse(char *line, t_minishell *parsing)
 	parsing->ios = ft_calloc(parsing->nb_cmds, sizeof(t_io *));
 	if (!parsing->cmds || !parsing->ios)
 		error_exit(parsing, parsing->nb_cmds);
-	while (++i < parsing->nb_cmds)
+	while (++i < (int) parsing->nb_cmds)
 	{
 		parsing->cmds[i] = ft_calloc(1, sizeof(t_cmd));
 		parsing->ios[i] = ft_calloc(1, sizeof(t_io));
@@ -98,5 +94,7 @@ void parse(char *line, t_minishell *parsing)
 			error_exit(parsing, parsing->nb_cmds);
 		init_cmd(parsing->cmds[i]);
 	}
+	i = 0;
+	j = 0;
 	fill_cmds(parsing, lexed);	
 }
