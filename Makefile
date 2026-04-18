@@ -6,7 +6,7 @@
 #    By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/20 10:13:22 by Camille           #+#    #+#              #
-#    Updated: 2026/04/18 14:40:57 by lifranco         ###   ########.fr        #
+#    Updated: 2026/04/18 15:41:31 by lifranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,11 +33,7 @@ BUILT_IN_DIR := built_in/
 SRC_BASENAMES := minishell ft_freeall cleaning get_envp
 PARSE_BASENAMES := fill_io parsing trim_quotes process
 LEXER_BASENAMES := ft_lexlast lexer split_quotes
-<<<<<<< HEAD
 EXEC_BASENAMES := exec built_in redirections fds_utils pipes children exit_code
-=======
-EXEC_BASENAMES := exec redirections fds_utils pipes children exit_code
->>>>>>> b118b2e (feat: linking parsing & execution & fixing some bugs)
 EXPAND_BASENAMES := expand get_var is_in_sq
 #BUILT_IN_BASENAMES :=  #set_envp ft_pwd
 
