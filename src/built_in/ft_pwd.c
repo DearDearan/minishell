@@ -6,13 +6,21 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 10:39:07 by lifranco          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/04/16 13:43:14 by lifranco         ###   ########.fr       */
+=======
+/*   Updated: 2026/04/16 12:02:06 by lifranco         ###   ########.fr       */
+>>>>>>> 3650a83 (	modified:   src/built_in/ft_pwd.c)
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+<<<<<<< HEAD
 void	ft_pwd(t_minishell *sh)
+=======
+void	ft_pwd(t_minishell sh)
+>>>>>>> 3650a83 (	modified:   src/built_in/ft_pwd.c)
 {
 	char	*path;
 	int		i;
