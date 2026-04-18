@@ -6,15 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*   Updated: 2026/04/18 15:36:00 by lifranco         ###   ########.fr       */
-=======
-/*   Updated: 2026/04/17 11:46:12 by lifranco         ###   ########.fr       */
->>>>>>> b118b2e (feat: linking parsing & execution & fixing some bugs)
-=======
-/*   Updated: 2026/04/17 15:49:22 by lifranco         ###   ########.fr       */
->>>>>>> a8dd686 (	modified:   Makefile)
+/*   Updated: 2026/04/18 15:40:30 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

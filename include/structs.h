@@ -8,6 +8,7 @@
 /*   Created: 2026/04/12 14:25:25 by lifranco          #+#    #+#             */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2026/04/17 17:54:49 by Camille          ###   ########.fr       */
 =======
 /*   Updated: 2026/04/16 19:23:08 by Camille          ###   ########.fr       */
@@ -15,6 +16,9 @@
 =======
 /*   Updated: 2026/04/17 17:11:57 by lifranco         ###   ########.fr       */
 >>>>>>> a8dd686 (	modified:   Makefile)
+=======
+/*   Updated: 2026/04/18 12:07:14 by lifranco         ###   ########.fr       */
+>>>>>>> f3ae237 (	modified:   Makefile)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +34,7 @@ typedef enum e_type
 	OUT,
 	LIM,
 	APP
-} t_type;
+}	t_type;
 
 typedef struct s_lexer
 {
@@ -41,6 +45,7 @@ typedef struct s_lexer
 
 typedef struct s_minishell
 {
+<<<<<<< HEAD
 <<<<<<< HEAD
 	int				exit_c;
 	char			**envp;
@@ -54,6 +59,13 @@ typedef struct s_minishell
 	struct s_cmd	**cmds;
 	struct s_io	**ios;
 >>>>>>> a8dd686 (	modified:   Makefile)
+=======
+	int				exit_c;
+	char			**envp;
+	size_t			nb_cmds;
+	struct s_cmd	**cmds;
+	struct s_io		**ios;
+>>>>>>> f3ae237 (	modified:   Makefile)
 }	t_minishell;
 
 typedef struct s_cmd

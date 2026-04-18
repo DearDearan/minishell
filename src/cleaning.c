@@ -6,17 +6,14 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 13:53:30 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/17 11:59:11 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/18 15:40:52 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-<<<<<<< HEAD
 
 static void	clean_cmds(t_cmd **cmds, int nb_cmds);
 static void	clean_ios(t_io **ios, int nb_cmds);
-=======
->>>>>>> b118b2e (feat: linking parsing & execution & fixing some bugs)
 
 void	cleaning(t_minishell *sh, int nb_cmds)
 {
@@ -33,8 +30,7 @@ void	cleaning_for_next_prompt(t_minishell *sh, int nb_cmds)
 void	error_exit(t_minishell *sh, int nb_cmds)
 {
 	perror("minishell");
-	if (sh)
-		cleaning(sh, nb_cmds);
+	cleaning(sh, nb_cmds);
 	exit(EXIT_FAILURE);
 }
 
