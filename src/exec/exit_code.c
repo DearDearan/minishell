@@ -12,7 +12,14 @@
 
 #include "minishell.h"
 
-int	get_exit_code(int wstatus)
+int	get_exit_code(pid_t last_cmd_pid, int wstatus)
+{
+	if (last_cmd_pid == -1)
+		return (EXIT_FAILURE);
+	return (parse_wait_status(wstatus));
+}
+
+int	parse_wait_status(int wstatus)
 {
 	if (WIFEXITED(wstatus))
 		return (WEXITSTATUS(wstatus));

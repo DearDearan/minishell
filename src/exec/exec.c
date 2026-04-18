@@ -6,7 +6,7 @@
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 11:54:27 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/16 18:33:19 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/17 17:57:37 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,14 @@ int	exec(t_minishell *sh, int nb_cmds)
 	int		wstatus;
 
 	env_path = extract_env_path(sh, sh->envp);
-	exec_cmds(sh, nb_cmds, env_path);
-	wait_children(sh->cmds, sh->nb_cmds, &wstatus);
-	sh->exit_c = get_exit_code(wstatus);
+	if (nb_cmds == 1 && set_built_in(sh->cmds[0], sh->cmds[0]->argv[0]))
+		sh->exit_c = sh->cmds[0]->built_in(sh, sh->cmds[0]);
+	else
+	{
+		exec_cmds(sh, nb_cmds, env_path);
+		wait_children(sh->cmds, sh->nb_cmds, &wstatus);
+		sh->exit_c = get_exit_code(sh->cmds[nb_cmds - 1]->pid, wstatus);
+	}
 	cleaning_for_next_prompt(sh, nb_cmds);
 	return (sh->exit_c);
 }
@@ -58,23 +63,24 @@ static void	exec_cmds(t_minishell *sh, int nb_cmds, char **env_path)
 {
 	int		i;
 	int		next;
-	t_cmd	*cmd;
 
 	i = 0;
 	next = 1;
 	while (i < nb_cmds)
 	{
-		cmd = sh->cmds[i];
-		if (set_redirections(sh, cmd, sh->ios[i]))
+		if (set_redirections(sh, sh->cmds[i], sh->ios[i]))
 		{
-			cmd->path = get_executable_path(cmd->argv[0], env_path);
-			if (!cmd->path)
-				error_exit(sh, nb_cmds);
+			if (!set_built_in(sh->cmds[i], sh->cmds[i]->argv[0]))
+			{
+				sh->cmds[i]->path = get_executable_path(sh->cmds[i]->argv[0], env_path);
+				if (!sh->cmds[i]->path)
+					error_exit(sh, nb_cmds);
+			}
 			if (next != nb_cmds)
-				set_pipe(sh, &cmd->fds[1], &sh->cmds[next]->fds[0]);
-			make_child(sh, cmd);
+				set_pipe(sh, &sh->cmds[i]->fds[1], &sh->cmds[next]->fds[0]);
+			make_child(sh, sh->cmds[i]);
 		}
-		close_fds(&cmd->fds);//INFO:a verif plus tard si faut tout liberer ou pas
+		close_fds(&sh->cmds[i]->fds);
 		i++;
 		next++;
 	}

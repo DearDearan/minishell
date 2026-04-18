@@ -6,7 +6,7 @@
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 15:31:30 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/16 17:39:21 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/17 17:50:12 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@
 
 # include "structs.h"
 
-//exec.c
+// exec.c
 int		exec(t_minishell *sh, int nb_cmds);
+
+// built-in.c
+bool	set_built_in(t_cmd *cmd, char *bin);
+int		test(t_minishell *sh, t_cmd *cmd);//TODO:a delete + tard
 
 // redirections.c
 bool	set_redirections(t_minishell *sh, t_cmd *cmd, t_io *io);
@@ -39,6 +43,7 @@ void	make_child(t_minishell *sh, t_cmd *cmd);
 void	wait_children(t_cmd **cmds, int nb_cmds, int *wstatus);
 
 // exit_code.c
-int	get_exit_code(int wstatus);
+int		get_exit_code(pid_t last_cmd_pid, int wstatus);
+int		parse_wait_status(int wstatus);
 
 #endif

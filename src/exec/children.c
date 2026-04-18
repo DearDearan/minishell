@@ -6,14 +6,15 @@
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 17:48:49 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/13 17:09:32 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/17 17:58:43 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static int	exec_built_in(t_minishell *sh, t_cmd *cmd, int nb_cmds);
 static void	print_error(char *path, char *bin);
-static void	exit_child(t_minishell *sh, int nb_cmds);
+static void	error_exit_child(t_minishell *sh, int nb_cmds);
 
 void	make_child(t_minishell *sh, t_cmd *cmd)
 {
@@ -24,10 +25,12 @@ void	make_child(t_minishell *sh, t_cmd *cmd)
 	{
 		duplicate_fds(cmd);
 		close_all_fds(sh->cmds, sh->nb_cmds);
-		if (execve(cmd->path, cmd->argv, sh->envp) == -1)
+		if (cmd->built_in)
+			exit(exec_built_in(sh, cmd, sh->nb_cmds));
+		else if (execve(cmd->path, cmd->argv, sh->envp) == -1)
 		{
 			print_error(cmd->path, cmd->argv[0]);
-			exit_child(sh, sh->nb_cmds);
+			error_exit_child(sh, sh->nb_cmds);
 		}
 	}
 	else if (cmd->pid == -1)
@@ -39,7 +42,7 @@ void	make_child(t_minishell *sh, t_cmd *cmd)
 
 void	wait_children(t_cmd **cmds, int nb_cmds, int *wstatus)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (i < nb_cmds)
@@ -48,6 +51,15 @@ void	wait_children(t_cmd **cmds, int nb_cmds, int *wstatus)
 			waitpid(cmds[i]->pid, wstatus, 0);
 		i++;
 	}
+}
+
+static int	exec_built_in(t_minishell *sh, t_cmd *cmd, int nb_cmds)
+{
+	int	exit_code;
+
+	exit_code = cmd->built_in(sh, cmd);
+	cleaning(sh, nb_cmds);
+	return (exit_code);
 }
 
 static void	print_error(char *path, char *bin)
@@ -72,7 +84,7 @@ static void	print_error(char *path, char *bin)
 	}
 }
 
-static void	exit_child(t_minishell *sh, int nb_cmds)
+static void	error_exit_child(t_minishell *sh, int nb_cmds)
 {
 	cleaning(sh, nb_cmds);
 	exit(EXIT_NOTFOUND);

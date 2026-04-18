@@ -12,6 +12,9 @@
 
 #include "minishell.h"
 
+static void	clean_cmds(t_cmd **cmds, int nb_cmds);
+static void	clean_ios(t_io **ios, int nb_cmds);
+
 void	cleaning(t_minishell *sh, int nb_cmds)
 {
 	cleaning_for_next_prompt(sh, nb_cmds);
@@ -20,30 +23,8 @@ void	cleaning(t_minishell *sh, int nb_cmds)
 
 void	cleaning_for_next_prompt(t_minishell *sh, int nb_cmds)
 {
-	int		i;
-	t_io	*io;
-	t_io	*old_io;
-
-	i = 0;
-	while (i < nb_cmds)
-	{
-		free(sh->cmds[i]->path);
-		ft_free_strs(sh->cmds[i]->argv);
-		close_fds(&sh->cmds[i]->fds);
-		free(sh->cmds[i]);
-		io = sh->ios[i];
-		while (io)
-		{
-			old_io = io;
-			free(io->infile);
-			free(io->outfile);
-			io = io->next;
-			free(old_io);
-		}
-		i++;
-	}
-	free(sh->cmds);
-	free(sh->ios);
+	clean_cmds(sh->cmds, nb_cmds);
+	clean_ios(sh->ios, nb_cmds);
 }
 
 void	error_exit(t_minishell *sh, int nb_cmds)
@@ -51,4 +32,44 @@ void	error_exit(t_minishell *sh, int nb_cmds)
 	perror("minishell");
 	cleaning(sh, nb_cmds);
 	exit(EXIT_FAILURE);
+}
+
+static void	clean_cmds(t_cmd **cmds, int nb_cmds)
+{
+	int	i;
+
+	i = 0;
+	if (!cmds)
+		return ;
+	while (i < nb_cmds)
+	{
+		free(cmds[i]->path);
+		ft_free_strs(cmds[i]->argv);
+		close_fds(&cmds[i]->fds);
+		free(cmds[i]);
+		i++;
+	}
+	free(cmds);
+}
+
+static void	clean_ios(t_io **ios, int nb_cmds)
+{
+	int		i;
+	t_io	*io;
+	t_io	*old_io;
+
+	if (!ios)
+		return ;
+	i = 0;
+	while (i < nb_cmds)
+	{
+		io = ios[i];
+		old_io = io;
+		free(io->infile);
+		free(io->outfile);
+		io = io->next;
+		free(old_io);
+		i++;
+	}
+	free(ios);
 }
