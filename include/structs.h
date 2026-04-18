@@ -6,7 +6,11 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 14:25:25 by lifranco          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/04/17 17:54:49 by Camille          ###   ########.fr       */
+=======
+/*   Updated: 2026/04/16 19:23:08 by Camille          ###   ########.fr       */
+>>>>>>> b118b2e (feat: linking parsing & execution & fixing some bugs)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +50,11 @@ typedef struct s_cmd
 	char	**argv;
 	int		fds[2];
 	pid_t	pid;
+<<<<<<< HEAD
 	int		(*built_in)(struct s_minishell *, struct s_cmd *);
+=======
+	int		exit_code;//TODO:a supprimer, plus besoin anymore
+>>>>>>> b118b2e (feat: linking parsing & execution & fixing some bugs)
 } t_cmd;
 
 typedef struct s_io
@@ -59,4 +67,8 @@ typedef struct s_io
 }	t_io;
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> b118b2e (feat: linking parsing & execution & fixing some bugs)
 #endif

@@ -6,7 +6,11 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/04/18 15:36:00 by lifranco         ###   ########.fr       */
+=======
+/*   Updated: 2026/04/17 11:46:12 by lifranco         ###   ########.fr       */
+>>>>>>> b118b2e (feat: linking parsing & execution & fixing some bugs)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +44,7 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		if (line[0] != '\0')
 			add_history(line);
-	 	shell = parse(line, envp);
+		shell = parse(line, envp);
 		if (!shell)
 			continue ;
 		shell->envp = envp;

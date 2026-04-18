@@ -11,9 +11,12 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+<<<<<<< HEAD
 
 static void	clean_cmds(t_cmd **cmds, int nb_cmds);
 static void	clean_ios(t_io **ios, int nb_cmds);
+=======
+>>>>>>> b118b2e (feat: linking parsing & execution & fixing some bugs)
 
 void	cleaning(t_minishell *sh, int nb_cmds)
 {

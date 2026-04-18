@@ -6,7 +6,11 @@
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 11:54:27 by Camille           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/04/17 17:57:37 by Camille          ###   ########.fr       */
+=======
+/*   Updated: 2026/04/16 18:33:19 by Camille          ###   ########.fr       */
+>>>>>>> b118b2e (feat: linking parsing & execution & fixing some bugs)
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +27,7 @@ int	exec(t_minishell *sh, int nb_cmds)
 	int		wstatus;
 
 	env_path = extract_env_path(sh, sh->envp);
+<<<<<<< HEAD
 	if (nb_cmds == 1 && set_built_in(sh->cmds[0], sh->cmds[0]->argv[0]))
 		sh->exit_c = sh->cmds[0]->built_in(sh, sh->cmds[0]);
 	else
@@ -31,6 +36,11 @@ int	exec(t_minishell *sh, int nb_cmds)
 		wait_children(sh->cmds, sh->nb_cmds, &wstatus);
 		sh->exit_c = get_exit_code(sh->cmds[nb_cmds - 1]->pid, wstatus);
 	}
+=======
+	exec_cmds(sh, nb_cmds, env_path);
+	wait_children(sh->cmds, sh->nb_cmds, &wstatus);
+	sh->exit_c = get_exit_code(wstatus);
+>>>>>>> b118b2e (feat: linking parsing & execution & fixing some bugs)
 	cleaning_for_next_prompt(sh, nb_cmds);
 	return (sh->exit_c);
 }
