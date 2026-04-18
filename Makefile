@@ -32,7 +32,7 @@ EXPAND_DIR := expander/
 SRC_BASENAMES := minishell ft_freeall cleaning
 PARSE_BASENAMES := fill_io parsing trim_quotes
 LEXER_BASENAMES := ft_lexlast lexer split_quotes
-EXEC_BASENAMES := exec redirections fds_utils pipes children exit_code
+EXEC_BASENAMES := exec built_in redirections fds_utils pipes children exit_code
 EXPAND_BASENAMES := expand get_var is_in_sq
 
 SRCS := $(addprefix $(SRC_DIR), $(addsuffix .c,$(SRC_BASENAMES))) \

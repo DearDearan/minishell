@@ -24,6 +24,7 @@ int		exec(t_minishell *sh, int nb_cmds);
 
 // built-in.c
 bool	set_built_in(t_cmd *cmd, char *bin);
+int		test(t_minishell *sh, t_cmd *cmd);//TODO:a delete + tard
 
 // redirections.c
 bool	set_redirections(t_minishell *sh, t_cmd *cmd, t_io *io);

@@ -23,12 +23,14 @@ int	exec(t_minishell *sh, int nb_cmds)
 	int		wstatus;
 
 	env_path = extract_env_path(sh, sh->envp);
-	//TODO:if (nb_cmds ==1 && setbuiltin)
-	//		sh->exit_c = builtin
-	//else
+	if (nb_cmds == 1 && set_built_in(sh->cmds[0], sh->cmds[0]->argv[0]))
+		sh->exit_c = sh->cmds[0]->built_in(sh, sh->cmds[0]);
+	else
+	{
 		exec_cmds(sh, nb_cmds, env_path);
 		wait_children(sh->cmds, sh->nb_cmds, &wstatus);
 		sh->exit_c = get_exit_code(sh->cmds[nb_cmds - 1]->pid, wstatus);
+	}
 	cleaning_for_next_prompt(sh, nb_cmds);
 	return (sh->exit_c);
 }
@@ -68,12 +70,12 @@ static void	exec_cmds(t_minishell *sh, int nb_cmds, char **env_path)
 	{
 		if (set_redirections(sh, sh->cmds[i], sh->ios[i]))
 		{
-			//TODO:if (!setbuiltin)
-			// {
+			if (!set_built_in(sh->cmds[i], sh->cmds[i]->argv[0]))
+			{
 				sh->cmds[i]->path = get_executable_path(sh->cmds[i]->argv[0], env_path);
 				if (!sh->cmds[i]->path)
 					error_exit(sh, nb_cmds);
-			//TODO:}
+			}
 			if (next != nb_cmds)
 				set_pipe(sh, &sh->cmds[i]->fds[1], &sh->cmds[next]->fds[0]);
 			make_child(sh, sh->cmds[i]);

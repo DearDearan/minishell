@@ -69,7 +69,6 @@ starting minishell lundi 30:
 2 semaine : 1 journee de test comportements bash, 4 jours de code
 3 semaine : 2 jour de code, 1 aprem pour apprendre git rebase -i et squash etc
 
-- refactor pour gerer les built-ins et lancer dans parent si une seule cmd
 - strace pour regarder les commandes de bash
 
 comportements bash:
