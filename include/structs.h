@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 14:25:25 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/18 15:45:30 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/21 11:19:43 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ typedef struct s_minishell
 	int				exit_c;
 	char			**envp;
 	size_t			nb_cmds;
+	char			*prompt;
 	struct s_cmd	**cmds;
 	struct s_io		**ios;
+	
 } t_minishell;
 
 typedef struct s_cmd
