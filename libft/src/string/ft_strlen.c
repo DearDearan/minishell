@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Camille <private_mail>                     +#+  +:+       +#+        */
+/*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 12:00:51 by Camille           #+#    #+#             */
-/*   Updated: 2025/10/21 12:00:51 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/20 18:04:23 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i])
+	while (s && s[i])
 		i++;
 	return (i);
 }
