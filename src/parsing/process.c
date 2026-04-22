@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 13:49:21 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/18 15:47:24 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/20 14:06:08 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_lexer *process_io(t_minishell *parse, t_lexer *lex, int cmd_i)
 {
 	if (!fill_io(parse, lex, cmd_i))
 		return (NULL);
-	return (lex->next->next);
+	return (lex->next);
 }
 
 t_lexer	*fill_cmds_words(t_minishell *parse, t_lexer *lex, int cmd_i)

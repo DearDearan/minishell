@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 15:16:55 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/18 12:01:32 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/21 11:40:45 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	set_envp(t_minishell *sh, t_cmd *cmd)
 			free(sh->envp[i]);
 			sh->envp[i] = ft_strdup(cmd->argv[1]);
 			if (!sh->envp[i])
-				error_exit(sh, sh->nb_cmds);
+				return (2);
 		}
 		i++;
 	}

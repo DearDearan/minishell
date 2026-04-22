@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 14:55:55 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/16 18:32:43 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/20 14:52:40 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static int	expand_var(char *s, char *ret, t_minishell *shell, int *j)
 	{
 		var = get_var_name(&s[i]);
 		copy_value(ret, j, get_var(shell->envp, var));
-		free(var);
 		i += ft_strlen(var) + 1;
+		free(var);
 	}
 	return (i);
 }

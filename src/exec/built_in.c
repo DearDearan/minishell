@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_built_in.c                                   :+:      :+:    :+:   */
+/*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Camille <private_mail>                     +#+  +:+       +#+        */
+/*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 16:09:31 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/17 16:09:38 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/21 13:37:26 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ bool	set_built_in(t_cmd *cmd, char *bin)
 		//set pointeur de fonction
 	//else if (size == 2 && !ft_strncmp(bin, "cd", size))
 		//set pointeur de fonction
-	//else if (size == 3 && !ft_strncmp(bin, "pwd", size))
-		//set pointeur de fonction
+	else if (size == 3 && !ft_strncmp(bin, "pwd", size))
+		cmd->built_in = ft_pwd;
 	//else if (size == 6 && !ft_strncmp(bin, "export", size))
 		//set pointeur de fonction
-	//else if (size == 5 && !ft_strncmp(bin, "unset", size))
-		//set pointeur de fonction
-	//else if (size == 3 && !ft_strncmp(bin, "env", size))
-		//set pointeur de fonction
-	//else if (size == 4 && !ft_strncmp(bin, "exit", size))
-		//set pointeur de fonction
+	else if (size == 5 && !ft_strncmp(bin, "unset", size))
+		cmd->built_in = ft_unset;
+	else if (size == 3 && !ft_strncmp(bin, "env", size))
+		cmd->built_in = ft_env;
+	else if (size == 4 && !ft_strncmp(bin, "exit", size))
+		cmd->built_in = ft_exit;
 	else if (size == 4 && !ft_strncmp(bin, "TEST", size))
 		cmd->built_in = test;//TODO:a delete + tard
 	else

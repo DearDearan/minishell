@@ -1,47 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_envp.c                                         :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/14 13:44:05 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/18 15:53:39 by lifranco         ###   ########.fr       */
+/*   Created: 2026/04/17 15:54:50 by lifranco          #+#    #+#             */
+/*   Updated: 2026/04/21 11:45:48 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	get_tab_size(char **str)
+static int	count_args(char **args)
 {
 	int	i;
 
-	if (!str || !*str)
-		return (-1);
 	i = 0;
-	while (str[i])
+	while (args && args[i])
 		i++;
 	return (i);
 }
 
-void	get_envp(char **envp, t_minishell *shell)
+int ft_exit(t_minishell *sh, t_cmd *cmd)
 {
-	int	i;
-	char **env;
+	int	exit_c;
 
-	i = 0;
-	env = ft_calloc(sizeof(char *), get_tab_size(envp) + 1);
-	if (!env)
-		error_exit(shell, shell->nb_cmds);
-	while (envp[i])
+	if (count_args(cmd->argv) > 2)
 	{
-		env[i] = ft_strdup(envp[i]);
-		if (!env[i])
-			error_exit(shell, shell->nb_cmds);
-		i++;
+		ft_dprintf(2, "Syntax Error: more than 1 arguments.\n");
+		return (-1);
 	}
-	env[i] = NULL;
-	shell->envp = env;
+	else if (count_args(cmd->argv) == 1)
+	{
+		cleaning(sh, sh->nb_cmds);
+		exit(0);
+	}
+	else
+		exit_c = ft_atoi(cmd->argv[1]);
+	if (exit_c < 0 || exit_c > 255)
+	{
+		cleaning(sh, sh->nb_cmds);
+		exit(0);
+	}
+	cleaning(sh, sh->nb_cmds);
+	exit(exit_c);
 }
-
-
