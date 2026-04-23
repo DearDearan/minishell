@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 static char	**extract_env_path(t_minishell *sh, char **envp);
-static void	exec_cmds(t_minishell *sh, int nb_cmds, char **env_path);
+static void	exec_prompt(t_minishell *sh, int nb_cmds, char **env_path);
 static char	*get_executable_path(char *bin, char **env_path);
 static char	*get_path_in_env(char *bin, char**paths);
 
@@ -23,13 +23,15 @@ int	exec(t_minishell *sh, int nb_cmds)
 	int		wstatus;
 
 	env_path = extract_env_path(sh, sh->envp);
-	if (nb_cmds == 1 && set_built_in(sh->cmds[0], sh->cmds[0]->argv[0]))
+	if (nb_cmds == 1 && sh->cmds[0]->argv[0]
+		&& set_built_in(sh->cmds[0], sh->cmds[0]->argv[0]))
 		sh->exit_c = sh->cmds[0]->built_in(sh, sh->cmds[0]);
 	else
 	{
-		exec_cmds(sh, nb_cmds, env_path);
+		exec_prompt(sh, nb_cmds, env_path);
 		wait_children(sh->cmds, sh->nb_cmds, &wstatus);
-		sh->exit_c = get_exit_code(sh->cmds[nb_cmds - 1]->pid, wstatus);
+		sh->exit_c = get_exit_code(sh->ios[nb_cmds - 1],
+						sh->cmds[nb_cmds - 1], wstatus);
 	}
 	cleaning_for_next_prompt(sh, nb_cmds);
 	return (sh->exit_c);
@@ -59,7 +61,7 @@ static char	**extract_env_path(t_minishell *sh, char **envp)
 	return (splitted_env_path);
 }
 
-static void	exec_cmds(t_minishell *sh, int nb_cmds, char **env_path)
+static void	exec_prompt(t_minishell *sh, int nb_cmds, char **env_path)
 {
 	int		i;
 	int		next;
@@ -70,7 +72,7 @@ static void	exec_cmds(t_minishell *sh, int nb_cmds, char **env_path)
 	{
 		if (set_redirections(sh, sh->cmds[i], sh->ios[i]))
 		{
-			if (!set_built_in(sh->cmds[i], sh->cmds[i]->argv[0]))
+			if (sh->cmds[i]->argv[0] && !set_built_in(sh->cmds[i], sh->cmds[i]->argv[0]))
 			{
 				sh->cmds[i]->path = get_executable_path(sh->cmds[i]->argv[0], env_path);
 				if (!sh->cmds[i]->path)
@@ -78,7 +80,8 @@ static void	exec_cmds(t_minishell *sh, int nb_cmds, char **env_path)
 			}
 			if (next != nb_cmds)
 				set_pipe(sh, &sh->cmds[i]->fds[1], &sh->cmds[next]->fds[0]);
-			make_child(sh, sh->cmds[i]);
+			if (sh->cmds[i]->path)
+				make_child(sh, sh->cmds[i]);
 		}
 		close_fds(&sh->cmds[i]->fds);
 		i++;

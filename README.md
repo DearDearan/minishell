@@ -64,11 +64,17 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 
 ## TODO
 
+- ctrl+d dans un prompt sans rien -> exit
+- ctrl+d dans un heredoc sans rien error bash: warning: here-document at line 9 delimited by end-of-file (wanted `eof')
+- SI < "" ou > "" (idem single quotes) un fichier avec quotes est cree
+- rebase
+
 starting minishell lundi 30:
 1 semaine : 4 jours de reflexion en commun et prototypage des structures
 2 semaine : 1 journee de test comportements bash, 4 jours de code
 3 semaine : 2 jour de code, 1 aprem pour apprendre git rebase -i et squash etc
 - Note pour la prochaine fois : ne pas ecraser exit_c et envp de la structure minishell dans parse.c
+4 semaine : 
 
 En theorie il faudrait allouer minishell en tout premier lieu du main et ne pas reallouer plus tard.
 - strace pour regarder les commandes de bash
@@ -77,13 +83,6 @@ comportements bash:
 - chaque commande de bash gere leurs propres infile et outfile et prends en compte les derniers. ainsi chaque commande de pipe peut gerer son propre infile et oufile.
 - bash gere le desordre : `< infile echo > outfile hello < infile2 world` va par exemple prendre comme infile : infile2, et va echo hello world dans outfile
 - Les infiles et outfiles precedents sont tous testes au niveau des permissions mais sont ignore. le dernier outfile recevra les donnees et les autres seront seulement crees mais reste vide
-
-$ << eof cat -e
-> chat
-> 
-bash: warning: here-document at line 9 delimited by end-of-file (wanted `eof')
-chat$
-
 
 fonctions:
 getenv : recup une var d'env
@@ -97,9 +96,11 @@ chdir : change le dossier de travail actuel pour le binaire en execution
 opendir, readdir, closedir : ouvre un dossier, lit les fichiers un a un a chaque appel de cette fonction en renvoyant une structure (NE PAS FREE), ferme le dossier
 unlink : supprime un fichier
 wait3 et wait4 : variantes de wait et waitpid avec une structure qui donne plus d'infos
-signal, sigaction, sigemptyset, sigaddset, kill : a voir pour les signaux...
+man 7 signal, man 2 : sigaction, sigemptyset, sigaddset, kill : a voir pour les signaux...
 
-autorise : printf, access
+SIGINT = ctrl+C
+SIGQUIT = ctrl + \
+jai appris quil faut utiliser certaines fonctions dans la gestion des signaux (man 7 signal-safety)
 
 
 
