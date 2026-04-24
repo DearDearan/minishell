@@ -13,8 +13,7 @@
 #ifndef EXEC_H
 # define EXEC_H
 
-# define WARN_EOF \
-	"minishell: warning: here-document delimited by end-of-file (wanted '%s')"
+# define WARN_EOF "%s at line %d delimited by end-of-file (wanted '%s')\n"
 # define EXIT_NOTFOUND 127
 
 # include "structs.h"
@@ -24,7 +23,6 @@ int		exec(t_minishell *sh, int nb_cmds);
 
 // built-in.c
 bool	set_built_in(t_cmd *cmd, char *bin);
-int		test(t_minishell *sh, t_cmd *cmd);//TODO:a delete + tard
 
 // redirections.c
 bool	set_redirections(t_minishell *sh, t_cmd *cmd, t_io *io);

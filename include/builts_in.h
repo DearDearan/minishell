@@ -6,12 +6,15 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 13:13:34 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/21 15:26:17 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/24 15:45:01 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTS_IN_H
 # define BUILTS_IN_H
+
+/* FT_ECHO_C */
+int	ft_echo(t_minishell *sh, t_cmd *cmd);
 
 /* FT_PWD_C */
 int	ft_pwd(t_minishell *sh, t_cmd *cmd);
@@ -30,4 +33,5 @@ int	ft_unset(t_minishell *sh, t_cmd *cmd);
 
 /* UNSET_C */
 void	ft_unset_env(char *var, t_minishell *sh);
+
 #endif

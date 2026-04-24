@@ -64,16 +64,17 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 
 ## TODO
 
-- ctrl+d dans un prompt sans rien -> exit
-- ctrl+d dans un heredoc sans rien error bash: warning: here-document at line 9 delimited by end-of-file (wanted `eof')
+- builtin cd + export
+- builtin marche pas avec pipe ??? ex : echo truc | cat -e ne donne rien
+- Note pour la prochaine fois : ne pas ecraser exit_c et envp de la structure minishell dans parse.c
+- faut il specifiquement kill les children avec les signaux ou rien a voir ?
 - SI < "" ou > "" (idem single quotes) un fichier avec quotes est cree
-- rebase
+- leaks
 
 starting minishell lundi 30:
 1 semaine : 4 jours de reflexion en commun et prototypage des structures
 2 semaine : 1 journee de test comportements bash, 4 jours de code
 3 semaine : 2 jour de code, 1 aprem pour apprendre git rebase -i et squash etc
-- Note pour la prochaine fois : ne pas ecraser exit_c et envp de la structure minishell dans parse.c
 4 semaine : 
 
 En theorie il faudrait allouer minishell en tout premier lieu du main et ne pas reallouer plus tard.
