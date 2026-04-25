@@ -6,23 +6,47 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 13:49:21 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/20 14:06:08 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/27 11:20:16 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*process_word(char *content, t_minishell *parse)
+static bool	is_quoted(char *content, int i)
+{
+	while (content[i])
+	{
+		if (content[i] == '\'')
+			return (true);
+		else if (content[i] == '\"')
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
+char	**process_word(char *content, t_minishell *parse)
 {
 	char	*expanded;
 	char	*trim;
+	char	**ret;
+	bool	is_quote;
 
+	is_quote = is_quoted(content, 0);
 	expanded = expand(content, parse);
 	if (!expanded)
-		return (NULL);
+		error_exit(parse, parse->nb_cmds);
 	trim = trim_quotes(expanded);
 	free(expanded);
-	return (trim);
+	if (is_quote == false)
+		ret = ft_split_outquote(trim, ' ');
+	else
+	{
+		ret = ft_calloc(2, sizeof(char *));
+		ret[0] = ft_strdup(trim);
+	}
+	free(trim);
+	return (ret);
 }
 
 t_lexer *process_io(t_minishell *parse, t_lexer *lex, int cmd_i)
@@ -34,16 +58,23 @@ t_lexer *process_io(t_minishell *parse, t_lexer *lex, int cmd_i)
 
 t_lexer	*fill_cmds_words(t_minishell *parse, t_lexer *lex, int cmd_i)
 {
-	int	j;
+	int		j;
+	char	**words;
+	int		k;
 
 	j = 0;
 	while (lex && lex->type == WORDS)
 	{
-		parse->cmds[cmd_i]->argv[j] = process_word(lex->content, parse);
-		if (!parse->cmds[cmd_i]->argv[j])
-			error_exit(parse, parse->nb_cmds);
-		j++;
+		k = 0;
+		words = process_word(lex->content, parse);
+		while (words && words[k])
+		{
+			fill_argv(parse, parse->cmds[cmd_i], words[k]);
+			k++;
+		}
+		ft_free_strs(words);
 		lex = lex->next;
 	}
 	return (lex);
 }
+	

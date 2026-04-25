@@ -6,28 +6,25 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/24 14:12:13 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/27 14:29:04 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*get_pwd(void)
-{
-	char	*path;
-
-	path = getenv("PWD");
-	return (path);
-}
-
 static char	*init_prompt(void)
 {
 	char 	*prompt;
+	char	*cwd;
 	char	*tmp;
 
-	tmp = ft_strjoin("NavidShell:", get_pwd());
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
+		return (NULL);
+	tmp = ft_strjoin("NavidShell:", cwd);
 	prompt = ft_strjoin(tmp, "$ ");
 	free(tmp);
+	free(cwd);
 	return (prompt);
 }
 
@@ -41,34 +38,48 @@ static t_minishell *init_sh(char **envp)
 		error_exit(shell, 0);
 	if (!shell->envp)
 		get_envp(envp, shell);
-	if (!shell->prompt)
-		shell->prompt = init_prompt();
 	return (shell);
+}
+static int	read_exec(t_minishell *shell)
+{
+	char		*line;
+
+	line = readline(shell->prompt);
+	if (!line)
+	{
+		printf("exit\n");
+		return (1);
+	}
+	if (line[0] != '\0')
+	{
+		if (check_for_specials(line))
+		{
+			add_history(line);
+			free(line);
+			return (0);
+		}
+		add_history(line);
+		parse(line, shell);
+		exec(shell, shell->nb_cmds);
+	}
+	free(line);
+	return (0);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_minishell	*shell;
-	char		*line;
+	
 	(void)		argc;
 	(void)		argv;
-
 	shell = init_sh(envp);
+	if (!shell)
+		error_exit(NULL, 0);
 	while (1)
 	{
-		line = readline(shell->prompt);
-		if (!line)
-		{
-			printf("exit\n");
+		shell->prompt = init_prompt();
+		if (read_exec(shell))
 			break ;
-		}
-		if (line[0] != '\0')
-		{
-			add_history(line);
-			parse(line, shell);
-			exec(shell, shell->nb_cmds);
-		}
-		free(line);
 	}
 	cleaning(shell, 0);
 	rl_clear_history();

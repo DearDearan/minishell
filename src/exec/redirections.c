@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Camille <private_mail>                     +#+  +:+       +#+        */
+/*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:49:58 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/10 15:45:14 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/27 14:26:42 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,25 +61,17 @@ static int	get_fd_heredoc(t_minishell *sh, char *limiter, int size)
 {
 	int		fds[2];
 	char	*s;
-	int		line_nb;
 
 	if (pipe(fds) == -1)
 		error_exit(sh, sh->nb_cmds);
 	s = NULL;
-	line_nb = 1;
 	while (1)
 	{
 		s = readline("> ");
-		if (!s)
-		{
-			printf(WARN_EOF, "minishell: warning: here-document", line_nb, limiter);
-			break ;
-		}
-		if (((int)ft_strlen(s) == size && !ft_strncmp(s, limiter, size)))
+		if (!s || ((int)ft_strlen(s) == size && !ft_strncmp(s, limiter, size)))
 			break ;
 		ft_dprintf(fds[1], "%s\n", s);
 		free(s);
-		line_nb++;
 	}
 	free(s);
 	close(fds[1]);
