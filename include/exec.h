@@ -43,7 +43,7 @@ void	make_child(t_minishell *sh, t_cmd *cmd);
 void	wait_children(t_cmd **cmds, int nb_cmds, int *wstatus);
 
 // exit_code.c
-int		get_exit_code(pid_t last_cmd_pid, int wstatus);
+int		get_exit_code(bool io_invalid, t_cmd *cmd, int wstatus);
 int		parse_wait_status(int wstatus);
 
 #endif

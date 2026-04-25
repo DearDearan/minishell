@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <unistd.h>
+# include <signal.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
@@ -30,12 +31,11 @@
 # include "strutils.h"
 # include "ft_ctype.h"
 # include "structs.h"
+# include "signals.h"
 # include "parsing.h"
 # include "exec.h"
 # include "cleaning.h"
 # include "builts_in.h"
-
-//static int	g_signal;
 
 /* FT_FREEALL_C */
 void	ft_freetabs(char **strs);

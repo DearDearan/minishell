@@ -57,6 +57,7 @@ typedef struct s_io
 	char		*outfile;
 	bool		is_lim;
 	int			outfile_flags;
+	bool		invalid;
 	struct s_io	*next;
 }	t_io;
 

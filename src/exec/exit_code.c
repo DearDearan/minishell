@@ -12,9 +12,13 @@
 
 #include "minishell.h"
 
-int	get_exit_code(pid_t last_cmd_pid, int wstatus)
+int	get_exit_code(bool io_invalid, t_cmd *cmd, int wstatus)
 {
-	if (last_cmd_pid == -1)
+	if (io_invalid)
+		return (EXIT_FAILURE);
+	if (!cmd->argv)
+		return (EXIT_SUCCESS);
+	if (cmd->pid == -1)
 		return (EXIT_FAILURE);
 	return (parse_wait_status(wstatus));
 }
