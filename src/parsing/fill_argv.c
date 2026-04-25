@@ -1,48 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   fill_argv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/17 15:54:50 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/23 11:08:03 by lifranco         ###   ########.fr       */
+/*   Created: 2026/04/23 15:41:17 by lifranco          #+#    #+#             */
+/*   Updated: 2026/04/23 16:45:14 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	count_args(char **args)
+static int	count_split(char **split)
 {
 	int	i;
 
 	i = 0;
-	while (args && args[i])
+	while (split && split[i])
 		i++;
 	return (i);
 }
 
-int ft_exit(t_minishell *sh, t_cmd *cmd)
+void	fill_argv(t_minishell *sh, t_cmd *cmd, char *word)
 {
-	int	exit_c;
+	int		i;
+	int		size;
+	char	**args;
 
-	if (count_args(cmd->argv) > 2)
+	i = 0;
+	size = count_split(cmd->argv);
+	args = ft_calloc(size + 2, sizeof(char *));
+	if (!args)
+		error_exit(sh, sh->nb_cmds);
+	while (i < size)
 	{
-		ft_dprintf(2, "Syntax Error: more than 1 arguments.\n");
-		return (-1);
+		args[i] = cmd->argv[i];
+		i++;
 	}
-	else if (count_args(cmd->argv) == 1)
-	{
-		cleaning(sh, sh->nb_cmds);
-		exit(0);
-	}
-	else
-		exit_c = ft_atoi(cmd->argv[1]);
-	if (exit_c < 0 || exit_c > 255)
-	{
-		cleaning(sh, sh->nb_cmds);
-		exit(exit_c % 256);
-	}
-	cleaning(sh, sh->nb_cmds);
-	exit(exit_c);
+	args[size] = ft_strdup(word);
+	args[size + 1] = NULL;
+	free(cmd->argv);
+	cmd->argv = args;
 }

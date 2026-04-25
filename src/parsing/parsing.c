@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 15:12:38 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/20 14:40:57 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/23 16:42:19 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	init_cmd(t_cmd *cmd)
 	cmd->built_in = NULL;
 }
 
-static int  w_cnt(t_lexer *lexed)
+int  w_cnt(t_lexer *lexed)
 {
 	int count;
 	
@@ -57,9 +57,7 @@ static void fill_cmds(t_minishell *parse, t_lexer *lex)
     i = 0;
     while (lex)
     {
-        parse->cmds[i]->argv = ft_calloc(w_cnt(lex) + 1, sizeof(char *));
-        if (!parse->cmds[i]->argv)
-            error_exit(parse, parse->nb_cmds);
+		parse->cmds[i]->argv = NULL;
         while (lex && lex->type != PIPES)
         {
 			if (lex->type == WORDS)

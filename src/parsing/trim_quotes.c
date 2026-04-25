@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 14:34:46 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/14 13:23:02 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/23 16:59:48 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@
 
 static void	fill_trim(char *str, char *trim)
 {
-	int		i = 0;
-	int		j = 0;
+	int		i;
+	int		j;
 	bool	in_sq;
 	bool	in_dq;
 
+	i = 0;
+	j = 0;
 	in_sq = false;
 	in_dq = false;
 	while (str[i])
@@ -41,13 +43,11 @@ static void	fill_trim(char *str, char *trim)
 		{
 			in_sq = !in_sq;
 			i++;
-			continue;
 		}
 		if (str[i] == '"' && !in_sq)
 		{
 			in_dq = !in_dq;
 			i++;
-			continue;
 		}
 		trim[j++] = str[i++];
 	}

@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/24 14:12:13 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/25 17:54:02 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		line = readline(shell->prompt);
+	//	check_for_specials(line);
 		if (!line)
 		{
 			printf("exit\n");
