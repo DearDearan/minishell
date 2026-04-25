@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 16:09:31 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/21 13:37:26 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/24 17:41:30 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ bool	set_built_in(t_cmd *cmd, char *bin)
 	size = ft_strlen(bin);
 	if (!size)
 		return (false);
-	//else if (size == 4 && !ft_strncmp(bin, "echo", size))
-		//set pointeur de fonction
-	//else if (size == 2 && !ft_strncmp(bin, "cd", size))
+	else if (size == 4 && !ft_strncmp(bin, "echo", size))
+		cmd->built_in = ft_echo;
+	//else if (size == 2 && !ft_strncmp(bin, "cd", size))//TODO: utiliser chdir
 		//set pointeur de fonction
 	else if (size == 3 && !ft_strncmp(bin, "pwd", size))
 		cmd->built_in = ft_pwd;
@@ -33,18 +33,7 @@ bool	set_built_in(t_cmd *cmd, char *bin)
 		cmd->built_in = ft_env;
 	else if (size == 4 && !ft_strncmp(bin, "exit", size))
 		cmd->built_in = ft_exit;
-	else if (size == 4 && !ft_strncmp(bin, "TEST", size))
-		cmd->built_in = test;//TODO:a delete + tard
 	else
 		return (false);
 	return (true);
-}
-
-int	test(t_minishell *sh, t_cmd *cmd)//TODO:a delete + tard
-{
-	(void)cmd;
-	printf("TEST built-in\n");
-	if (sh->nb_cmds != 1)
-		exit(EXIT_SUCCESS);
-	return (EXIT_SUCCESS);
 }

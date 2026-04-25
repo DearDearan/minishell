@@ -39,9 +39,9 @@ static void	clean_cmds(t_cmd **cmds, int nb_cmds)
 {
 	int	i;
 
-	i = 0;
-	if (!cmds)
+	if (!nb_cmds || !cmds)
 		return ;
+	i = 0;
 	while (i < nb_cmds)
 	{
 		free(cmds[i]->path);
@@ -59,7 +59,7 @@ static void	clean_ios(t_io **ios, int nb_cmds)
 	t_io	*io;
 	t_io	*old_io;
 
-	if (!ios)
+	if (!nb_cmds || !ios)
 		return ;
 	i = 0;
 	while (i < nb_cmds)

@@ -6,7 +6,7 @@
 #    By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/20 10:13:22 by Camille           #+#    #+#              #
-#    Updated: 2026/04/24 14:12:27 by Camille          ###   ########.fr        #
+#    Updated: 2026/04/24 17:19:24 by Camille          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ PARSE_BASENAMES := fill_io parsing trim_quotes process
 LEXER_BASENAMES := ft_lexlast lexer split_quotes
 EXEC_BASENAMES := exec built_in redirections fds_utils pipes children exit_code
 EXPAND_BASENAMES := expand get_var is_in_sq
-BUILT_IN_BASENAMES := ft_exit ft_pwd ft_unset ft_env
+BUILT_IN_BASENAMES := ft_echo ft_exit ft_pwd ft_unset ft_env
 HELPERS_BASENAMES := set_envp unset
 
 SRCS := $(addprefix $(SRC_DIR), $(addsuffix .c,$(SRC_BASENAMES))) \

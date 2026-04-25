@@ -61,17 +61,25 @@ static int	get_fd_heredoc(t_minishell *sh, char *limiter, int size)
 {
 	int		fds[2];
 	char	*s;
+	int		line_nb;
 
 	if (pipe(fds) == -1)
 		error_exit(sh, sh->nb_cmds);
 	s = NULL;
+	line_nb = 1;
 	while (1)
 	{
 		s = readline("> ");
-		if (!s || ((int)ft_strlen(s) == size && !ft_strncmp(s, limiter, size)))
+		if (!s)
+		{
+			printf(WARN_EOF, "minishell: warning: here-document", line_nb, limiter);
+			break ;
+		}
+		if (((int)ft_strlen(s) == size && !ft_strncmp(s, limiter, size)))
 			break ;
 		ft_dprintf(fds[1], "%s\n", s);
 		free(s);
+		line_nb++;
 	}
 	free(s);
 	close(fds[1]);

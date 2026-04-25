@@ -35,6 +35,7 @@ static t_minishell *init_sh(char **envp)
 {
 	t_minishell	*shell;
 
+	set_signals();
 	shell = ft_calloc(1, sizeof(t_minishell));
 	if (!shell)
 		error_exit(shell, 0);
@@ -52,13 +53,15 @@ int	main(int argc, char **argv, char **envp)
 	(void)		argc;
 	(void)		argv;
 
-	set_signals();
 	shell = init_sh(envp);
 	while (1)
 	{
 		line = readline(shell->prompt);
 		if (!line)
-			continue ;
+		{
+			printf("exit\n");
+			break ;
+		}
 		if (line[0] != '\0')
 		{
 			add_history(line);
@@ -67,7 +70,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		free(line);
 	}
-	free(shell->prompt);
-	cleaning(shell, shell->nb_cmds);
+	cleaning(shell, 0);
 	rl_clear_history();
+	exit(EXIT_SUCCESS);
 }
