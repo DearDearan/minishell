@@ -6,12 +6,12 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 10:39:07 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/21 16:02:53 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/26 11:43:21 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+// let Camille rewrite the function
 int	ft_pwd(t_minishell *sh, t_cmd *cmd)
 {
 	char	*path;

@@ -6,11 +6,27 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 16:07:59 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/18 15:11:53 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/26 14:38:00 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static char	*expand_file(char *content, t_minishell *sh)
+{
+	char	*trim;
+	char	*expanded;
+
+	expanded = expand(content, sh);
+	trim = trim_quotes(expanded);
+	free(expanded);
+	if ((trim[0] == '\"' || trim[0] == '\'') && ft_strlen(trim) == 1)
+	{
+		free(trim);
+		return (NULL);
+	}
+	return (trim);
+}
 
 static t_io	*ft_newnode(void)
 {
@@ -23,29 +39,29 @@ static t_io	*ft_newnode(void)
 	return (node);
 }
 
-static t_io	*add_io(t_lexer *lexed)
+static t_io	*add_io(t_lexer *lexed, t_minishell *sh)
 {
 	t_io	*io;
 	
 	io = ft_newnode();
 	if (lexed->type == IN && lexed->next != NULL)
 	{
-		io->infile = lexed->next->content;
+		io->infile = expand_file(lexed->next->content, sh);
 		io->is_lim = false;		
 	}
 	else if (lexed->type == OUT && lexed->next != NULL)
 	{
-		io->outfile = lexed->next->content;
+		io->outfile = expand_file(lexed->next->content, sh);
 		io->outfile_flags = O_CREAT | O_TRUNC | O_WRONLY;
 	}
 	else if (lexed->type == LIM && lexed->next != NULL)
 	{
-		io->infile = lexed->next->content;
+		io->infile = expand_file(lexed->next->content, sh);
 		io->is_lim = true;
 	}
 	else if (lexed->type == APP && lexed->next != NULL)
 	{
-		io->outfile = lexed->next->content;
+		io->outfile = expand_file(lexed->next->content, sh);
 		io->outfile_flags = O_CREAT | O_APPEND | O_WRONLY;
 	}
 	return (io);
@@ -57,13 +73,13 @@ t_lexer *fill_io(t_minishell *shell, t_lexer *lexed, int i)
 	t_io *last;
 
 	if (!shell->ios[i]->infile && !shell->ios[i]->outfile)
-		*shell->ios[i] = *add_io(lexed);
+		*shell->ios[i] = *add_io(lexed, shell);
 	else 
 	{
 		last = ft_iolast(shell->ios[i]);	
 		if (!last)
 			return (NULL);
-		content = add_io(lexed);
+		content = add_io(lexed, shell);
 		last->next = content;
 	}
 	return (lexed->next);
