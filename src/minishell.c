@@ -6,11 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/04/27 14:29:04 by lifranco         ###   ########.fr       */
-=======
-/*   Updated: 2026/04/27 11:55:03 by lifranco         ###   ########.fr       */
->>>>>>> 688682a6841fbb33498369043a8c18f88a50d5a1
+/*   Updated: 2026/04/27 15:04:05 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +69,6 @@ static int	read_exec(t_minishell *shell)
 int	main(int argc, char **argv, char **envp)
 {
 	t_minishell	*shell;
-<<<<<<< HEAD
-=======
-	char		*line;
->>>>>>> 688682a6841fbb33498369043a8c18f88a50d5a1
 	
 	(void)		argc;
 	(void)		argv;
@@ -88,17 +80,6 @@ int	main(int argc, char **argv, char **envp)
 		shell->prompt = init_prompt();
 		if (read_exec(shell))
 			break ;
-<<<<<<< HEAD
-=======
-		}
-		if (line[0] != '\0' && !check_for_specials(line))
-		{
-			add_history(line);
-			parse(line, shell);
-			exec(shell, shell->nb_cmds);
-		}
-		free(line);
->>>>>>> 688682a6841fbb33498369043a8c18f88a50d5a1
 	}
 	cleaning(shell, 0);
 	rl_clear_history();
