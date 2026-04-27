@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 11:12:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/27 13:02:49 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/27 15:03:02 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@
 # include "exec.h"
 # include "cleaning.h"
 # include "builts_in.h"
-# include "get_next_line.h"
 
 /* FT_FREEALL_C */
 void	ft_freetabs(char **strs);
