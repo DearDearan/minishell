@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 13:49:21 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/25 13:49:30 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/27 11:20:16 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	**process_word(char *content, t_minishell *parse)
 		ret = ft_split_outquote(trim, ' ');
 	else
 	{
-		ret = ft_calloc(1, sizeof(char *));
+		ret = ft_calloc(2, sizeof(char *));
 		ret[0] = ft_strdup(trim);
 	}
 	free(trim);

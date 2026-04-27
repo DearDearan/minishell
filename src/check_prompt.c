@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 10:33:30 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/26 14:14:06 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/27 11:41:23 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ int			check_for_specials(char *prompt)
 	i = 0;
 	while (prompt[i])
 	{
-		if ((prompt[i] == ';' || prompt[i] == '\\') &&
-			is_in_quotes(prompt, i) == false)
+		if ((prompt[i] == ';' && is_in_quotes(prompt, i) == false)
+			|| prompt[i] == '\\')
 		{
 			printf("NavidShell: We're sorry, we don't support '%c' for now.\n",
 				prompt[i]);

@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 14:34:46 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/23 16:59:48 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/27 11:32:37 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,15 @@
 
 #include "minishell.h"
 
-static void	fill_trim(char *str, char *trim)
+static void	fill_trim(char *str, char *trim, int i, int j)
 {
-	int		i;
-	int		j;
 	bool	in_sq;
 	bool	in_dq;
 
-	i = 0;
-	j = 0;
 	in_sq = false;
 	in_dq = false;
 	while (str[i])
-	{
+	{ 
 		if (str[i] == '\'' && !in_dq)
 		{
 			in_sq = !in_sq;
@@ -49,7 +45,11 @@ static void	fill_trim(char *str, char *trim)
 			in_dq = !in_dq;
 			i++;
 		}
-		trim[j++] = str[i++];
+		else
+		{
+			trim[j++] = str[i];
+			i++;
+		}
 	}
 }
 
@@ -60,6 +60,11 @@ char *trim_quotes(char *str)
 	trim = ft_calloc(ft_strlen(str) + 1, sizeof(char));
 	if (!trim)
 		return (NULL);
-	fill_trim(str, trim);
+	fill_trim(str, trim, 0, 0);
+	if ((trim[0] == '\"' || trim[0] == '\'') && ft_strlen(trim) == 1)
+	{
+		free(trim);
+		return (NULL);
+	}
 	return (trim);
 }

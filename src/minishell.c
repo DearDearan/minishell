@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/26 11:10:27 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/27 11:55:03 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_minishell	*shell;
 	char		*line;
+	
 	(void)		argc;
 	(void)		argv;
-
 	shell = init_sh(envp);
 	while (1)
 	{
