@@ -16,6 +16,9 @@
 /* FT_ECHO_C */
 int		ft_echo(t_minishell *sh, t_cmd *cmd);
 
+/* FT_CD_C */
+int	ft_cd(t_minishell *sh, t_cmd *cmd);
+
 /* FT_PWD_C */
 int		ft_pwd(t_minishell *sh, t_cmd *cmd);
 
@@ -36,5 +39,11 @@ int		ft_unset(t_minishell *sh, t_cmd *cmd);
 
 /* UNSET_C */
 void	ft_unset_env(char *var, t_minishell *sh);
+
+// built_in_helpers/get_argc.c
+int	get_argc(char **argv);
+
+// built_in_helpers/ft_getenv.c
+char *ft_getenv(const char *name, const char **envp);
 
 #endif

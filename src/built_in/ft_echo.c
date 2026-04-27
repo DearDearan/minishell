@@ -6,13 +6,12 @@
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 15:42:57 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/24 17:29:44 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/25 15:35:46 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	get_argc(char **argv);
 static bool	get_option_n(int argc, char **argv);
 static void	print_echo_argv(int argc, char **argv, bool option_n);
 
@@ -23,22 +22,11 @@ int	ft_echo(t_minishell *sh, t_cmd *cmd)
 
 	(void)sh;
 	argc = get_argc(cmd->argv);
-	printf("ARGC:%d\n", argc);
 	option_n = get_option_n(argc, cmd->argv);
 	print_echo_argv(argc, cmd->argv, option_n);
 	if (!option_n)
 		printf("\n");
-	return (0);
-}
-
-static int	get_argc(char **argv)
-{
-	int		argc;
-
-	argc = 0;
-	while (argv[argc])
-		argc++;
-	return (argc);
+	return (EXIT_SUCCESS);
 }
 
 static bool	get_option_n(int argc, char **argv)

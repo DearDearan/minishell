@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 13:40:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/28 13:39:20 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/28 14:24:17 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,14 @@ static bool	is_correct_varname(char *var)
 	return (true);
 }
 
-int			ft_export(t_minishell *sh, t_cmd *cmd)
+int	ft_export(t_minishell *sh, t_cmd *cmd)
 {
 	int		i;
 	char	*var;
 	char	*trim;
-	
+
+	if (sh->nb_cmds > 1)
+		return (EXIT_SUCCESS);
 	i = 1;
 	while (cmd->argv[i])
 	{
@@ -80,6 +82,6 @@ int			ft_export(t_minishell *sh, t_cmd *cmd)
 		ft_set_env(cmd->argv[i], sh);
 		i++;
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 

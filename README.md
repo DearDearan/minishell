@@ -64,20 +64,18 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 
 ## TODO
 
-- builtin cd + export
+- integrer fonction de liam pour builtin cd
 - builtin marche pas avec pipe ??? ex : echo truc | cat -e ne donne rien
-- Note pour la prochaine fois : ne pas ecraser exit_c et envp de la structure minishell dans parse.c
+- renvoyer bon exitcode dans signal sigint !?
+- SIGNAUX: que faire de la variable global ? reparler peut etre avec mickael et jb ou voir discord ou avec d'autres !?
 - faut il specifiquement kill les children avec les signaux ou rien a voir ?
-- SI < "" ou > "" (idem single quotes) un fichier avec quotes est cree
+- delete et replace ft_freeall by free strs de split
+- renommer certaines variables pour anglicisme (ex: get_tab_size) et eventuellement rendre certaines plus explicites (ex: exit_c)
 - leaks
+- verifier quon a pas use des fontions interditent conne dprintf par exemple (a la place de ft_dprintf)
 
-starting minishell lundi 30:
-1 semaine : 4 jours de reflexion en commun et prototypage des structures
-2 semaine : 1 journee de test comportements bash, 4 jours de code
-3 semaine : 2 jour de code, 1 aprem pour apprendre git rebase -i et squash etc
-4 semaine : 
+## PRISE DE NOTE EN VRAC
 
-En theorie il faudrait allouer minishell en tout premier lieu du main et ne pas reallouer plus tard.
 - strace pour regarder les commandes de bash
 
 comportements bash:
@@ -114,3 +112,10 @@ tgetnum : Récupérer une valeur numérique (nombre de colonnes)
 tgetstr : Obtenir une séquence d'échappement (code couleur, déplacement)
 tgoto : Convertir des coordonnées en séquence d'échappement
 tputs : Envoyer une séquence au terminal
+
+## Travail de Camille, starting minishell lundi 30:
+
+1 semaine : 4 jours de reflexion en commun et prototypage des structures
+2 semaine : 1 journee de test comportements bash, 4 jours de code
+3 semaine : 2 jour de code, 1 aprem pour apprendre git rebase -i et squash etc
+4 semaine : 4 jour de code

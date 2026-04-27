@@ -80,7 +80,7 @@ static void	exec_prompt(t_minishell *sh, int nb_cmds, char **env_path)
 			}
 			if (next != nb_cmds)
 				set_pipe(sh, &sh->cmds[i]->fds[1], &sh->cmds[next]->fds[0]);
-			if (sh->cmds[i]->path)
+			if (sh->cmds[i]->built_in || sh->cmds[i]->path)
 				make_child(sh, sh->cmds[i]);
 		}
 		close_fds(&sh->cmds[i]->fds);
