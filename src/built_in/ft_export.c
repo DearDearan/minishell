@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 13:40:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/28 14:24:17 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/28 14:39:48 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*get_varname(char *str)
 		ret[j] = str[i];
 		j++;
 		i++;
-	}		
+	}
 	return (ret);
 }
 
@@ -84,4 +84,3 @@ int	ft_export(t_minishell *sh, t_cmd *cmd)
 	}
 	return (EXIT_SUCCESS);
 }
-

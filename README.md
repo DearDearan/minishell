@@ -64,9 +64,9 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 
 ## TODO
 
+- gerer variable glo avec les readline ?? verif exitcode 130 dans prompt ET dans heredoc pour CTRL+C
 - integrer fonction de liam pour builtin cd
-- builtin marche pas avec pipe ??? ex : echo truc | cat -e ne donne rien
-- renvoyer bon exitcode dans signal sigint !?
+- verif les erreurs de syntaxe et bien retourner 2 (egalement si on gere pas les characs speciaux comme ; etc)
 - SIGNAUX: que faire de la variable global ? reparler peut etre avec mickael et jb ou voir discord ou avec d'autres !?
 - faut il specifiquement kill les children avec les signaux ou rien a voir ?
 - delete et replace ft_freeall by free strs de split

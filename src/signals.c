@@ -29,7 +29,7 @@ void	set_signals()
 
 static void	handle_sigint(int signum)
 {
-	(void)signum;
+	g_signal = signum + 128;
 	write(STDOUT_FILENO, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
