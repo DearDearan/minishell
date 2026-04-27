@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 13:44:05 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/18 15:53:39 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/27 12:58:56 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	get_tab_size(char **str)
 	return (i);
 }
 
-void	get_envp(char **envp, t_minishell *shell)
+void		get_envp(char **envp, t_minishell *shell)
 {
 	int	i;
 	char **env;
@@ -43,5 +43,3 @@ void	get_envp(char **envp, t_minishell *shell)
 	env[i] = NULL;
 	shell->envp = env;
 }
-
-

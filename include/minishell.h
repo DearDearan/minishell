@@ -6,13 +6,12 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 11:12:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/18 14:41:27 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/27 15:03:02 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-
 # include <fcntl.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -46,5 +45,8 @@ t_io	*ft_iolast(t_io *lst);
 t_io	*ft_iolast(t_io *lst);
 /* GET_ENVP_C */
 void	get_envp(char **envp, t_minishell *shell);
+/* CHECK_PROMPT_C */
+int		check_for_specials(char *prompt);
+
 
 #endif

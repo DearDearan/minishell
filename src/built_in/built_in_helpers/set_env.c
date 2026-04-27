@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 15:16:55 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/21 11:40:45 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/27 15:36:43 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,31 @@ static void	put_into_env(char *var, char **envp, t_minishell *shell)
 	shell->envp = env;
 }
 
-int	set_envp(t_minishell *sh, t_cmd *cmd)
+void	ft_set_env(char *var, t_minishell *sh)
 {
 	int		i;
 	char	*equal;
+	char	name;
 	int		j;
 
 	i = 0;
 	j = 0;
-	equal = ft_strjoin(get_var_name(cmd->argv[1]), "=");
+	name = get_var_name(var, sh);
+	equal = ft_strjoin(name, "=");
+	free(name);
 	while (sh->envp && sh->envp[i])
 	{
 		if (!ft_strncmp(equal, sh->envp[i], ft_strlen(equal)))
 		{
 			free(sh->envp[i]);
-			sh->envp[i] = ft_strdup(cmd->argv[1]);
+			sh->envp[i] = ft_strdup(var);
 			if (!sh->envp[i])
-				return (2);
+				error_exit(sh, sh->nb_cmds);
 		}
 		i++;
 	}
 	if (!sh->envp[i])
-		put_into_env(cmd->argv[1], sh->envp, sh);
+		put_into_env(var, sh->envp, sh);
 	free(equal);
 	return (0);
 }
