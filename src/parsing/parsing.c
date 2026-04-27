@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 15:12:38 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/23 16:42:19 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/27 15:20:49 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static void	init_cmd(t_cmd *cmd)
 	cmd->fds[0] = -1;
 	cmd->fds[1] = -1;
 	cmd->built_in = NULL;
+	cmd->argv = NULL;
 }
 
 int  w_cnt(t_lexer *lexed)

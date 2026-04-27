@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 15:16:55 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/27 13:54:17 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/27 15:36:43 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	put_into_env(char *var, char **envp, t_minishell *shell)
 	shell->envp = env;
 }
 
-void	ft_set_envp(char *var, t_minishell *sh)
+void	ft_set_env(char *var, t_minishell *sh)
 {
 	int		i;
 	char	*equal;
@@ -72,7 +72,7 @@ void	ft_set_envp(char *var, t_minishell *sh)
 		i++;
 	}
 	if (!sh->envp[i])
-		put_into_env(cmd->argv[1], sh->envp, sh);
+		put_into_env(var, sh->envp, sh);
 	free(equal);
 	return (0);
 }
