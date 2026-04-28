@@ -13,7 +13,7 @@
 #ifndef EXEC_H
 # define EXEC_H
 
-# define WARN_EOF "%s at line %d delimited by end-of-file (wanted '%s')\n"
+# define WARN_EOF "%s at line %d delimited by end-of-file (wanted `%s')\n"
 # define EXIT_NOTFOUND 127
 
 # include "structs.h"

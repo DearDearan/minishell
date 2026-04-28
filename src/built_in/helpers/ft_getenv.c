@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/21 13:30:58 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/25 14:50:11 by Camille          ###   ########.fr       */
+/*   Created: 2026/04/25 16:29:02 by Camille           #+#    #+#             */
+/*   Updated: 2026/04/25 16:51:06 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_unset(t_minishell *sh, t_cmd *cmd)
+char *ft_getenv(const char *name, const char **envp)
 {
+	int	size;
 	int	i;
-	
-	i = 1;
-	if (sh->nb_cmds > 1)
-		return (EXIT_SUCCESS);
-	if (!cmd->argv[1])
-		return (EXIT_FAILURE);
-	while (cmd->argv[i])
+
+	if (!name || !envp)
+		return (NULL);
+	size = ft_strlen(name);
+	i = 0;
+	while(envp[i])
 	{
-		ft_unset_env(cmd->argv[i], sh);
+		if (!ft_strncmp(envp[i], name, size))
+		{
+			if (envp[i][size] == '=')
+				return ((char *)(envp[i] + size + 1));
+		}
 		i++;
 	}
-	return (EXIT_SUCCESS);
+	return (NULL);
 }

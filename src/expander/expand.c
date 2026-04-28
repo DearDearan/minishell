@@ -29,7 +29,10 @@ static int	expand_var(char *s, char *ret, t_minishell *shell, int *j)
 	i = 0;
 	if (s[i] == '$' && s[i + 1] == '?')
 	{
-		var = ft_itoa(shell->exit_c);
+		if (!g_signal)
+			var = ft_itoa(shell->exit_c);
+		else
+			var = ft_itoa(g_signal);
 		copy_value(ret, j, var);
 		free(var);
 		i += 2;

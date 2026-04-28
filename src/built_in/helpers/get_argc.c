@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*   get_argc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
+/*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/21 13:30:58 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/25 14:50:11 by Camille          ###   ########.fr       */
+/*   Created: 2026/04/25 15:35:18 by Camille           #+#    #+#             */
+/*   Updated: 2026/04/25 15:37:14 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_unset(t_minishell *sh, t_cmd *cmd)
+int	get_argc(char **argv)
 {
-	int	i;
-	
-	i = 1;
-	if (sh->nb_cmds > 1)
-		return (EXIT_SUCCESS);
-	if (!cmd->argv[1])
-		return (EXIT_FAILURE);
-	while (cmd->argv[i])
-	{
-		ft_unset_env(cmd->argv[i], sh);
-		i++;
-	}
-	return (EXIT_SUCCESS);
+	int	argc;
+
+	argc = 0;
+	while (argv[argc])
+		argc++;
+	return (argc);
 }
