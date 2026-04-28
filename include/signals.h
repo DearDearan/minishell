@@ -6,15 +6,15 @@
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 11:15:08 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/22 11:19:21 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/28 16:03:45 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SIGNALS_H
 # define SIGNALS_H
 
-static int	g_signal;
+extern int	g_signal;
 
-void	set_signals();
+void	set_signals(void);
 
 #endif

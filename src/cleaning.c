@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 13:53:30 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/22 11:30:39 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/28 17:04:16 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	cleaning_for_next_prompt(t_minishell *sh, int nb_cmds)
 {
 	clean_cmds(sh->cmds, nb_cmds);
 	clean_ios(sh->ios, nb_cmds);
-	g_signal = 0;
+	g_signal = 0;//TODO:pertinent ??? a voir plus tard quand je ferai les 130
 }
 
 void	error_exit(t_minishell *sh, int nb_cmds)
