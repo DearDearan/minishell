@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/27 15:04:05 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/28 16:30:48 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@ static int	read_exec(t_minishell *shell)
 	}
 	if (line[0] != '\0')
 	{
-		if (check_for_specials(line))
+		if (check_for_specials(line, shell))
 		{
 			add_history(line);
 			free(line);
 			return (0);
 		}
 		add_history(line);
-		parse(line, shell);
-		exec(shell, shell->nb_cmds);
+		if (!parse(line, shell))
+			exec(shell, shell->nb_cmds);
 	}
 	free(line);
 	return (0);
