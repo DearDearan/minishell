@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 11:54:27 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/27 15:02:21 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/28 16:26:28 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	exec(t_minishell *sh, int nb_cmds)
 	int		wstatus;
 
 	env_path = extract_env_path(sh, sh->envp);
-	if (nb_cmds == 1 && sh->cmds[0]->argv[0]
+	if (nb_cmds == 1 && sh->cmds[0]->argv
 		&& set_built_in(sh->cmds[0], sh->cmds[0]->argv[0]))
 		sh->exit_c = sh->cmds[0]->built_in(sh, sh->cmds[0]);
 	else
@@ -34,6 +34,7 @@ int	exec(t_minishell *sh, int nb_cmds)
 						sh->cmds[nb_cmds - 1], wstatus);
 	}
 	cleaning_for_next_prompt(sh, nb_cmds);
+	ft_free_strs(env_path);
 	return (sh->exit_c);
 }
 
@@ -72,7 +73,7 @@ static void	exec_prompt(t_minishell *sh, int nb_cmds, char **env_path)
 	{
 		if (set_redirections(sh, sh->cmds[i], sh->ios[i]))
 		{
-			if (sh->cmds[i]->argv[0] && !set_built_in(sh->cmds[i], sh->cmds[i]->argv[0]))
+			if (sh->cmds[i]->argv && !set_built_in(sh->cmds[i], sh->cmds[i]->argv[0]))
 			{
 				sh->cmds[i]->path = get_executable_path(sh->cmds[i]->argv[0], env_path);
 				if (!sh->cmds[i]->path)

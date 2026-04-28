@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 10:33:30 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/27 15:02:35 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/28 17:26:04 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static bool	is_in_quotes(char *str, int pos)
 	return (sq + dq);
 }
 
-int			check_for_specials(char *prompt)
+int			check_for_specials(char *prompt, t_minishell *sh)
 {
 	int	i;
 
@@ -64,6 +64,8 @@ int			check_for_specials(char *prompt)
 		{
 			printf("NavidShell: We're sorry, we don't support '%c' for now.\n",
 				prompt[i]);
+			sh->exit_c = 2;
+			free(sh->prompt);
 			return (1);
 		}
 		i++;
@@ -71,6 +73,8 @@ int			check_for_specials(char *prompt)
 	if (check_for_open_quotes(prompt))
 	{
 		printf("NavidShell: You left a quote open, bruh.\n");
+		sh->exit_c = 2;
+		free(sh->prompt);
 		return (1);	
 	}
 	return (0);

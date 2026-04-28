@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 14:25:25 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/21 11:19:43 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/28 16:16:28 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_minishell
 	char			**envp;
 	size_t			nb_cmds;
 	char			*prompt;
+	bool			parse_err;
 	struct s_cmd	**cmds;
 	struct s_io		**ios;
 	

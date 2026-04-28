@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 16:25:21 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/23 16:44:32 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/28 15:58:32 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ char	**ft_split_outquote(char const *s, char c);
 /* FT_LEXLAST_C */
 t_lexer	*ft_lexlast(t_lexer *lst);
 
+/* FT_LEXCLEAR */
+void	ft_lexclear(t_lexer **lst, void (*del)(void *));
+void	del(void *content);
+
 /* TRIM_QUOTES_C */
 char	*trim_quotes(char *str);
 
@@ -38,7 +42,7 @@ char	*expand(char *str, t_minishell *shell);
 bool	is_in_sq(char *str, int pos);
 
 /* PARSING_C */
-void	parse(char *line, t_minishell *parsing);
+int		parse(char *line, t_minishell *parsing);
 int		w_cnt(t_lexer *lexed);
 
 /* PROCESS_C */
@@ -55,6 +59,7 @@ t_io	*ft_iolast(t_io *lst);
 
 /* FILL_ARGV_C */
 void	fill_argv(t_minishell *sh, t_cmd *cmd, char *word);
+
 
 
 #endif

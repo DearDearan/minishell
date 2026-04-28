@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 15:16:55 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/28 13:25:35 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/28 14:55:39 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,8 @@ void	ft_set_env(char *var, t_minishell *sh)
 	int		i;
 	char	*equal;
 	char	*name;
-	int		j;
 
 	i = 0;
-	j = 0;
 	name = get_varname(var);
 	equal = ft_strjoin(name, "=");
 	free(name);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Camille <private_mail>                     +#+  +:+       +#+        */
+/*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 15:42:57 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/24 17:29:44 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/28 17:15:49 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_echo(t_minishell *sh, t_cmd *cmd)
 
 	(void)sh;
 	argc = get_argc(cmd->argv);
-	printf("ARGC:%d\n", argc);
+	//printf("ARGC:%d\n", argc);
 	option_n = get_option_n(argc, cmd->argv);
 	print_echo_argv(argc, cmd->argv, option_n);
 	if (!option_n)
