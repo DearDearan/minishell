@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 11:54:27 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/27 16:45:41 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/28 18:09:45 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	exec(t_minishell *sh, int nb_cmds)
 						sh->cmds[nb_cmds - 1], wstatus);
 	}
 	cleaning_for_next_prompt(sh, nb_cmds);
+	ft_free_strs(env_path);
 	return (sh->exit_c);
 }
 

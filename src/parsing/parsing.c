@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 15:12:38 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/27 15:20:49 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/28 16:21:12 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,21 +70,23 @@ static void fill_cmds(t_minishell *parse, t_lexer *lex)
         }
         if (lex && lex->type == PIPES)
             lex = lex->next;
-        i++;
+		if (!lex)
+			break ;
+		i++;
     }
 }
 
-void parse(char *line, t_minishell *parsing)
+int	parse(char *line, t_minishell *parsing)
 {
 	t_lexer	*lexed;
 	int 	i;
-	int		j;
 
 	lexed = lex(line);
 	i = -1;
 	parsing->nb_cmds = count_pipes(lexed) + 1;
 	parsing->cmds = ft_calloc(parsing->nb_cmds, sizeof(t_cmd *));
 	parsing->ios = ft_calloc(parsing->nb_cmds, sizeof(t_io *));
+	parsing->parse_err = false;
 	if (!parsing->cmds || !parsing->ios)
 		error_exit(parsing, parsing->nb_cmds);
 	while (++i < (int) parsing->nb_cmds)
@@ -95,7 +97,9 @@ void parse(char *line, t_minishell *parsing)
 			error_exit(parsing, parsing->nb_cmds);
 		init_cmd(parsing->cmds[i]);
 	}
-	i = 0;
-	j = 0;
-	fill_cmds(parsing, lexed);	
+	fill_cmds(parsing, lexed);
+	ft_lexclear(&lexed, del);
+	if (parsing->parse_err == true)
+		return (1);
+	return (0);
 }
