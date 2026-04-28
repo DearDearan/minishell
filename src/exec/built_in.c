@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 16:09:31 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/25 17:53:51 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/28 11:21:59 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ bool	set_built_in(t_cmd *cmd, char *bin)
 		//set pointeur de fonction
 	else if (size == 3 && !ft_strncmp(bin, "pwd", size))
 		cmd->built_in = ft_pwd;
-	//else if (size == 6 && !ft_strncmp(bin, "export", size))
-		//set pointeur de fonction
+	else if (size == 6 && !ft_strncmp(bin, "export", size))
+		cmd->built_in = ft_export;
 	else if (size == 5 && !ft_strncmp(bin, "unset", size))
 		cmd->built_in = ft_unset;
 	else if (size == 3 && !ft_strncmp(bin, "env", size))
