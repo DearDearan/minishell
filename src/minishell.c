@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/29 15:01:42 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/29 15:17:01 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ static int	read_exec(t_minishell *shell)
 			exec(shell, shell->nb_cmds);
 	}
 	if (line[0] == '\0')
-		cleaning(shell, 0);
+		free(shell->prompt);
+	shell->prompt = NULL;
 	free(line);
 	return (0);
 }
