@@ -6,13 +6,24 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/28 16:30:48 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/29 15:01:42 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*init_prompt(void)
+static char *choose_shell_name(int *i)
+{
+	static char *name[10] = {"NavidShell:", "Bush_Shell:", "NavidShell...?:",
+		"Coquillage:", "PerlAbyssShell:", "MyShell.pk3:",
+		"Fish:", "\033[0;94mHouse\033[0mShell:", "EauCalmeShell:",
+		NULL};
+	if (!name[*i])
+		*i = 0;
+	return (name[*i]);
+}
+
+static char	*init_prompt(t_minishell *sh, int *i)
 {
 	char 	*prompt;
 	char	*cwd;
@@ -20,8 +31,8 @@ static char	*init_prompt(void)
 
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
-		return (NULL);
-	tmp = ft_strjoin("NavidShell:", cwd);
+		cwd = ft_getenv("OLDPWD", (const char **)sh->envp);
+	tmp = ft_strjoin(choose_shell_name(i), cwd);
 	prompt = ft_strjoin(tmp, "$ ");
 	free(tmp);
 	free(cwd);
@@ -36,13 +47,15 @@ static t_minishell *init_sh(char **envp)
 	shell = ft_calloc(1, sizeof(t_minishell));
 	if (!shell)
 		error_exit(shell, 0);
-	if (!shell->envp)
+	if (!shell->envp && envp)
 		get_envp(envp, shell);
+	else if (!envp)
+		shell->envp = NULL;
 	return (shell);
 }
 static int	read_exec(t_minishell *shell)
 {
-	char		*line;
+	char	*line;
 
 	line = readline(shell->prompt);
 	if (!line)
@@ -62,6 +75,8 @@ static int	read_exec(t_minishell *shell)
 		if (!parse(line, shell))
 			exec(shell, shell->nb_cmds);
 	}
+	if (line[0] == '\0')
+		cleaning(shell, 0);
 	free(line);
 	return (0);
 }
@@ -69,7 +84,9 @@ static int	read_exec(t_minishell *shell)
 int	main(int argc, char **argv, char **envp)
 {
 	t_minishell	*shell;
-	
+	int		i;
+
+	i = 0;
 	(void)		argc;
 	(void)		argv;
 	shell = init_sh(envp);
@@ -77,7 +94,8 @@ int	main(int argc, char **argv, char **envp)
 		error_exit(NULL, 0);
 	while (1)
 	{
-		shell->prompt = init_prompt();
+		shell->prompt = init_prompt(shell, &i);
+		i++;
 		if (read_exec(shell))
 			break ;
 	}
