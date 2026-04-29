@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 11:54:27 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/28 18:09:45 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/29 11:28:02 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,17 +90,22 @@ static void	exec_prompt(t_minishell *sh, int nb_cmds, char **env_path)
 	}
 }
 
-static char	*get_executable_path(char *bin, char **env_path)
+static char    *get_executable_path(char *bin, char **env_path)
 {
-	char	*path;
+    char    *path;
 
-	if (ft_strchr(bin, '/') || (bin[0] && !*env_path))
-		path = ft_strdup(bin);
-	else if (!*env_path)
-		path = ft_strdup("");
-	else
-		path = get_path_in_env(bin, env_path);
-	return (path);
+    if (!env_path)
+        path = ft_strdup(bin);
+    else
+    {
+        if (ft_strchr(bin, '/') || (bin[0] && !*env_path))
+            path = ft_strdup(bin);
+        else if (!*env_path)
+            path = ft_strdup("");
+        else
+            path = get_path_in_env(bin, env_path);
+    }
+    return (path);
 }
 
 static char	*get_path_in_env(char *bin, char**env_path)
