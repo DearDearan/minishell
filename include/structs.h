@@ -33,11 +33,12 @@ typedef struct s_lexer
 
 typedef struct s_minishell
 {
-	int				exit_c;
-	char			**envp;
-	size_t			nb_cmds;
 	char			*prompt;
+	char			*first_home_dir_path;
+	char			**envp;
+	int				exit_c;
 	bool			parse_err;
+	size_t			nb_cmds;
 	struct s_cmd	**cmds;
 	struct s_io		**ios;
 	

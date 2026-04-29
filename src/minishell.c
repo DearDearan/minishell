@@ -31,7 +31,7 @@ static char	*init_prompt(t_minishell *sh, int *i)
 
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
-		cwd = ft_getenv("OLDPWD", (const char **)sh->envp);
+		(void)sh;//TODO: si pas de cwd car rm par ex. faire en sorte de garder le dernier prompt
 	tmp = ft_strjoin(choose_shell_name(i), cwd);
 	prompt = ft_strjoin(tmp, "$ ");
 	free(tmp);
@@ -51,6 +51,7 @@ static t_minishell *init_sh(char **envp)
 		get_envp(envp, shell);
 	else if (!envp)
 		shell->envp = NULL;
+	shell->first_home_dir_path = getenv("HOME");
 	return (shell);
 }
 static int	read_exec(t_minishell *shell)

@@ -64,7 +64,15 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 
 ## TODO
 
-- rm avec cd : refaire le prompt ne pas le clean et ajouter les erreurs et le nombres de /.. necessaire pour chaque sousdossier supprime
+- rm avec wd (pour pwd, prompt et potentiellement cd) : refaire le prompt ne pas le clean et ajouter les erreurs et le nombres de /.. necessaire pour chaque sousdossier supprime (marche avec cd . et cd .. ??)
+
+cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+cboucher@1F1:~/42 CURSUS/minishell/test/test/test/..$ cd ..
+cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
+cboucher@1F1:~/42 CURSUS/minishell/test/test/test/../..$ cd ..
+cboucher@1F1:~/42 CURSUS/minishell$ 
+
+
 - global 130
 - a corriger > out : exitcode a 1 alors que bash est a 0
 - gerer variable glo avec les readline ?? verif exitcode 130 dans prompt ET dans heredoc pour CTRL+C
@@ -119,5 +127,6 @@ tputs : Envoyer une séquence au terminal
 
 1 semaine : 4 jours de reflexion en commun et prototypage des structures
 2 semaine : 1 journee de test comportements bash, 4 jours de code
-3 semaine : 2 jour de code, 1 aprem pour apprendre git rebase -i et squash etc
-4 semaine : 4 jour de code
+3 semaine : 2 jours de code, 1 aprem pour apprendre git rebase -i et squash etc
+4 semaine : 4 jours de code
+5 semaine : 3 gros jours de code
