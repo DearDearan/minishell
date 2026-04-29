@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 15:16:55 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/28 14:55:55 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/29 15:25:14 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,13 @@ static void	put_into_env(char *var, char **envp, t_minishell *shell)
 	char **env;
 
 	i = 0;
-	env = ft_calloc(sizeof(char *), get_tab_size(envp) + 2);
+	if (!envp)
+		env = ft_calloc(sizeof(char *), 2);
+	else
+		env = ft_calloc(sizeof(char *), get_tab_size(envp) + 2);
 	if (!env)
 		error_exit(shell, shell->nb_cmds);
-	while (envp[i])
+	while (envp && envp[i])
 	{
 		env[i] = ft_strdup(envp[i]);
 		if (!env[i])
@@ -95,7 +98,7 @@ void	ft_set_env(char *var, t_minishell *sh)
 		}
 		i++;
 	}
-	if (!sh->envp[i])
+	if (!sh->envp || !sh->envp[i])
 		put_into_env(var, sh->envp, sh);
 	free(equal);
 }

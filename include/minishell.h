@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 11:12:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/28 17:21:11 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/29 15:24:35 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ t_io	*ft_iolast(t_io *lst);
 /* GET_ENVP_C */
 void	get_envp(char **envp, t_minishell *shell);
 /* CHECK_PROMPT_C */
-int		check_for_specials(char *prompt);
+int		check_for_specials(char *prompt, t_minishell *sh);
 
 #endif

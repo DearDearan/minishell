@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 13:40:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/28 14:39:48 by Camille          ###   ########.fr       */
+/*   Updated: 2026/04/29 15:50:48 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	ft_export(t_minishell *sh, t_cmd *cmd)
 			ft_dprintf(2, "export: Error. Invalid variable name\n");
 			free(var);
 			free(trim);
-			return (1);
+			return (2);
 		}
 		free(var);
 		free(trim);
