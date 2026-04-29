@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/29 15:24:47 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/29 15:53:14 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static char *choose_shell_name(int *i)
 {
 	static char *name[10] = {"NavidShell:", "Bush_Shell:", "NavidShell...?:",
-		"Coquillage:", "PerlAbyssShell:", "MyShell.pk3:",
+		"Coquillage:", "PearlAbyssShell:", "MyShell.pk3:",
 		"Fish:", "\033[0;94mHouse\033[0mShell:", "EauCalmeShell:",
 		NULL};
 	if (!name[*i])
