@@ -93,12 +93,17 @@ static char	*get_executable_path(char *bin, char **env_path)
 {
 	char	*path;
 
-	if (ft_strchr(bin, '/') || (bin[0] && !*env_path))
+	if (!env_path)
 		path = ft_strdup(bin);
-	else if (!*env_path)
-		path = ft_strdup("");
 	else
-		path = get_path_in_env(bin, env_path);
+	{
+		if (ft_strchr(bin, '/') || (bin[0] && !*env_path))
+			path = ft_strdup(bin);
+		else if (!*env_path)
+			path = ft_strdup("");
+		else
+			path = get_path_in_env(bin, env_path);
+	}
 	return (path);
 }
 

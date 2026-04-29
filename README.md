@@ -64,9 +64,10 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 
 ## TODO
 
+- rm avec cd : refaire le prompt ne pas le clean et ajouter les erreurs et le nombres de /.. necessaire pour chaque sousdossier supprime
+- global 130
 - a corriger > out : exitcode a 1 alors que bash est a 0
 - gerer variable glo avec les readline ?? verif exitcode 130 dans prompt ET dans heredoc pour CTRL+C
-- SIGNAUX: que faire de la variable global ? reparler peut etre avec mickael et jb ou voir discord ou avec d'autres !?
 - faut il specifiquement kill les children avec les signaux ou rien a voir ?
 - delete et replace ft_freeall by free strs de split
 - renommer certaines variables pour anglicisme (ex: get_tab_size) et eventuellement rendre certaines plus explicites (ex: exit_c)
