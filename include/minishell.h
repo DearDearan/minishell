@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 11:12:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/29 15:24:35 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/29 17:47:31 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@
 # include "cleaning.h"
 # include "builts_in.h"
 
-/* FT_FREEALL_C */
-void	ft_freetabs(char **strs);
 /* FILL_IO_C */
 t_lexer *fill_io(t_minishell *shell, t_lexer *lexed, int i);
 /* FILL_IO_C */

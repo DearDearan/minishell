@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/29 15:53:14 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/01 20:26:31 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,14 @@ static char	*init_prompt(t_minishell *sh, int *i)
 	if (!cwd)
 		cwd = ft_getenv("OLDPWD", (const char **)sh->envp);
 	tmp = ft_strjoin(choose_shell_name(i), cwd);
+	if (!tmp)
+		error_exit(sh, sh->nb_cmds);
 	prompt = ft_strjoin(tmp, "$ ");
+	if (!prompt)
+	{
+		free(tmp);
+		error_exit(sh, sh->nb_cmds);
+	}
 	free(tmp);
 	free(cwd);
 	return (prompt);
@@ -46,13 +53,14 @@ static t_minishell *init_sh(char **envp)
 	set_signals();
 	shell = ft_calloc(1, sizeof(t_minishell));
 	if (!shell)
-		error_exit(shell, 0);
+		return (NULL);
 	if (!shell->envp && envp)
 		get_envp(envp, shell);
 	else if (!envp)
 		shell->envp = NULL;
 	return (shell);
 }
+
 static int	read_exec(t_minishell *shell)
 {
 	char	*line;
@@ -101,6 +109,5 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 	}
 	cleaning(shell, 0);
-	rl_clear_history();
 	exit(EXIT_SUCCESS);
 }

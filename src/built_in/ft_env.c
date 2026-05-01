@@ -6,11 +6,25 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 11:40:55 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/29 12:00:10 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/04/29 17:04:21 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+bool is_hidden(char *var)
+{
+	int	i;
+
+	i = 0;
+	while (var && var[i])
+	{
+		if (var[i] == '=')
+			return (false);
+		i++;
+	}
+	return (true);
+}
 
 int	ft_env(t_minishell *sh, t_cmd *cmd)
 {
@@ -27,7 +41,8 @@ int	ft_env(t_minishell *sh, t_cmd *cmd)
 		return (EXIT_SUCCESS);
 	while (sh->envp && sh->envp[i])
 	{
-		printf("%s\n", sh->envp[i]);
+		if (is_hidden(sh->envp[i]) == false)
+			printf("%s\n", sh->envp[i]);
 		i++;
 	}
 	return (EXIT_SUCCESS);

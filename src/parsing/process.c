@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 13:49:21 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/27 11:20:16 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/01 19:15:54 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	**process_word(char *content, t_minishell *parse)
 	is_quote = is_quoted(content, 0);
 	expanded = expand(content, parse);
 	if (!expanded)
-		error_exit(parse, parse->nb_cmds);
+		return (NULL);
 	trim = trim_quotes(expanded);
 	free(expanded);
 	if (is_quote == false)
@@ -43,8 +43,12 @@ char	**process_word(char *content, t_minishell *parse)
 	else
 	{
 		ret = ft_calloc(2, sizeof(char *));
+		if (!ret)
+			return (NULL);
 		ret[0] = ft_strdup(trim);
 	}
+	if (!ret)
+			return (NULL);
 	free(trim);
 	return (ret);
 }
@@ -67,6 +71,8 @@ t_lexer	*fill_cmds_words(t_minishell *parse, t_lexer *lex, int cmd_i)
 	{
 		k = 0;
 		words = process_word(lex->content, parse);
+		if (!words)
+			error_parsing(lex, parse, parse->nb_cmds);
 		while (words && words[k])
 		{
 			fill_argv(parse, parse->cmds[cmd_i], words[k]);
