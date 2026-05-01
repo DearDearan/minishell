@@ -17,8 +17,11 @@ static void	clean_ios(t_io **ios, int nb_cmds);
 
 void	cleaning(t_minishell *sh, int nb_cmds)
 {
+	if (!sh)
+		return ;
 	cleaning_for_next_prompt(sh, nb_cmds);
 	ft_free_strs(sh->envp);
+	free(sh->cwd);
 }
 
 void	cleaning_for_next_prompt(t_minishell *sh, int nb_cmds)
@@ -45,6 +48,8 @@ static void	clean_cmds(t_cmd **cmds, int nb_cmds)
 	i = 0;
 	while (i < nb_cmds)
 	{
+		if (!cmds[i])
+			break ;
 		free(cmds[i]->path);
 		ft_free_strs(cmds[i]->argv);
 		close_fds(&cmds[i]->fds);
@@ -66,6 +71,8 @@ static void	clean_ios(t_io **ios, int nb_cmds)
 	while (i < nb_cmds)
 	{
 		io = ios[i];
+		if (!io)
+			break ;
 		old_io = io;
 		free(io->infile);
 		free(io->outfile);

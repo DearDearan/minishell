@@ -25,18 +25,21 @@ static char *choose_shell_name(int *i)
 
 static char	*init_prompt(t_minishell *sh, int *i)
 {
-	char 	*prompt;
 	char	*cwd;
 	char	*tmp;
 
 	cwd = getcwd(NULL, 0);
-	if (!cwd)
-		(void)sh;//TODO: si pas de cwd car rm par ex. faire en sorte de garder le dernier prompt
-	tmp = ft_strjoin(choose_shell_name(i), cwd);
-	prompt = ft_strjoin(tmp, "$ ");
+	if (cwd)
+	{
+		free(sh->cwd);
+		tmp = ft_strjoin(choose_shell_name(i), cwd);
+		sh->cwd = cwd;
+	}
+	else
+		tmp = ft_strjoin(choose_shell_name(i), sh->cwd);
+	sh->prompt = ft_strjoin(tmp, "$ ");
 	free(tmp);
-	free(cwd);
-	return (prompt);
+	return (sh->prompt);
 }
 
 static t_minishell *init_sh(char **envp)
@@ -46,7 +49,7 @@ static t_minishell *init_sh(char **envp)
 	set_signals();
 	shell = ft_calloc(1, sizeof(t_minishell));
 	if (!shell)
-		error_exit(shell, 0);
+		error_exit(NULL, 0);
 	if (!shell->envp && envp)
 		get_envp(envp, shell);
 	else if (!envp)
@@ -54,6 +57,7 @@ static t_minishell *init_sh(char **envp)
 	shell->first_home_dir_path = getenv("HOME");
 	return (shell);
 }
+
 static int	read_exec(t_minishell *shell)
 {
 	char	*line;
@@ -92,8 +96,6 @@ int	main(int argc, char **argv, char **envp)
 	(void)		argc;
 	(void)		argv;
 	shell = init_sh(envp);
-	if (!shell)
-		error_exit(NULL, 0);
 	while (1)
 	{
 		shell->prompt = init_prompt(shell, &i);

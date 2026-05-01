@@ -64,21 +64,11 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 
 ## TODO
 
-- rm avec wd (pour pwd, prompt et potentiellement cd) : refaire le prompt ne pas le clean et ajouter les erreurs et le nombres de /.. necessaire pour chaque sousdossier supprime (marche avec cd . et cd .. ??)
-
-cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
-cboucher@1F1:~/42 CURSUS/minishell/test/test/test/..$ cd ..
-cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory
-cboucher@1F1:~/42 CURSUS/minishell/test/test/test/../..$ cd ..
-cboucher@1F1:~/42 CURSUS/minishell$ 
-
-
-- global 130
+- global 130 (revoir les fichiers expand.c et cleaning.c notamment)
 - a corriger > out : exitcode a 1 alors que bash est a 0
 - gerer variable glo avec les readline ?? verif exitcode 130 dans prompt ET dans heredoc pour CTRL+C
 - faut il specifiquement kill les children avec les signaux ou rien a voir ?
-- delete et replace ft_freeall by free strs de split
-- renommer certaines variables pour anglicisme (ex: get_tab_size) et eventuellement rendre certaines plus explicites (ex: exit_c)
+- eventuellement rendre certaines plus explicites (ex: exit_c)
 - leaks
 - verifier quon a pas use des fontions interditent conne dprintf par exemple (a la place de ft_dprintf)
 - verifier que les erreurs utilise bien ft_dprintf(2,)

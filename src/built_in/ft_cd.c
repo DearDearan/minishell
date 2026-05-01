@@ -20,12 +20,11 @@ static bool	update_envpwd_and_old(char *oldpwd_path, t_minishell *sh);
 int	ft_cd(t_minishell *sh, t_cmd *cmd)
 {
 	char	*oldpwd_path;
+	char	*newpwd_path;
 
 	if (sh->nb_cmds > 1)
 		return (EXIT_FAILURE);
 	oldpwd_path = getcwd(NULL, 0);
-	if (!oldpwd_path)
-		error_exit(sh, sh->nb_cmds);
 	if (!can_execute_cd(cmd->argv, sh))
 	{
 		free(oldpwd_path);
@@ -33,6 +32,15 @@ int	ft_cd(t_minishell *sh, t_cmd *cmd)
 	}
 	if (!update_envpwd_and_old(oldpwd_path, sh))
 		error_exit(sh, sh->nb_cmds);
+	newpwd_path = getcwd(NULL, 0);
+	if (!newpwd_path)
+	{
+		ft_dprintf(2, "minishell: cd: error retrieving current directory: getcwd: ");
+		ft_dprintf(2, "cannot access parent directories: No such file or directory");
+		ft_dprintf(2, "\n");
+	}
+	else
+		free(newpwd_path);
 	return (EXIT_SUCCESS);
 }
 
@@ -111,6 +119,8 @@ static bool	update_envpwd_and_old(char *oldpwd_path, t_minishell *sh)
 	char	*pwd_path;
 	char	*newpwd_path;
 
+	if (!oldpwd_path)
+		oldpwd_path = ft_strdup(sh->cwd);
 	pwd_path = oldpwd_path;
 	oldpwd_path = ft_strjoin("OLDPWD=", oldpwd_path);
 	free(pwd_path);
@@ -120,7 +130,7 @@ static bool	update_envpwd_and_old(char *oldpwd_path, t_minishell *sh)
 	free(oldpwd_path);
 	pwd_path = getcwd(NULL, 0);
 	if (!pwd_path)
-		return (false);
+		pwd_path = ft_strdup(sh->cwd);
 	newpwd_path = ft_strjoin("PWD=", pwd_path);
 	free(pwd_path);
 	if (!newpwd_path)

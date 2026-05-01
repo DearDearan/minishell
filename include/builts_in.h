@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 13:13:34 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/27 16:36:09 by Camille          ###   ########.fr       */
+/*   Updated: 2026/05/01 11:58:56 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ int		ft_unset(t_minishell *sh, t_cmd *cmd);
 /* UNSET_C */
 void	ft_unset_env(char *var, t_minishell *sh);
 
-// built_in_helpers/get_argc.c
-int	get_argc(char **argv);
+// built_in/helpers/get_argc.c
+int		get_argc(char **argv);
 
-// built_in_helpers/ft_getenv.c
-char *ft_getenv(const char *name, const char **envp);
+// built_in/helpers/ft_getenv.c
+char	*ft_getenv(const char *name, const char **envp);
 
 #endif
