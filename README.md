@@ -64,13 +64,11 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 
 ## TODO
 
-- rm avec cd : refaire le prompt ne pas le clean et ajouter les erreurs et le nombres de /.. necessaire pour chaque sousdossier supprime
-- global 130
+- global 130 (revoir les fichiers expand.c et cleaning.c notamment)
 - a corriger > out : exitcode a 1 alors que bash est a 0
 - gerer variable glo avec les readline ?? verif exitcode 130 dans prompt ET dans heredoc pour CTRL+C
 - faut il specifiquement kill les children avec les signaux ou rien a voir ?
-- delete et replace ft_freeall by free strs de split
-- renommer certaines variables pour anglicisme (ex: get_tab_size) et eventuellement rendre certaines plus explicites (ex: exit_c)
+- eventuellement rendre certaines plus explicites (ex: exit_c)
 - leaks
 - verifier quon a pas use des fontions interditent conne dprintf par exemple (a la place de ft_dprintf)
 - verifier que les erreurs utilise bien ft_dprintf(2,)
@@ -119,5 +117,6 @@ tputs : Envoyer une séquence au terminal
 
 1 semaine : 4 jours de reflexion en commun et prototypage des structures
 2 semaine : 1 journee de test comportements bash, 4 jours de code
-3 semaine : 2 jour de code, 1 aprem pour apprendre git rebase -i et squash etc
-4 semaine : 4 jour de code
+3 semaine : 2 jours de code, 1 aprem pour apprendre git rebase -i et squash etc
+4 semaine : 4 jours de code
+5 semaine : 3 gros jours de code

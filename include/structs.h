@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 14:25:25 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/28 16:16:28 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/01 12:52:00 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ typedef struct s_lexer
 
 typedef struct s_minishell
 {
-	int				exit_c;
-	char			**envp;
-	size_t			nb_cmds;
 	char			*prompt;
+	char			*cwd;
+	char			*first_home_dir_path;
+	char			**envp;
+	int				exit_c;
 	bool			parse_err;
+	size_t			nb_cmds;
 	struct s_cmd	**cmds;
 	struct s_io		**ios;
 	

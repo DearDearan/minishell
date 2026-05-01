@@ -19,8 +19,11 @@ int	ft_pwd(t_minishell *sh, t_cmd *cmd)
 	(void)cmd;
 	pwd_path = getcwd(NULL, 0);
 	if (!pwd_path)
-		error_exit(sh, sh->nb_cmds);
-	printf("%s\n", pwd_path);
-	free(pwd_path);
+		ft_dprintf(2, "minishell: pwd: The directory has been deleted\n", sh->cwd);
+	else
+	{
+		printf("%s\n", pwd_path);
+		free(pwd_path);
+	}
 	return (EXIT_SUCCESS);
 }
