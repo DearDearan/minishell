@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 16:25:21 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/28 15:58:32 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/01 19:08:52 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ t_io	*ft_iolast(t_io *lst);
 /* FILL_ARGV_C */
 void	fill_argv(t_minishell *sh, t_cmd *cmd, char *word);
 
+/* ERROR_CLEANING_C */
+void	error_parsing(t_lexer *lex, t_minishell *sh, int nb_cmds);
 
 
 #endif

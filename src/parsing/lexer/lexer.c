@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 13:44:49 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/22 13:40:50 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/01 19:07:58 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ t_lexer *lex(char *argv)
 	type = 0;
 	ret_lex = NULL;
 	args = ft_split_outquote(argv, ' ');
-	while (args[i])
+	if (!args)
+		return (NULL);
+	while (args && args[i])
 	{
 		new = ft_newnode(args[i]);
 		if (!new)

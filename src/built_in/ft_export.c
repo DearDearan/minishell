@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 13:40:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/29 15:50:48 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/01 17:07:34 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,24 @@ static bool	is_correct_varname(char *var)
 			return (false);
 		i++;
 	}
-	if (var[i] != '=')
-		return (false);
 	return (true);
+}
+
+static int	check_for_args(t_minishell *sh, t_cmd *cmd)
+{
+	int	i;
+
+	i = 0;
+	if (cmd->argv[0] && !cmd->argv[1])
+	{
+		while (sh->envp[i])
+		{
+			printf("declare -x %s\n", sh->envp[i]);
+			i++;
+		}
+		return (1);
+	}
+	return (0);
 }
 
 int	ft_export(t_minishell *sh, t_cmd *cmd)
@@ -62,25 +77,25 @@ int	ft_export(t_minishell *sh, t_cmd *cmd)
 	int		i;
 	char	*var;
 	char	*trim;
+	bool	error;
 
-	if (sh->nb_cmds > 1)
+	error = false;
+	if (sh->nb_cmds > 1 || check_for_args(sh, cmd))
 		return (EXIT_SUCCESS);
-	i = 1;
-	while (cmd->argv[i])
+	i = 0;
+	while (cmd->argv[++i])
 	{
 		trim = trim_quotes(cmd->argv[i]);
 		var = get_varname(trim);
 		if (is_correct_varname(trim) == false)
 		{
-			ft_dprintf(2, "export: Error. Invalid variable name\n");
-			free(var);
-			free(trim);
-			return (2);
+			ft_dprintf(2, "export: Error. \"%s\"'s not a valid ID.\n", trim);
+			error = true;
 		}
+		else
+			ft_set_env(cmd->argv[i], sh);
 		free(var);
 		free(trim);
-		ft_set_env(cmd->argv[i], sh);
-		i++;
 	}
-	return (EXIT_SUCCESS);
+	return ((int)error);
 }

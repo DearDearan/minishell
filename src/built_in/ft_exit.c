@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 15:54:50 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/28 15:00:17 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/01 15:04:45 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int ft_exit(t_minishell *sh, t_cmd *cmd)
 	if (get_argc(cmd->argv) > 2)
 	{
 		ft_dprintf(2, "Syntax Error: more than 1 arguments.\n");
-		return (2);
+		return (EXIT_FAILURE);
 	}
 	else if (get_argc(cmd->argv) == 1)
 	{

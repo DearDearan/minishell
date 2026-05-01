@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 13:53:30 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/29 15:52:56 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/01 20:29:29 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	cleaning(t_minishell *sh, int nb_cmds)
 	cleaning_for_next_prompt(sh, nb_cmds);
 	ft_free_strs(sh->envp);
 	free(sh->cwd);
+	rl_clean_history();
 }
 
 void	cleaning_for_next_prompt(t_minishell *sh, int nb_cmds)

@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 15:12:38 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/29 15:52:23 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/01 19:14:22 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,14 @@ int  w_cnt(t_lexer *lexed)
     }
 	return (count);
 }
-static unsigned int	count_pipes(t_lexer *lexed)
+static unsigned int	count_pipes(t_lexer *lexed, t_minishell *sh)
 {
 	int count;
 
 	count = 0;
-	while(lexed)
+	if (!lexed)
+		error_parsing(lexed, sh, 0);
+	while (lexed)
 	{
 		if (lexed->type == PIPES)
 			count++;
@@ -83,12 +85,12 @@ int	parse(char *line, t_minishell *parsing)
 
 	lexed = lex(line);
 	i = -1;
-	parsing->nb_cmds = count_pipes(lexed) + 1;
+	parsing->nb_cmds = count_pipes(lexed, parsing) + 1;
 	parsing->cmds = ft_calloc(parsing->nb_cmds, sizeof(t_cmd *));
 	parsing->ios = ft_calloc(parsing->nb_cmds, sizeof(t_io *));
 	parsing->parse_err = false;
 	if (!parsing->cmds || !parsing->ios)
-		error_exit(parsing, parsing->nb_cmds);
+		error_exit(parsing, 0);
 	while (++i < (int) parsing->nb_cmds)
 	{
 		parsing->cmds[i] = ft_calloc(1, sizeof(t_cmd));
