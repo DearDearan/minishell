@@ -64,12 +64,18 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 
 ## TODO
 
-- global 130 (revoir les fichiers expand.c et cleaning.c notamment)
+- global 130 (revoir les fichiers expand.c et cleaning.c notamment):
+ctrl+c dans prompt -> exit code 130
+ctrl+d dans prompt -> exit avec le dernier exit code
+- COMPORTEMENT BASH : le 17eme heredoc crash et retourne 2 -> bash: maximum here-document count exceeded
+On peut eventuellement ajouter ca ou pas ?
+- gerer sigint handler for heredoc prompt et exec
 - a corriger > out : exitcode a 1 alors que bash est a 0
 - gerer variable glo avec les readline ?? verif exitcode 130 dans prompt ET dans heredoc pour CTRL+C
 - faut il specifiquement kill les children avec les signaux ou rien a voir ?
 - eventuellement rendre certaines plus explicites (ex: exit_c)
-- leaks
+- leaks :
+ctrl+d dans prompt si existe commandes precedentes
 - verifier quon a pas use des fontions interditent conne dprintf par exemple (a la place de ft_dprintf)
 - verifier que les erreurs utilise bien ft_dprintf(2,)
 - utiliser excel discord 42 chan minishell et testeur ndacun pour tests finaux

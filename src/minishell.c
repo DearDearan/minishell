@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "signals.h"
 
 static char *choose_shell_name(int *i)
 {
@@ -46,7 +47,7 @@ static t_minishell *init_sh(char **envp)
 {
 	t_minishell	*shell;
 
-	set_signals();
+	set_signals(false);
 	shell = ft_calloc(1, sizeof(t_minishell));
 	if (!shell)
 		error_exit(NULL, 0);
@@ -63,10 +64,13 @@ static int	read_exec(t_minishell *shell)
 	char	*line;
 
 	line = readline(shell->prompt);
+	if (g_signal == SIGINT)
+		shell->exit_c = SIGINT + 128;
+	g_signal = 0;
 	if (!line)
 	{
 		printf("exit\n");
-		return (1);
+		return (shell->exit_c);//TODO: restructurer la boucle dexecution principal pour exit avec exitc
 	}
 	if (line[0] != '\0')
 	{
@@ -80,7 +84,7 @@ static int	read_exec(t_minishell *shell)
 		if (!parse(line, shell))
 			exec(shell, shell->nb_cmds);
 	}
-	if (line[0] == '\0')
+	else
 		free(shell->prompt);
 	shell->prompt = NULL;
 	free(line);

@@ -71,6 +71,7 @@ static void	exec_prompt(t_minishell *sh, int nb_cmds, char **env_path)
 	next = 1;
 	while (i < nb_cmds)
 	{
+		//TODO:if global SIGINT free tout, quitter lexec
 		if (set_redirections(sh, sh->cmds[i], sh->ios[i]))
 		{
 			if (sh->cmds[i]->argv && !set_built_in(sh->cmds[i], sh->cmds[i]->argv[0]))

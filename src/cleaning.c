@@ -29,7 +29,6 @@ void	cleaning_for_next_prompt(t_minishell *sh, int nb_cmds)
 	clean_cmds(sh->cmds, nb_cmds);
 	clean_ios(sh->ios, nb_cmds);
 	free(sh->prompt);
-	g_signal = 0;//TODO:pertinent ??? a voir plus tard quand je ferai les 130
 }
 
 void	error_exit(t_minishell *sh, int nb_cmds)
