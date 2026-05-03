@@ -14,6 +14,7 @@
 
 static int	open_io(char *path, int flags, bool to_read, bool *io_is_invalid);
 static int	get_fd_heredoc(t_minishell *sh, char *limiter, int size);
+static void	heredoc_loop(char *s, char *limiter, int size, int (*fds)[2]);
 
 bool	set_redirections(t_minishell *sh, t_cmd *cmd, t_io *io)
 {
@@ -62,28 +63,44 @@ static int	open_io(char *path, int flags, bool to_read, bool *io_is_invalid)
 static int	get_fd_heredoc(t_minishell *sh, char *limiter, int size)
 {
 	int		fds[2];
-	char	*s;
-	int		line_nb;
+	char	*line;
 
 	if (pipe(fds) == -1)
 		error_exit(sh, sh->nb_cmds);
-	s = NULL;
+	line = NULL;
+	set_signals(true);
+	heredoc_loop(line, limiter, size, &fds);
+	set_signals(false);
+	free(line);
+	close(fds[1]);
+	return (fds[0]);
+}
+
+static void	heredoc_loop(char *s, char *limiter, int size, int (*fds)[2])
+{
+	int	line_nb;
+	int	fd_writing;
+	int	fd_stdin_dup;
+
 	line_nb = 1;
+	fd_writing = (*fds)[1];
+	fd_stdin_dup = dup(STDIN_FILENO);
 	while (1)
 	{
 		s = readline("> ");
-		if (!s)
+		if (g_signal == SIGINT)
 		{
-			printf(WARN_EOF, "minishell: warning: heredoc", line_nb, limiter);
+			dup2(fd_stdin_dup, STDIN_FILENO);
+			close(fd_stdin_dup);
+			close_fd(&(*fds)[0]);
 			break ;
 		}
-		if (((int)ft_strlen(s) == size && !ft_strncmp(s, limiter, size)))
+		if (!s)
+			printf(WARN_EOF, "minishell: warning: here-document", line_nb, limiter);
+		if (!s || ((int)ft_strlen(s) == size && !ft_strncmp(s, limiter, size)))
 			break ;
-		ft_dprintf(fds[1], "%s\n", s);
+		ft_dprintf(fd_writing, "%s\n", s);
 		free(s);
 		line_nb++;
 	}
-	free(s);
-	close(fds[1]);
-	return (fds[0]);
 }

@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 11:54:27 by Camille           #+#    #+#             */
-/*   Updated: 2026/05/04 16:21:03 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/05 11:38:05 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,12 @@ int	exec(t_minishell *sh, int nb_cmds)
 	env_path = extract_env_path(sh, sh->envp);
 	if (nb_cmds == 1 && sh->cmds[0]->argv
 		&& set_built_in(sh->cmds[0], sh->cmds[0]->argv[0]))
-		sh->exit_c = sh->cmds[0]->built_in(sh, sh->cmds[0]);
+	{
+		if (g_signal == SIGINT)
+			sh->exit_c = SIGINT + 128;
+		else
+			sh->exit_c = sh->cmds[0]->built_in(sh, sh->cmds[0]);
+	}
 	else
 	{
 		exec_prompt(sh, nb_cmds, env_path);
@@ -71,6 +76,8 @@ static void	exec_prompt(t_minishell *sh, int nb_cmds, char **env_path)
 	next = 1;
 	while (i < nb_cmds)
 	{
+		if (g_signal == SIGINT)
+			break ;
 		if (set_redirections(sh, sh->cmds[i], sh->ios[i]))
 		{
 			if (sh->cmds[i]->argv && !set_built_in(sh->cmds[i], sh->cmds[i]->argv[0]))

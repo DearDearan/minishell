@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:15:36 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/27 14:27:25 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 17:50:18 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	get_exit_code(bool io_invalid, t_cmd *cmd, int wstatus)
 {
+	if (g_signal == SIGINT)
+		return (SIGINT + 128);
 	if (io_invalid)
 		return (EXIT_FAILURE);
 	if (!cmd->argv)

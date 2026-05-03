@@ -6,11 +6,13 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/05 10:42:40 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/05 11:39:52 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "signals.h"
+#include <stdlib.h>
 
 static char	*choose_shell_name(int *i)
 {
@@ -47,7 +49,7 @@ static t_minishell	*init_sh(char **envp)
 {
 	t_minishell	*shell;
 
-	set_signals();
+	set_signals(false);
 	shell = ft_calloc(1, sizeof(t_minishell));
 	if (!shell)
 		return (NULL);
@@ -59,32 +61,32 @@ static t_minishell	*init_sh(char **envp)
 	return (shell);
 }
 
-static int	read_exec(t_minishell *shell)
+static bool	read_exec(t_minishell *shell)
 {
 	char	*line;
 
 	line = readline(shell->prompt);
+	if (g_signal == SIGINT)
+		shell->exit_c = SIGINT + 128;
+	g_signal = 0;
 	if (!line)
-	{
-		printf("exit\n");
-		return (1);
-	}
+		return (false);
 	if (line[0] != '\0')
 	{
 		if (check_for_specials(line, shell))
 		{
 			add_history(line);
 			free(line);
-			return (0);
+			return (true);
 		}
 		add_history(line);
 		if (!parse(line, shell))
 			exec(shell, shell->nb_cmds);
 	}
-	if (line[0] == '\0')
+	else
 		free(shell->prompt);
 	free(line);
-	return (0);
+	return (true);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -100,9 +102,12 @@ int	main(int argc, char **argv, char **envp)
 	{
 		shell->prompt = init_prompt(shell, &i);
 		i++;
-		if (read_exec(shell))
+		if (!read_exec(shell))
+		{
+			printf("exit\n");
 			break ;
+		}
 	}
 	cleaning(shell, 0);
-	exit(EXIT_SUCCESS);
+	return (shell->exit_c);
 }

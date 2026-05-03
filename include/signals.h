@@ -15,6 +15,9 @@
 
 extern int	g_signal;
 
-void	set_signals(void);
+void	set_signals(bool heredoc);
+void	reset_signals(void);
+void	sigint_for_interactive_mode(int signum);
+void	sigint_for_heredoc(int signum);
 
 #endif

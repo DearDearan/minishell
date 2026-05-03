@@ -25,6 +25,7 @@ void	make_child(t_minishell *sh, t_cmd *cmd)
 	{
 		duplicate_fds(cmd);
 		close_all_fds(sh->cmds, sh->nb_cmds);
+		reset_signals();
 		if (cmd->built_in)
 			exit(exec_built_in(sh, cmd, sh->nb_cmds));
 		else if (execve(cmd->path, cmd->argv, sh->envp) == -1)
