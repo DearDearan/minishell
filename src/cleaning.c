@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/10 13:53:30 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/29 15:52:56 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 14:08:05 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	cleaning(t_minishell *sh, int nb_cmds)
 	cleaning_for_next_prompt(sh, nb_cmds);
 	ft_free_strs(sh->envp);
 	free(sh->cwd);
+	rl_clear_history();
 }
 
 void	cleaning_for_next_prompt(t_minishell *sh, int nb_cmds)
@@ -67,18 +68,20 @@ static void	clean_ios(t_io **ios, int nb_cmds)
 
 	if (!nb_cmds || !ios)
 		return ;
-	i = 0;
-	while (i < nb_cmds)
+	i = -1;
+	while (++i < nb_cmds)
 	{
 		io = ios[i];
 		if (!io)
-			break ;
-		old_io = io;
-		free(io->infile);
-		free(io->outfile);
-		io = io->next;
-		free(old_io);
-		i++;
+			continue ;
+		while (io)
+		{
+			old_io = io;
+			free(io->infile);
+			free(io->outfile);
+			io = io->next;
+			free(old_io);
+		}
 	}
 	free(ios);
 }

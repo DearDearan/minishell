@@ -1,46 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lexlast.c                                       :+:      :+:    :+:   */
+/*   check_filename.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/01 16:26:19 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/04 10:44:49 by lifranco         ###   ########.fr       */
+/*   Created: 2026/05/03 17:06:45 by lifranco          #+#    #+#             */
+/*   Updated: 2026/05/04 10:32:22 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_lexer	*ft_lexlast(t_lexer *lst)
+int	check_filename(char *str)
 {
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
+	int i;
 
-t_io	*ft_iolast(t_io *lst)
-{
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
-
-void	ft_lex_addback(t_lexer **lst, t_lexer *node)
-{
-	t_lexer	*last;
-
-	if (!lst || !node)
-		return ;
-	if (!*lst)
+	i = 0;
+	if (is_redir(str[i]) || is_pipes(str[i]))
 	{
-		*lst = node;
-		return ;
+		ft_dprintf(2, "Syntax Error : %s is an invalid token\n", str);
+		return (0);
 	}
-	last = ft_lexlast(*lst);
-	last->next = node;
+	return (1);
 }

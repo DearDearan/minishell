@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 16:25:21 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/28 15:58:32 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 14:09:04 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 
 /* LEXER_C */
 t_lexer *lex(char *argv);
+void	ft_lex_addback(t_lexer **lst, t_lexer *node);
+int		w_cnt(t_lexer *lexed);
 
 /* SPLIT_QUOTES_C*/
 char	**ft_split_outquote(char const *s, char c);
@@ -43,7 +45,6 @@ bool	is_in_sq(char *str, int pos);
 
 /* PARSING_C */
 int		parse(char *line, t_minishell *parsing);
-int		w_cnt(t_lexer *lexed);
 
 /* PROCESS_C */
 t_lexer	*fill_cmds_words(t_minishell *parse, t_lexer *lex, int cmd_i);
@@ -60,6 +61,14 @@ t_io	*ft_iolast(t_io *lst);
 /* FILL_ARGV_C */
 void	fill_argv(t_minishell *sh, t_cmd *cmd, char *word);
 
+/* ERROR_CLEANING_C */
+void	error_parsing(t_lexer *lex, t_minishell *sh, int nb_cmds);
 
+/* CHECK_FOR_SPACES_C */
+char	*add_spaces_around_ops(char *line);
+int		is_redir(char c);
+int		is_pipes(char c);
 
+/* CHECK_FILENAME_C */
+int		check_filename(char *str);
 #endif

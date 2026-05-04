@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/29 15:53:14 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 14:08:51 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static t_minishell *init_sh(char **envp)
 	set_signals();
 	shell = ft_calloc(1, sizeof(t_minishell));
 	if (!shell)
-		error_exit(NULL, 0);
+		return (NULL);
 	if (!shell->envp && envp)
 		get_envp(envp, shell);
 	else if (!envp)
@@ -104,6 +104,5 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 	}
 	cleaning(shell, 0);
-	rl_clear_history();
 	exit(EXIT_SUCCESS);
 }

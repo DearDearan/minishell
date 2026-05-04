@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_freeall.c                                       :+:      :+:    :+:   */
+/*   error_cleaning.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/01 15:36:46 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/03 10:52:09 by lifranco         ###   ########.fr       */
+/*   Created: 2026/05/01 18:49:09 by lifranco          #+#    #+#             */
+/*   Updated: 2026/05/01 19:08:39 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_freetabs(char **strs)
+void error_parsing(t_lexer *lex, t_minishell *sh, int nb_cmds)
 {
-	int	i;
-
-	i = 0;
-	while (strs[i])
-	{
-		free(strs[i]);
-		i++;
-	}
-	free(strs);
+	if (lex)
+		ft_lexclear(&lex, del);
+	error_exit(sh, nb_cmds);
 }

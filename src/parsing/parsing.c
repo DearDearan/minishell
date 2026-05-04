@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 15:12:38 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/29 15:52:23 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 14:08:23 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,14 @@ static void	init_cmd(t_cmd *cmd)
 	cmd->argv = NULL;
 }
 
-int  w_cnt(t_lexer *lexed)
-{
-	int count;
-	
-    count = 0;
-	while (lexed && lexed->type != PIPES)
-    {
-		if (lexed->type == WORDS)
-        	count++;
-        lexed = lexed->next;
-    }
-	return (count);
-}
-static unsigned int	count_pipes(t_lexer *lexed)
+static unsigned int	count_pipes(t_lexer *lexed, t_minishell *sh)
 {
 	int count;
 
 	count = 0;
-	while(lexed)
+	if (!lexed)
+		error_parsing(lexed, sh, 0);
+	while (lexed)
 	{
 		if (lexed->type == PIPES)
 			count++;
@@ -75,31 +64,48 @@ static void fill_cmds(t_minishell *parse, t_lexer *lex)
 		i++;
     }
 }
-
-int	parse(char *line, t_minishell *parsing)
+void	init_parse(t_minishell *parsing, t_lexer *lexed)
 {
-	t_lexer	*lexed;
-	int 	i;
+	int	i;
 
-	lexed = lex(line);
 	i = -1;
-	parsing->nb_cmds = count_pipes(lexed) + 1;
+	parsing->nb_cmds = count_pipes(lexed, parsing) + 1;
 	parsing->cmds = ft_calloc(parsing->nb_cmds, sizeof(t_cmd *));
 	parsing->ios = ft_calloc(parsing->nb_cmds, sizeof(t_io *));
 	parsing->parse_err = false;
 	if (!parsing->cmds || !parsing->ios)
-		error_exit(parsing, parsing->nb_cmds);
+		error_parsing(lexed, parsing, parsing->nb_cmds);
 	while (++i < (int) parsing->nb_cmds)
 	{
 		parsing->cmds[i] = ft_calloc(1, sizeof(t_cmd));
 		parsing->ios[i] = ft_calloc(1, sizeof(t_io));
 		if (!parsing->cmds[i] || !parsing->ios[i])
-			error_exit(parsing, parsing->nb_cmds);
+			error_parsing(lexed, parsing, parsing->nb_cmds);
 		init_cmd(parsing->cmds[i]);
 	}
+}
+
+int	parse(char *line, t_minishell *parsing)
+{
+	t_lexer	*lexed;
+	char	*new_line;
+
+	new_line = add_spaces_around_ops(line);
+	lexed = lex(new_line);
+	if (!lexed)
+	{
+		free(new_line);
+		parsing->exit_c = 2;
+		return (1);
+	}
+	init_parse(parsing, lexed);
 	fill_cmds(parsing, lexed);
 	ft_lexclear(&lexed, del);
 	if (parsing->parse_err == true)
+	{
+		free(new_line);
 		return (1);
+	}
+	free(new_line);
 	return (0);
 }

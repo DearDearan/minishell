@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 15:16:55 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/29 15:25:14 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/01 17:42:51 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static char	*get_varname(char *str)
 		ret[j] = str[i];
 		j++;
 		i++;
-	}		
+	}
+	ret[j] = str[i];
 	return (ret);
 }
 
@@ -79,16 +80,19 @@ static void	put_into_env(char *var, char **envp, t_minishell *shell)
 void	ft_set_env(char *var, t_minishell *sh)
 {
 	int		i;
-	char	*equal;
 	char	*name;
 
-	i = 0;
+	i = -1;
 	name = get_varname(var);
-	equal = ft_strjoin(name, "=");
-	free(name);
-	while (sh->envp && sh->envp[i])
+	if (name[ft_strlen(name) - 1] != '=')
 	{
-		if (!ft_strncmp(equal, sh->envp[i], ft_strlen(equal)))
+		put_into_env(var, sh->envp, sh);
+		free(name);
+		return ;
+	}
+	while (sh->envp && sh->envp[++i])
+	{
+		if (!ft_strncmp(name, sh->envp[i], ft_strlen(name)))
 		{
 			free(sh->envp[i]);
 			sh->envp[i] = ft_strdup(var);
@@ -96,9 +100,8 @@ void	ft_set_env(char *var, t_minishell *sh)
 				error_exit(sh, sh->nb_cmds);
 			break ;
 		}
-		i++;
 	}
 	if (!sh->envp || !sh->envp[i])
 		put_into_env(var, sh->envp, sh);
-	free(equal);
+	free(name);
 }
