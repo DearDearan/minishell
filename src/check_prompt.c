@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 10:33:30 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/28 17:26:04 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/03 13:05:45 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static bool	check_for_open_quotes(char *str)
 	return (sq + dq);
 }
 
-static bool	is_in_quotes(char *str, int pos)
+bool	is_in_quotes(char *str, int pos)
 {
 	int		i;
 	bool	sq;

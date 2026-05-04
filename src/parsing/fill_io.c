@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 16:07:59 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/28 16:17:45 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 13:48:23 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ static char	*expand_file(char *content, t_minishell *sh)
 	return (trim);
 }
 
-static t_io	*ft_newnode(void)
+static t_io	*ft_newnode(t_minishell *sh, t_lexer *lex)
 {
 	t_io	*node;
 
 	node = ft_calloc(sizeof(t_io), 1);
 	if (!node)
-		return (NULL);
+		error_parsing(lex, sh, sh->nb_cmds);
 	node->next = NULL;
 	return (node);
 }
@@ -42,8 +42,8 @@ static t_io	*ft_newnode(void)
 static t_io	*add_io(t_lexer *lexed, t_minishell *sh)
 {
 	t_io	*io;
-	
-	io = ft_newnode();
+
+	io = ft_newnode(sh, lexed);
 	if (lexed->type == IN && lexed->next != NULL)
 	{
 		io->infile = expand_file(lexed->next->content, sh);
@@ -67,11 +67,22 @@ static t_io	*add_io(t_lexer *lexed, t_minishell *sh)
 	return (io);
 }
 
+static void	replace_first_io(t_minishell *sh, t_lexer *lexed, int i)
+{
+	t_io *tmp;
+
+	tmp = add_io(lexed, sh);
+	if (!tmp)
+		return ;
+	free(sh->ios[i]);
+	sh->ios[i] = tmp;
+}
+
 t_lexer *fill_io(t_minishell *shell, t_lexer *lexed, int i)
 {
-	t_io *content;
-	t_io *last;
-
+	t_io	*content;
+	t_io	*last;
+		
 	if (!lexed->next)
 	{
 		ft_dprintf(2, "Error: Filename cannot be empty.\n");
@@ -80,7 +91,7 @@ t_lexer *fill_io(t_minishell *shell, t_lexer *lexed, int i)
 		return (NULL);
 	}
 	if (!shell->ios[i]->infile && !shell->ios[i]->outfile)
-		*shell->ios[i] = *add_io(lexed, shell);
+		replace_first_io(shell, lexed, i);
 	else 
 	{
 		last = ft_iolast(shell->ios[i]);	

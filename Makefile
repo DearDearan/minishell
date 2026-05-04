@@ -6,7 +6,7 @@
 #    By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/20 10:13:22 by Camille           #+#    #+#              #
-#    Updated: 2026/05/01 19:04:42 by lifranco         ###   ########.fr        #
+#    Updated: 2026/05/03 17:16:29 by lifranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,8 @@ BUILT_IN_DIR := built_in/
 BTIN_HELPERS_DIR := built_in/helpers/
 
 SRC_BASENAMES := minishell signals get_envp cleaning check_prompt
-PARSE_BASENAMES := fill_io parsing trim_quotes process fill_argv
-LEXER_BASENAMES := ft_lexlast lexer split_quotes ft_lexclear error_cleaning
+PARSE_BASENAMES := fill_io parsing trim_quotes process fill_argv check_for_spaces
+LEXER_BASENAMES := ft_lexlast lexer split_quotes ft_lexclear error_cleaning check_filename
 EXEC_BASENAMES := exec built_in redirections fds_utils pipes children exit_code
 EXPAND_BASENAMES := expand get_var is_in_sq
 BUILT_IN_BASENAMES := ft_echo ft_cd ft_pwd ft_export ft_unset ft_env ft_exit
