@@ -6,13 +6,11 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/05 11:39:52 by Camille          ###   ########.fr       */
+/*   Updated: 2026/05/05 12:09:11 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include "signals.h"
-#include <stdlib.h>
 
 static char	*choose_shell_name(int *i)
 {

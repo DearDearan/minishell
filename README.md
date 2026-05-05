@@ -64,8 +64,6 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 
 ## TODO
 
-- verifier quon a pas use des fontions interditent conne dprintf par exemple (a la place de ft_dprintf)
-- verifier que les erreurs utilise bien ft_dprintf(2,)
 - utiliser excel discord 42 chan minishell et testeur ndacun pour tests finaux
 
 ### LEAKS :

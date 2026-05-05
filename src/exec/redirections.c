@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:49:58 by Camille           #+#    #+#             */
-/*   Updated: 2026/05/04 16:17:25 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/05 11:45:26 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	heredoc_loop(char *s, char *limiter, int size, int (*fds)[2])
 			break ;
 		}
 		if (!s)
-			printf(WARN_EOF, "minishell: warning: here-document", line_nb, limiter);
+			printf(WARN_EOF, "minishell: warning: heredoc", line_nb, limiter);
 		if (!s || ((int)ft_strlen(s) == size && !ft_strncmp(s, limiter, size)))
 			break ;
 		ft_dprintf(fd_writing, "%s\n", s);
