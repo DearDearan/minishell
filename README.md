@@ -67,6 +67,7 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 - utiliser excel discord 42 chan minishell et testeur ndacun pour tests finaux
 
 ### LEAKS :
+EOF pas fermé quand on en fait un.
 ctrl+c puis ctrl+d (initsh ligne 52)
 >> puis ctrl+d (initsh ligne 52 et initprompt 42 et initparse multiple lines)
 tester dautres trucs chelous avec des interupts
