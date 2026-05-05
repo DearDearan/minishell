@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:49:58 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/27 16:34:53 by Camille          ###   ########.fr       */
+/*   Updated: 2026/05/04 16:17:25 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ bool	set_redirections(t_minishell *sh, t_cmd *cmd, t_io *io)
 		{
 			close_fd(&cmd->fds[0]);
 			if (io->is_lim)
-				cmd->fds[0] = get_fd_heredoc(sh, io->infile, ft_strlen(io->infile));
+				cmd->fds[0] = get_fd_heredoc(sh, io->infile,
+						ft_strlen(io->infile));
 			else
 				cmd->fds[0] = open_io(io->infile, O_RDONLY, true, &io->invalid);
 			if (cmd->fds[0] == -1)
@@ -32,7 +33,8 @@ bool	set_redirections(t_minishell *sh, t_cmd *cmd, t_io *io)
 		if (io->outfile)
 		{
 			close_fd(&cmd->fds[1]);
-			cmd->fds[1] = open_io(io->outfile, io->outfile_flags, false, &io->invalid);
+			cmd->fds[1] = open_io(io->outfile, io->outfile_flags,
+					false, &io->invalid);
 			if (cmd->fds[1] == -1)
 				return (false);
 		}
@@ -72,7 +74,7 @@ static int	get_fd_heredoc(t_minishell *sh, char *limiter, int size)
 		s = readline("> ");
 		if (!s)
 		{
-			printf(WARN_EOF, "minishell: warning: here-document", line_nb, limiter);
+			printf(WARN_EOF, "minishell: warning: heredoc", line_nb, limiter);
 			break ;
 		}
 		if (((int)ft_strlen(s) == size && !ft_strncmp(s, limiter, size)))

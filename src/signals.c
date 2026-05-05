@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Camille <private_mail>                     +#+  +:+       +#+        */
+/*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/22 11:13:15 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/28 16:04:15 by Camille          ###   ########.fr       */
+/*   Updated: 2026/05/04 16:08:52 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	g_signal;
 
 static void	handle_sigint(int signum);
 
-void	set_signals()
+void	set_signals(void)
 {
 	struct sigaction	sa;
 

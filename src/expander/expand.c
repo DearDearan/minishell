@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 14:55:55 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/20 14:52:40 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 17:22:23 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	expand_var(char *s, char *ret, t_minishell *shell, int *j)
 static void	handle_expand(char *s, char *ret, t_minishell *shell)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	j = 0;

@@ -6,13 +6,13 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 11:40:55 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/29 17:04:21 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 16:13:08 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool is_hidden(char *var)
+bool	is_hidden(char *var)
 {
 	int	i;
 

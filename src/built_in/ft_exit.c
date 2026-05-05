@@ -6,13 +6,13 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 15:54:50 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/01 15:04:45 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 16:13:19 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int ft_exit(t_minishell *sh, t_cmd *cmd)
+int	ft_exit(t_minishell *sh, t_cmd *cmd)
 {
 	int	exit_c;
 

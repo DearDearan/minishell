@@ -6,16 +6,16 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 16:25:21 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/04 14:09:04 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 17:38:04 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef	PARSING_H
+#ifndef PARSING_H
 # define PARSING_H 
 # include "structs.h"
 
 /* LEXER_C */
-t_lexer *lex(char *argv);
+t_lexer	*lex(char *argv);
 void	ft_lex_addback(t_lexer **lst, t_lexer *node);
 int		w_cnt(t_lexer *lexed);
 
@@ -48,11 +48,11 @@ int		parse(char *line, t_minishell *parsing);
 
 /* PROCESS_C */
 t_lexer	*fill_cmds_words(t_minishell *parse, t_lexer *lex, int cmd_i);
-t_lexer *process_io(t_minishell *parse, t_lexer *lex, int cmd_i);
+t_lexer	*process_io(t_minishell *parse, t_lexer *lex, int cmd_i);
 char	**process_word(char *content, t_minishell *parse);
 
 /* FILL_IO_C */
-t_lexer *fill_io(t_minishell *shell, t_lexer *lexed, int i);
+t_lexer	*fill_io(t_minishell *shell, t_lexer *lexed, int i);
 
 /* FILL_IO_C */
 t_io	*ft_iolast(t_io *lst);

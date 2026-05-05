@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 14:23:08 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/28 13:25:14 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 16:26:04 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*get_var_name(char *str)
 		ret[j] = str[i];
 		j++;
 		i++;
-	}		
+	}
 	return (ret);
 }
 
@@ -84,8 +84,7 @@ int	get_size(char *str, t_minishell *shell, int i)
 	int		size;
 
 	size = ft_strlen(str);
-	
-	while (str &&str[i])
+	while (str && str[i])
 	{
 		if (!is_in_sq(str, i) && str[i] == '$' && str[i + 1] == '?')
 		{
@@ -96,11 +95,11 @@ int	get_size(char *str, t_minishell *shell, int i)
 			i += 2;
 		}
 		else if (!is_in_sq(str, i) && str[i] == '$'
-			&& (ft_isalnum(str[i + 1]) == 1	|| str[i + 1] == '_'))
-			{
-				if (handle_var_size(str, &i, shell, &size) == -1)
-					return (-1);
-			}
+			&& (ft_isalnum(str[i + 1]) == 1 || str[i + 1] == '_'))
+		{
+			if (handle_var_size(str, &i, shell, &size) == -1)
+				return (-1);
+		}
 		else
 			i++;
 	}

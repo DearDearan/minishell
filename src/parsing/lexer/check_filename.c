@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 17:06:45 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/04 10:32:22 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 17:27:58 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_filename(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (is_redir(str[i]) || is_pipes(str[i]))

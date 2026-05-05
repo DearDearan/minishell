@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 13:40:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/01 17:07:34 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 16:13:37 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static bool	is_correct_varname(char *var)
 	if ((ft_isdigit(var[0]) || !ft_isalpha(var[0]))
 		&& var[0] != '_')
 		return (false);
-	while(var[i] && var[i] != '=')
+	while (var[i] && var[i] != '=')
 	{
 		if (!ft_isalnum(var[i]) && var[i] != '_'
 			&& var[i] != '\'' && var[i] != '\"')

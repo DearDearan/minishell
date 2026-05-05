@@ -6,23 +6,23 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 13:44:49 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/04 14:08:31 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 17:29:48 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int  w_cnt(t_lexer *lexed)
+int	w_cnt(t_lexer *lexed)
 {
-	int count;
-	
-    count = 0;
+	int	count;
+
+	count = 0;
 	while (lexed && lexed->type != PIPES)
-    {
+	{
 		if (lexed->type == WORDS)
-        	count++;
-        lexed = lexed->next;
-    }
+			count++;
+		lexed = lexed->next;
+	}
 	return (count);
 }
 
@@ -38,9 +38,9 @@ static t_lexer	*ft_newnode(void *content)
 	return (node);
 }
 
-static int get_type(char *arg, int delim)
+static int	get_type(char *arg, int delim)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if ((arg[i] == '<' || arg[i] == '>') && delim <= PIPES)
@@ -88,22 +88,20 @@ static int	fill_lexer(t_lexer *new, t_lexer **ret_lex,
 			ft_lexclear(ret_lex, del);
 			return (0);
 		}
-		ft_lex_addback(ret_lex, new); 
+		ft_lex_addback(ret_lex, new);
 		i++;
 	}
 	return (1);
 }
 
-t_lexer *lex(char *argv)
+t_lexer	*lex(char *argv)
 {
 	t_lexer	*new;
 	t_lexer	*ret_lex;
 	char	**args;
 	int		i;
-	int		type;
 
 	i = 0;
-	type = 0;
 	ret_lex = NULL;
 	new = NULL;
 	args = ft_split_outquote(argv, ' ');
