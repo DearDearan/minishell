@@ -23,6 +23,7 @@ void	cleaning(t_minishell *sh, int nb_cmds)
 	ft_free_strs(sh->envp);
 	free(sh->cwd);
 	rl_clear_history();
+	free(sh);
 }
 
 void	cleaning_for_next_prompt(t_minishell *sh, int nb_cmds)

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <stdlib.h>
 
 static char	*choose_shell_name(int *i)
 {
@@ -91,10 +92,12 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_minishell	*shell;
 	int			i;
+	int			final_exit_code;
 
 	i = 0;
 	(void) argc;
 	(void) argv;
+	final_exit_code = EXIT_SUCCESS;
 	shell = init_sh(envp);
 	while (1)
 	{
@@ -106,6 +109,7 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 		}
 	}
+	final_exit_code = shell->exit_c;
 	cleaning(shell, 0);
-	return (shell->exit_c);
+	return (final_exit_code);
 }

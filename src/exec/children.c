@@ -16,7 +16,7 @@ static int	exec_built_in(t_minishell *sh, t_cmd *cmd, int nb_cmds);
 static void	print_error(char *path, char *bin);
 static void	error_exit_child(t_minishell *sh, int nb_cmds);
 
-void	make_child(t_minishell *sh, t_cmd *cmd)
+void	make_child(t_minishell *sh, t_cmd *cmd, char **env_path)
 {
 	int	wstatus;
 
@@ -25,6 +25,7 @@ void	make_child(t_minishell *sh, t_cmd *cmd)
 	{
 		duplicate_fds(cmd);
 		close_all_fds(sh->cmds, sh->nb_cmds);
+		ft_free_strs(env_path);
 		reset_signals();
 		if (cmd->built_in)
 			exit(exec_built_in(sh, cmd, sh->nb_cmds));

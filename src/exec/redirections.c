@@ -15,6 +15,7 @@
 static int	open_io(char *path, int flags, bool to_read, bool *io_is_invalid);
 static int	get_fd_heredoc(t_minishell *sh, char *limiter, int size);
 static void	heredoc_loop(char *s, char *limiter, int size, int (*fds)[2]);
+static bool	sigint_triggered(int fd_stdin_dup, int (*fds)[2]);
 
 bool	set_redirections(t_minishell *sh, t_cmd *cmd, t_io *io)
 {
@@ -88,13 +89,8 @@ static void	heredoc_loop(char *s, char *limiter, int size, int (*fds)[2])
 	while (1)
 	{
 		s = readline("> ");
-		if (g_signal == SIGINT)
-		{
-			dup2(fd_stdin_dup, STDIN_FILENO);
-			close(fd_stdin_dup);
-			close_fd(&(*fds)[0]);
+		if (sigint_triggered(fd_stdin_dup, fds))
 			break ;
-		}
 		if (!s)
 			printf(WARN_EOF, "minishell: warning: heredoc", line_nb, limiter);
 		if (!s || ((int)ft_strlen(s) == size && !ft_strncmp(s, limiter, size)))
@@ -103,4 +99,17 @@ static void	heredoc_loop(char *s, char *limiter, int size, int (*fds)[2])
 		free(s);
 		line_nb++;
 	}
+	close(fd_stdin_dup);
+}
+
+static bool	sigint_triggered(int fd_stdin_dup, int (*fds)[2])
+{
+	if (g_signal == SIGINT)
+	{
+		dup2(fd_stdin_dup, STDIN_FILENO);
+		close(fd_stdin_dup);
+		close_fd(&(*fds)[0]);
+		return (true);
+	}
+	return (false);
 }

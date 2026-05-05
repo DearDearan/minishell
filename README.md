@@ -65,29 +65,33 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 ## TODO
 
 - utiliser excel discord 42 chan minishell et testeur ndacun pour tests finaux
+- heredoc puis exit
 
 ### LEAKS :
-EOF pas fermé quand on en fait un.
-
-NavidShell...?:/home/lifranco/Documents/github_maison/minishell$ exit
-==2283911== 
-==2283911== FILE DESCRIPTORS: 4 open (3 std) at exit.
-==2283911== Open file descriptor 5: /dev/pts/0
-==2283911==    at 0x49E106B: dup (syscall-template.S:120)
-==2283911==    by 0x40479E: heredoc_loop (redirections.c:87)
-==2283911==    by 0x4046CD: get_fd_heredoc (redirections.c:72)
-==2283911==    by 0x404595: set_redirections (redirections.c:27)
-==2283911==    by 0x404019: exec_prompt (exec.c:79)
-==2283911==    by 0x403DCE: exec (exec.c:36)
-==2283911==    by 0x4015D6: read_exec (minishell.c:82)
-==2283911==    by 0x401346: main (minishell.c:103)
+NavidShell:/home/cboucher/42 CURSUS/minishell$ << << , 
+Syntax Error : << is an invalid token
+PUIS ctrl+d
+48 bytes in 1 blocks are definitely lost in loss record 16 of 64
+==2282377==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2282377==    by 0x408457: ft_strjoin (ft_strjoin.c:24)
+==2282377==    by 0x4014E1: init_prompt (minishell.c:42)
+==2282377==    by 0x401331: main (minishell.c:104)
+==2282377== 
+==2282377== LEAK SUMMARY:
+==2282377==    definitely lost: 48 bytes in 1 blocks
 
 
 
-ctrl+c puis ctrl+d (initsh ligne 52)
->> puis ctrl+d (initsh ligne 52 et initprompt 42 et initparse multiple lines)
-tester dautres trucs chelous avec des interupts
-verifier valgrind et si fd close
+
+NavidShell:/home/cboucher/42 CURSUS/minishell$ << <
+Syntax Error : < is an invalid token
+
+tester avec chaines vides "" et ''
+tester avec pleins de heredooc ouvert
+tester avec desordres de pipes, redirections et commandes params dans tous les sens
+tester avec redirections qui marche et dautres non
+tester avec des dossiers plutot que des fichiers
+tester dautres trucs chelous avec des interupts et redirections
 tester des NULL dans les malloc, calloc, strjoin, strdup, etc...
 simuler des BAD retour de fonctions de la libc
 

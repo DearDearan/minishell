@@ -37,7 +37,7 @@ void	close_all_fds(t_cmd **cmds, int nb_cmds);
 void	set_pipe(t_minishell *sh, int *curr_cmd_fd_out, int *next_cmd_fd_in);
 
 // children.c
-void	make_child(t_minishell *sh, t_cmd *cmd);
+void	make_child(t_minishell *sh, t_cmd *cmd, char **env_path);
 void	wait_children(t_cmd **cmds, int nb_cmds, int *wstatus);
 
 // exit_code.c
