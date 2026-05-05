@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 15:12:38 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/05 11:45:35 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 17:27:04 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ int	parse(char *line, t_minishell *parsing)
 	if (parsing->parse_err == true)
 	{
 		free(new_line);
-		cleaning_for_next_prompt(parsing, parsing->nb_cmds);
 		return (1);
 	}
 	free(new_line);
