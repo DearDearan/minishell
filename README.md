@@ -68,6 +68,22 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 
 ### LEAKS :
 EOF pas fermé quand on en fait un.
+
+NavidShell...?:/home/lifranco/Documents/github_maison/minishell$ exit
+==2283911== 
+==2283911== FILE DESCRIPTORS: 4 open (3 std) at exit.
+==2283911== Open file descriptor 5: /dev/pts/0
+==2283911==    at 0x49E106B: dup (syscall-template.S:120)
+==2283911==    by 0x40479E: heredoc_loop (redirections.c:87)
+==2283911==    by 0x4046CD: get_fd_heredoc (redirections.c:72)
+==2283911==    by 0x404595: set_redirections (redirections.c:27)
+==2283911==    by 0x404019: exec_prompt (exec.c:79)
+==2283911==    by 0x403DCE: exec (exec.c:36)
+==2283911==    by 0x4015D6: read_exec (minishell.c:82)
+==2283911==    by 0x401346: main (minishell.c:103)
+
+
+
 ctrl+c puis ctrl+d (initsh ligne 52)
 >> puis ctrl+d (initsh ligne 52 et initprompt 42 et initparse multiple lines)
 tester dautres trucs chelous avec des interupts
