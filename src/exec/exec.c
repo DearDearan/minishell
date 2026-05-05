@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 11:54:27 by Camille           #+#    #+#             */
-/*   Updated: 2026/05/04 16:21:03 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/05 12:09:38 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,12 @@ int	exec(t_minishell *sh, int nb_cmds)
 	env_path = extract_env_path(sh, sh->envp);
 	if (nb_cmds == 1 && sh->cmds[0]->argv
 		&& set_built_in(sh->cmds[0], sh->cmds[0]->argv[0]))
-		sh->exit_c = sh->cmds[0]->built_in(sh, sh->cmds[0]);
+	{
+		if (g_signal == SIGINT)
+			sh->exit_c = SIGINT + 128;
+		else
+			sh->exit_c = sh->cmds[0]->built_in(sh, sh->cmds[0]);
+	}
 	else
 	{
 		exec_prompt(sh, nb_cmds, env_path);
@@ -65,28 +70,27 @@ static char	**extract_env_path(t_minishell *sh, char **envp)
 static void	exec_prompt(t_minishell *sh, int nb_cmds, char **env_path)
 {
 	int		i;
-	int		next;
+	t_cmd	*cmd;
 
 	i = 0;
-	next = 1;
-	while (i < nb_cmds)
+	while (g_signal != SIGINT && i < nb_cmds)
 	{
-		if (set_redirections(sh, sh->cmds[i], sh->ios[i]))
+		cmd = sh->cmds[i];
+		if (set_redirections(sh, cmd, sh->ios[i]))
 		{
-			if (sh->cmds[i]->argv && !set_built_in(sh->cmds[i], sh->cmds[i]->argv[0]))
+			if (cmd->argv && !set_built_in(cmd, cmd->argv[0]))
 			{
-				sh->cmds[i]->path = get_executable_path(sh->cmds[i]->argv[0], env_path);
-				if (!sh->cmds[i]->path)
+				cmd->path = get_executable_path(cmd->argv[0], env_path);
+				if (!cmd->path)
 					error_exit(sh, nb_cmds);
 			}
-			if (next != nb_cmds)
-				set_pipe(sh, &sh->cmds[i]->fds[1], &sh->cmds[next]->fds[0]);
-			if (sh->cmds[i]->built_in || sh->cmds[i]->path)
-				make_child(sh, sh->cmds[i]);
+			if (i + 1 != nb_cmds)
+				set_pipe(sh, &cmd->fds[1], &sh->cmds[i + 1]->fds[0]);
+			if (cmd->built_in || cmd->path)
+				make_child(sh, cmd);
 		}
-		close_fds(&sh->cmds[i]->fds);
+		close_fds(&cmd->fds);
 		i++;
-		next++;
 	}
 }
 

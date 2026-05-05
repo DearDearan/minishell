@@ -6,12 +6,13 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 16:25:21 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/04 17:38:04 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/05 13:13:00 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
-# define PARSING_H 
+# define PARSING_H
+
 # include "structs.h"
 
 /* LEXER_C */
@@ -71,4 +72,5 @@ int		is_pipes(char c);
 
 /* CHECK_FILENAME_C */
 int		check_filename(char *str);
+
 #endif

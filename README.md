@@ -64,15 +64,16 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 
 ## TODO
 
-- global 130 (revoir les fichiers expand.c et cleaning.c notamment)
-- a corriger > out : exitcode a 1 alors que bash est a 0
-- gerer variable glo avec les readline ?? verif exitcode 130 dans prompt ET dans heredoc pour CTRL+C
-- faut il specifiquement kill les children avec les signaux ou rien a voir ?
-- eventuellement rendre certaines plus explicites (ex: exit_c)
-- leaks
-- verifier quon a pas use des fontions interditent conne dprintf par exemple (a la place de ft_dprintf)
-- verifier que les erreurs utilise bien ft_dprintf(2,)
 - utiliser excel discord 42 chan minishell et testeur ndacun pour tests finaux
+
+### LEAKS :
+ctrl+c puis ctrl+d (initsh ligne 52)
+>> puis ctrl+d (initsh ligne 52 et initprompt 42 et initparse multiple lines)
+tester dautres trucs chelous avec des interupts
+verifier valgrind et si fd close
+tester des NULL dans les malloc, calloc, strjoin, strdup, etc...
+simuler des BAD retour de fonctions de la libc
+
 
 ## PRISE DE NOTE EN VRAC
 
@@ -82,6 +83,8 @@ comportements bash:
 - chaque commande de bash gere leurs propres infile et outfile et prends en compte les derniers. ainsi chaque commande de pipe peut gerer son propre infile et oufile.
 - bash gere le desordre : `< infile echo > outfile hello < infile2 world` va par exemple prendre comme infile : infile2, et va echo hello world dans outfile
 - Les infiles et outfiles precedents sont tous testes au niveau des permissions mais sont ignore. le dernier outfile recevra les donnees et les autres seront seulement crees mais reste vide
+- COMPORTEMENT BASH : le 17eme heredoc crash et retourne 2 -> bash: maximum here-document count exceeded
+
 
 fonctions:
 getenv : recup une var d'env
@@ -103,7 +106,7 @@ jai appris quil faut utiliser certaines fonctions dans la gestion des signaux (m
 
 
 
-ioctl : permet d'avoir la taille du terminal par exemple et configurer, gerer d'autres trucs avec des requetes et macros par rapport au device/terminal
+ioctl : permet d'avoir la taille du terminal par exemple et configurer, gerer d'autres trucs avec des requetes et macros par rapport au device/terminal -> peut servir par exemple a injecter un \n dans un readline pour le terminer par exemple. Mais pas conseille dans un signal car la fonction est pas async safe
 tcgetattr : Lire la configuration actuelle du terminal
 tcsetattr : Modifier la configuration du terminal
 tgetent : Charger les infos du terminal depuis la base de données

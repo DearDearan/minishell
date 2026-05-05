@@ -6,12 +6,13 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 11:12:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/04 17:31:02 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/05 13:12:47 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
 # include <fcntl.h>
 # include <errno.h>
 # include <stdio.h>
@@ -39,11 +40,14 @@
 
 /* FILL_IO_C */
 t_lexer	*fill_io(t_minishell *shell, t_lexer *lexed, int i);
+
 /* FILL_IO_C */
 t_io	*ft_iolast(t_io *lst);
 t_io	*ft_iolast(t_io *lst);
+
 /* GET_ENVP_C */
 void	get_envp(char **envp, t_minishell *shell);
+
 /* CHECK_PROMPT_C */
 int		check_for_specials(char *prompt, t_minishell *sh);
 bool	is_in_quotes(char *str, int pos);
