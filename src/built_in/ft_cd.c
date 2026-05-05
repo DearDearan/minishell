@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Camille <private_mail>                     +#+  +:+       +#+        */
+/*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 14:19:39 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/28 17:20:50 by Camille          ###   ########.fr       */
+/*   Updated: 2026/05/04 16:11:22 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ int	ft_cd(t_minishell *sh, t_cmd *cmd)
 	newpwd_path = getcwd(NULL, 0);
 	if (!newpwd_path)
 	{
-		ft_dprintf(2, "minishell: cd: error retrieving current directory: getcwd: ");
-		ft_dprintf(2, "cannot access parent directories: No such file or directory");
+		ft_dprintf(2,
+			"minishell: cd: error retrieving current directory: getcwd: ");
+		ft_dprintf(2,
+			"cannot access parent directories: No such file or directory");
 		ft_dprintf(2, "\n");
 	}
 	else
@@ -83,7 +85,8 @@ static bool	handling_home_dir(int argc, t_minishell *sh)
 			return (true);
 		if (chdir(home_path) == -1)
 		{
-			ft_dprintf(2, "minishell: cd: %s: %s\n", home_path, strerror(errno));
+			ft_dprintf(2,
+				"minishell: cd: %s: %s\n", home_path, strerror(errno));
 			return (false);
 		}
 	}

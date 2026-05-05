@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 15:16:55 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/01 17:42:51 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 16:14:36 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ static int	get_tab_size(char **str)
 
 static void	put_into_env(char *var, char **envp, t_minishell *shell)
 {
-	int	i;
-	char **env;
+	int		i;
+	char	**env;
 
 	i = 0;
 	if (!envp)

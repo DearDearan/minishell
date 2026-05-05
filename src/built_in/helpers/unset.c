@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 17:48:36 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/29 11:12:34 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 16:14:23 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	unset_and_free(char *var, t_minishell *sh)
 	while (sh->envp && sh->envp[i])
 	{
 		if (ft_strncmp(var, sh->envp[i], ft_strlen(var)))
-		{	
+		{
 			new_env[j] = ft_strdup(sh->envp[i]);
 			if (!new_env[j])
 				error_exit(sh, sh->nb_cmds);

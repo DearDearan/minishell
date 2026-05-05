@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 15:12:38 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/04 14:08:23 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 17:27:04 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	init_cmd(t_cmd *cmd)
 
 static unsigned int	count_pipes(t_lexer *lexed, t_minishell *sh)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	if (!lexed)
@@ -40,30 +40,31 @@ static unsigned int	count_pipes(t_lexer *lexed, t_minishell *sh)
 	return (count);
 }
 
-static void fill_cmds(t_minishell *parse, t_lexer *lex)
+static void	fill_cmds(t_minishell *parse, t_lexer *lex)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (lex)
-    {
+	i = 0;
+	while (lex)
+	{
 		parse->cmds[i]->argv = NULL;
-        while (lex && lex->type != PIPES)
-        {
+		while (lex && lex->type != PIPES)
+		{
 			if (lex->type == WORDS)
 				lex = fill_cmds_words(parse, lex, i);
-            else if (lex->type > PIPES)
-                lex = process_io(parse, lex, i);
-            else
-                lex = lex->next;
-        }
-        if (lex && lex->type == PIPES)
-            lex = lex->next;
+			else if (lex->type > PIPES)
+				lex = process_io(parse, lex, i);
+			else
+				lex = lex->next;
+		}
+		if (lex && lex->type == PIPES)
+			lex = lex->next;
 		if (!lex)
 			break ;
 		i++;
-    }
+	}
 }
+
 void	init_parse(t_minishell *parsing, t_lexer *lexed)
 {
 	int	i;

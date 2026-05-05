@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 13:48:44 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/04 11:17:19 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 17:25:52 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static	size_t	count_spaces(char *str)
 	{
 		if (is_redir(str[i]) && !is_in_quotes(str, i))
 		{
-    		if (i > 0 && str[i - 1] != ' ' && !is_redir(str[i - 1]))
+			if (i > 0 && str[i - 1] != ' ' && !is_redir(str[i - 1]))
 				count++;
 			if (str[i + 1] && str[i + 1] != ' ' && !is_redir(str[i + 1]))
 				count++;
@@ -46,8 +46,8 @@ static	size_t	count_spaces(char *str)
 		{
 			if (i > 0 && str[i - 1] != ' ')
 				count++;
-    		if (str[i + 1] && str[i + 1] != ' ')
-				count++;	
+			if (str[i + 1] && str[i + 1] != ' ')
+				count++;
 		}
 	}
 	return (count);
@@ -58,21 +58,21 @@ static void	add_spaces(char *line, char *new, int *i, int *j)
 	if (is_redir(line[*i]) && !is_in_quotes(line, *i))
 	{
 		if (*i > 0 && line[*i - 1] != ' ' && !is_redir(line[*i - 1]))
-       	{
+		{
 			new[(*j)++] = ' ';
 		}
 		new[(*j)++] = line[*i];
 		if (line[*i + 1] && line[*i + 1] != ' '
 			&& !is_redir(line[*i + 1]))
-       		new[(*j)++] = ' ';
+			new[(*j)++] = ' ';
 	}
 	else if (is_pipes(line[*i]) && !is_in_quotes(line, *i))
 	{
 		if (*i > 0 && line[*i - 1] != ' ')
-       		new[(*j)++] = ' ';
+			new[(*j)++] = ' ';
 		new[(*j)++] = line[*i];
-    	if (line[*i + 1] && line[*i + 1] != ' ')
-       		new[(*j)++] = ' ';
+		if (line[*i + 1] && line[*i + 1] != ' ')
+			new[(*j)++] = ' ';
 	}
 	else
 		new[(*j)++] = line[*i];

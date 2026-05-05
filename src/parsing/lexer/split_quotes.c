@@ -6,13 +6,13 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:07:53 by lifranco          #+#    #+#             */
-/*   Updated: 2026/04/13 16:41:01 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 17:27:31 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static size_t   strcount(const char *str, char c)
+static size_t	strcount(const char *str, char c)
 {
 	size_t	i;
 	size_t	count;
@@ -41,7 +41,7 @@ static size_t	to_next_c(const char *str, char c)
 	size_t	i;
 	bool	is_sq;
 	bool	is_dq;
-	
+
 	is_dq = false;
 	is_sq = false;
 	i = 0;

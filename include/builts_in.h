@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 13:13:34 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/01 11:58:56 by Camille          ###   ########.fr       */
+/*   Updated: 2026/05/04 17:30:14 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 int		ft_echo(t_minishell *sh, t_cmd *cmd);
 
 /* FT_CD_C */
-int	ft_cd(t_minishell *sh, t_cmd *cmd);
+int		ft_cd(t_minishell *sh, t_cmd *cmd);
 
 /* FT_PWD_C */
 int		ft_pwd(t_minishell *sh, t_cmd *cmd);

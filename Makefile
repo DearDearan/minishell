@@ -6,11 +6,7 @@
 #    By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/20 10:13:22 by Camille           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2026/05/03 17:16:29 by lifranco         ###   ########.fr        #
-=======
-#    Updated: 2026/05/01 19:04:42 by lifranco         ###   ########.fr        #
->>>>>>> cb058d92d05c601af1162f18b2005a30464d93f6
+#    Updated: 2026/05/04 17:35:19 by lifranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +23,7 @@ ifeq ($(DEBUG),true)
     CFLAGS += -g
 endif
 
-ifeq ($(VALGRIND), true)
+ifeq ($(FSANITIZE), true)
 	CFLAGS += -fsanitize=address
 endif
 

@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 16:07:59 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/04 13:48:23 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 17:23:51 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static t_io	*add_io(t_lexer *lexed, t_minishell *sh)
 	if (lexed->type == IN && lexed->next != NULL)
 	{
 		io->infile = expand_file(lexed->next->content, sh);
-		io->is_lim = false;		
+		io->is_lim = false;
 	}
 	else if (lexed->type == OUT && lexed->next != NULL)
 	{
@@ -69,7 +69,7 @@ static t_io	*add_io(t_lexer *lexed, t_minishell *sh)
 
 static void	replace_first_io(t_minishell *sh, t_lexer *lexed, int i)
 {
-	t_io *tmp;
+	t_io	*tmp;
 
 	tmp = add_io(lexed, sh);
 	if (!tmp)
@@ -78,11 +78,11 @@ static void	replace_first_io(t_minishell *sh, t_lexer *lexed, int i)
 	sh->ios[i] = tmp;
 }
 
-t_lexer *fill_io(t_minishell *shell, t_lexer *lexed, int i)
+t_lexer	*fill_io(t_minishell *shell, t_lexer *lexed, int i)
 {
 	t_io	*content;
 	t_io	*last;
-		
+
 	if (!lexed->next)
 	{
 		ft_dprintf(2, "Error: Filename cannot be empty.\n");
@@ -92,9 +92,9 @@ t_lexer *fill_io(t_minishell *shell, t_lexer *lexed, int i)
 	}
 	if (!shell->ios[i]->infile && !shell->ios[i]->outfile)
 		replace_first_io(shell, lexed, i);
-	else 
+	else
 	{
-		last = ft_iolast(shell->ios[i]);	
+		last = ft_iolast(shell->ios[i]);
 		if (!last)
 			return (NULL);
 		content = add_io(lexed, shell);
@@ -102,4 +102,3 @@ t_lexer *fill_io(t_minishell *shell, t_lexer *lexed, int i)
 	}
 	return (lexed->next);
 }
-

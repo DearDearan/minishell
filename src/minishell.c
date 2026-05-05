@@ -6,18 +6,19 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/04 14:08:51 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/05 10:42:40 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char *choose_shell_name(int *i)
+static char	*choose_shell_name(int *i)
 {
-	static char *name[10] = {"NavidShell:", "Bush_Shell:", "NavidShell...?:",
+	static char	*name[10] = {"NavidShell:", "Bush_Shell:", "NavidShell...?:",
 		"Coquillage:", "PearlAbyssShell:", "MyShell.pk3:",
 		"Fish:", "\033[0;94mHouse\033[0mShell:", "EauCalmeShell:",
 		NULL};
+
 	if (!name[*i])
 		*i = 0;
 	return (name[*i]);
@@ -42,7 +43,7 @@ static char	*init_prompt(t_minishell *sh, int *i)
 	return (sh->prompt);
 }
 
-static t_minishell *init_sh(char **envp)
+static t_minishell	*init_sh(char **envp)
 {
 	t_minishell	*shell;
 
@@ -82,7 +83,6 @@ static int	read_exec(t_minishell *shell)
 	}
 	if (line[0] == '\0')
 		free(shell->prompt);
-	shell->prompt = NULL;
 	free(line);
 	return (0);
 }
@@ -90,11 +90,11 @@ static int	read_exec(t_minishell *shell)
 int	main(int argc, char **argv, char **envp)
 {
 	t_minishell	*shell;
-	int		i;
+	int			i;
 
 	i = 0;
-	(void)		argc;
-	(void)		argv;
+	(void) argc;
+	(void) argv;
 	shell = init_sh(envp);
 	while (1)
 	{

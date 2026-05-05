@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 14:25:25 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/01 12:52:00 by Camille          ###   ########.fr       */
+/*   Updated: 2026/05/04 17:30:52 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ typedef struct s_minishell
 	size_t			nb_cmds;
 	struct s_cmd	**cmds;
 	struct s_io		**ios;
-	
-} t_minishell;
+}	t_minishell;
 
 typedef struct s_cmd
 {
@@ -52,7 +51,7 @@ typedef struct s_cmd
 	int		fds[2];
 	pid_t	pid;
 	int		(*built_in)(t_minishell *, struct s_cmd *);
-} t_cmd;
+}	t_cmd;
 
 typedef struct s_io
 {

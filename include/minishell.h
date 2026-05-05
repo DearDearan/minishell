@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 11:12:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/04 14:09:07 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 17:31:02 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # include "builts_in.h"
 
 /* FILL_IO_C */
-t_lexer *fill_io(t_minishell *shell, t_lexer *lexed, int i);
+t_lexer	*fill_io(t_minishell *shell, t_lexer *lexed, int i);
 /* FILL_IO_C */
 t_io	*ft_iolast(t_io *lst);
 t_io	*ft_iolast(t_io *lst);

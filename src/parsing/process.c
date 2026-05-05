@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 13:49:21 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/01 19:15:54 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/04 17:24:32 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ char	**process_word(char *content, t_minishell *parse)
 		ret[0] = ft_strdup(trim);
 	}
 	if (!ret)
-			return (NULL);
+		return (NULL);
 	free(trim);
 	return (ret);
 }
 
-t_lexer *process_io(t_minishell *parse, t_lexer *lex, int cmd_i)
+t_lexer	*process_io(t_minishell *parse, t_lexer *lex, int cmd_i)
 {
 	if (!fill_io(parse, lex, cmd_i))
 		return (NULL);
@@ -83,4 +83,3 @@ t_lexer	*fill_cmds_words(t_minishell *parse, t_lexer *lex, int cmd_i)
 	}
 	return (lex);
 }
-	
