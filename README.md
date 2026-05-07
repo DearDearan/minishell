@@ -4,7 +4,58 @@ _This project has been created as part of the 42 curriculum by cboucher and lifr
 
 ## Description
 
-todo
+Minishell is a project which the main goal is to make a simple terminal Shell.
+
+A Shell is basically a prompt that can execute commands and make redirections. Examples of Shells are Zsh, fish, or what we use as a reference for ours, bash.
+
+Minishell should display a prompt when waiting for a new command. It also need to have a <ins>**working history**</ins>.
+
+Minishell should launch the right executable, whether you input a **relative**, **absolute** or a **PATH inside an environment variable**.
+
+Minishell should handle single quotes, which prevents the shell from interpreting special chars (Dollar sign for example), double quotes, which should prevent the shell from interpreting special characters ***except*** dollar sign. 
+
+It also **shouldn't** process unclosed quotes or special characters <ins>**not specified by the subject**</ins>.
+
+Minishell should handle redirections, which are :
+
+- ">", which redirect input.
+- "<", which redirect output.
+- ">>", which redirect output in **append mode**.
+- "<<", which should be given a delimiter, then read the input until a line containing the delimiter is seen.
+
+It should also implement pipes, "|". The **output** of each command in the pipeline is connected to the **input** of the next command via a pipe.
+
+It also **HAVE TO** handle expands, which are environment variables ($HOME for example, which should expand to /home/user). Although, Dollar sign and "?" should expand the exit status of the most recently executed foreground pipeline.
+
+Minishell should handle signals of CTRL+C, CTRL+D and CTRL+\
+
+- CTRL+C displays a new prompt on a newline.
+- CTRL+D exits the shell **IF** the line is empty.
+- CTRL+\ is absolutely fucking useless.
+
+At last, Minishell has to have built-in commands. Those are the followings :
+
+- echo, **with** or **without** the option "-n". -n should erase the newline at the end of the text written.
+
+- cd, **with** or **without** a relative or absolute path.
+
+- pwd with **no** options.
+
+- export with **no** options.
+
+- unset with **no** options.
+
+- env with <ins>**no options or arguments**</ins>.
+
+- exit with **no** options.
+
+
+### Parsing
+
+The parsing of Minishell is the equivalent of stubbing your toe while stepping on a lego while having a testicular torsion. It's one of the most MISERABLE THING I'VE EVER DONE.
+
+The parsing handles redirections and pipes that are not separated by a space. how ? BY ADDING SPACES	
+
 
 ### Fundamental Concepts
 

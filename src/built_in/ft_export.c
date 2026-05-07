@@ -6,13 +6,13 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 13:40:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/04 16:13:37 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/05 15:47:11 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*get_varname(char *str)
+static char	*get_varname(char *str, t_minishell *sh)
 {
 	int		i;
 	int		j;
@@ -26,7 +26,7 @@ static char	*get_varname(char *str)
 		i++;
 	ret = ft_calloc(i + 1, sizeof(char));
 	if (!ret)
-		return (NULL);
+		error_exit(sh, sh->nb_cmds);
 	i = 0;
 	while (str[i] && (ft_isalnum(str[i]) == 1 || str[i] == '_'))
 	{
@@ -86,7 +86,7 @@ int	ft_export(t_minishell *sh, t_cmd *cmd)
 	while (cmd->argv[++i])
 	{
 		trim = trim_quotes(cmd->argv[i]);
-		var = get_varname(trim);
+		var = get_varname(trim, sh);
 		if (is_correct_varname(trim) == false)
 		{
 			ft_dprintf(2, "export: Error. \"%s\"'s not a valid ID.\n", trim);
