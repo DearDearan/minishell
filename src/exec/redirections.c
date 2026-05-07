@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 14:49:58 by Camille           #+#    #+#             */
-/*   Updated: 2026/05/05 11:45:26 by Camille          ###   ########.fr       */
+/*   Updated: 2026/05/07 18:42:10 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ static int	get_fd_heredoc(t_minishell *sh, char *limiter, int size)
 	set_signals(true);
 	heredoc_loop(line, limiter, size, &fds);
 	set_signals(false);
-	free(line);
 	close(fds[1]);
 	return (fds[0]);
 }
@@ -99,6 +98,7 @@ static void	heredoc_loop(char *s, char *limiter, int size, int (*fds)[2])
 		free(s);
 		line_nb++;
 	}
+	free(s);
 	close(fd_stdin_dup);
 }
 

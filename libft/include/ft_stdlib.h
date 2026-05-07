@@ -6,7 +6,7 @@
 /*   By: Camille <private_mail>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 10:14:22 by Camille           #+#    #+#             */
-/*   Updated: 2025/12/14 10:00:09 by Camille          ###   ########.fr       */
+/*   Updated: 2026/05/07 15:55:35 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 
 int		ft_atoi(const char *nptr);
+long	ft_strtol(char *nptr, char **endptr);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_itoa(int n);
 

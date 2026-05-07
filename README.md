@@ -69,6 +69,9 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 
 ### LEAKS :
 
+dans le cadre d'un pwd ou je sais plus quoi ? explication de liam via ndacun ??
+126    A file to be executed was found, but it was not an executable utility.
+
 NavidShell:/home/cboucher/42 CURSUS/minishell$ << <
 Syntax Error : < is an invalid token
 

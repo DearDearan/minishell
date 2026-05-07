@@ -6,7 +6,7 @@
 #    By: Camille <private_mail>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/20 10:13:22 by Camille           #+#    #+#              #
-#    Updated: 2025/11/10 18:57:14 by Camille          ###   ########.fr        #
+#    Updated: 2026/05/07 16:08:03 by Camille          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ STDIO_BASENAMES := ft_putchar_fd ft_putendl_fd ft_putnbr_fd ft_putstr_fd
 PRINTF_BASENAMES := ft_printf print_decimal print_pointer \
 					   print_hexadecimal print_string print_char \
 					   print_percent_sign print_unsigned_decimal
-STDLIB_BASENAMES := ft_atoi ft_calloc ft_itoa
+STDLIB_BASENAMES := ft_atoi ft_calloc ft_itoa ft_strtol
 STRING_BASENAMES := ft_bzero ft_memcpy ft_strchr ft_strlcpy ft_strnstr ft_memchr \
 			  ft_memmove ft_strdup ft_strlen ft_strrchr ft_memcmp ft_memset \
 			  ft_strlcat ft_strncmp
