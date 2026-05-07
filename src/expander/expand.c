@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 14:55:55 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/07 16:35:32 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/07 18:23:11 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	expand_var(char *s, char *ret, t_minishell *shell, int *j)
 	i = 0;
 	if (s[i] == '$' && s[i + 1] == '?')
 	{
-		if (!g_signal)
+		if (!g_signal)false
 			var = ft_itoa(shell->exit_c);
 		else
 			var = ft_itoa(g_signal);
