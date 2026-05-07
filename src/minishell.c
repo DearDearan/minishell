@@ -6,12 +6,11 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/07 10:24:12 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/07 17:38:44 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <stdlib.h>
 
 static char	*choose_shell_name(int *i)
 {
@@ -72,10 +71,11 @@ static bool	read_exec(t_minishell *shell)
 		return (false);
 	if (line[0] != '\0')
 	{
-		if (check_for_specials(line, shell))
+		if (check_only_spaces(line) || check_for_specials(line, shell)
+			|| !check_pipe_syntax(line, shell))
 		{
-			add_history(line);
 			free(line);
+			free(shell->prompt);
 			return (true);
 		}
 		add_history(line);
@@ -83,6 +83,7 @@ static bool	read_exec(t_minishell *shell)
 			exec(shell, shell->nb_cmds);
 	}
 	free(shell->prompt);
+	shell->prompt = NULL;
 	free(line);
 	return (true);
 }

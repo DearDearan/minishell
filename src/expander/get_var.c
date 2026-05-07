@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 14:23:08 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/04 16:26:04 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/07 17:23:54 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,13 @@ char	*get_var(char **envp, char *var)
 	char	*equal;
 
 	equal = ft_strjoin(var, "=");
-	if (!equal || !envp || !*envp)
+	if (!equal)
 		return (NULL);
+	if (!envp || !*envp)
+	{
+		free(equal);
+		return (NULL);
+	}
 	i = 0;
 	size = ft_strlen(equal);
 	while (envp[i])
@@ -53,11 +58,8 @@ char	*get_var_name(char *str)
 		return (NULL);
 	i = 1;
 	while (str[i] && (ft_isalnum(str[i]) == 1 || str[i] == '_'))
-	{
-		ret[j] = str[i];
-		j++;
-		i++;
-	}
+		ret[j++] = str[i++];
+	ret[j] = '\0';
 	return (ret);
 }
 

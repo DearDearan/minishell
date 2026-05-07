@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*   check_only_spaces.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/21 13:30:58 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/07 14:14:32 by lifranco         ###   ########.fr       */
+/*   Created: 2026/05/07 15:42:01 by lifranco          #+#    #+#             */
+/*   Updated: 2026/05/07 16:35:16 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_unset(t_minishell *sh, t_cmd *cmd)
+bool	check_only_spaces(char *prompt)
 {
 	int	i;
 
-	i = 1;
-	if (sh->nb_cmds > 1)
-		return (EXIT_SUCCESS);
-	if (!cmd->argv[1])
-		return (EXIT_SUCCESS);
-	while (cmd->argv[i])
-	{
-		ft_unset_env(cmd->argv[i], sh);
+	i = 0;
+	while (prompt && prompt[i] == ' ')
 		i++;
-	}
-	return (EXIT_SUCCESS);
+	if (prompt[i] != '\0')
+		return (false);
+	else
+		return (true);
 }
