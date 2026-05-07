@@ -68,20 +68,6 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 - heredoc puis exit
 
 ### LEAKS :
-NavidShell:/home/cboucher/42 CURSUS/minishell$ << << , 
-Syntax Error : << is an invalid token
-PUIS ctrl+d
-48 bytes in 1 blocks are definitely lost in loss record 16 of 64
-==2282377==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2282377==    by 0x408457: ft_strjoin (ft_strjoin.c:24)
-==2282377==    by 0x4014E1: init_prompt (minishell.c:42)
-==2282377==    by 0x401331: main (minishell.c:104)
-==2282377== 
-==2282377== LEAK SUMMARY:
-==2282377==    definitely lost: 48 bytes in 1 blocks
-
-
-
 
 NavidShell:/home/cboucher/42 CURSUS/minishell$ << <
 Syntax Error : < is an invalid token

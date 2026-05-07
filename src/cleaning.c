@@ -31,6 +31,7 @@ void	cleaning_for_next_prompt(t_minishell *sh, int nb_cmds)
 	clean_cmds(sh->cmds, nb_cmds);
 	clean_ios(sh->ios, nb_cmds);
 	free(sh->prompt);
+	sh->prompt = NULL;
 }
 
 void	error_exit(t_minishell *sh, int nb_cmds)

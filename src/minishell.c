@@ -82,8 +82,7 @@ static bool	read_exec(t_minishell *shell)
 		if (!parse(line, shell))
 			exec(shell, shell->nb_cmds);
 	}
-	else
-		free(shell->prompt);
+	free(shell->prompt);
 	free(line);
 	return (true);
 }

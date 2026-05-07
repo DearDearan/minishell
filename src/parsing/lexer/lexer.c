@@ -99,9 +99,7 @@ t_lexer	*lex(char *argv)
 	t_lexer	*new;
 	t_lexer	*ret_lex;
 	char	**args;
-	int		i;
 
-	i = 0;
 	ret_lex = NULL;
 	new = NULL;
 	args = ft_split_outquote(argv, ' ');

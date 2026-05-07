@@ -62,11 +62,9 @@ t_lexer	*process_io(t_minishell *parse, t_lexer *lex, int cmd_i)
 
 t_lexer	*fill_cmds_words(t_minishell *parse, t_lexer *lex, int cmd_i)
 {
-	int		j;
 	char	**words;
 	int		k;
 
-	j = 0;
 	while (lex && lex->type == WORDS)
 	{
 		k = 0;

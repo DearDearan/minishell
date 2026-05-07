@@ -66,11 +66,9 @@ static void	handle_expand(char *s, char *ret, t_minishell *shell)
 
 char	*expand(char *str, t_minishell *shell)
 {
-	int		i;
 	char	*ret;
 	int		size;
 
-	i = 0;
 	size = get_size(str, shell, 0);
 	if (size == -1)
 		return (NULL);
