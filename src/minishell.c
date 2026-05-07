@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/05 12:09:11 by Camille          ###   ########.fr       */
+/*   Updated: 2026/05/05 13:42:46 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ int	main(int argc, char **argv, char **envp)
 		}
 	}
 	cleaning(shell, 0);
+	free(shell);
 	return (shell->exit_c);
 }
