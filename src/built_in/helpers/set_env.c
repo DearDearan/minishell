@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 15:16:55 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/07 17:28:21 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/08 18:22:23 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ static char	*get_varname(char *str)
 		j++;
 		i++;
 	}
-	ret[j] = str[i];
-	ret[j + 1] = '\0';
+	ret[j] = '\0';
 	return (ret);
 }
 
@@ -78,31 +77,44 @@ static void	put_into_env(char *var, char **envp, t_minishell *shell)
 	shell->envp = env;
 }
 
+static int	get_env_index(char **env, char *var)
+{
+	int	i;
+
+	i = 0;
+	while (env && env[i])
+	{
+		if (!ft_strncmp(env[i], var, ft_strlen(var))
+			&& (env[i][ft_strlen(var)] == '='
+			|| env[i][ft_strlen(var)] == '\0'))
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
 void	ft_set_env(char *var, t_minishell *sh)
 {
-	int		i;
 	char	*name;
+	int		i;
 
-	i = -1;
 	name = get_varname(var);
-	if (name[ft_strlen(name) - 1] != '=')
+	if (name && !ft_strchr(var, '='))
 	{
-		put_into_env(var, sh->envp, sh);
+		if (get_env_index(sh->envp, name) == -1)
+			put_into_env(var, sh->envp, sh);
 		free(name);
 		return ;
 	}
-	while (sh->envp && sh->envp[++i])
+	i = get_env_index(sh->envp, name);
+	if (i != -1)
 	{
-		if (!ft_strncmp(name, sh->envp[i], ft_strlen(name)))
-		{
-			free(sh->envp[i]);
-			sh->envp[i] = ft_strdup(var);
-			if (!sh->envp[i])
-				error_exit(sh, sh->nb_cmds);
-			break ;
-		}
+		free(sh->envp[i]);
+		sh->envp[i] = ft_strdup(var);
+		if (!sh->envp[i])
+			error_exit(sh, sh->nb_cmds);
 	}
-	if (!sh->envp || !sh->envp[i])
+	else
 		put_into_env(var, sh->envp, sh);
 	free(name);
 }

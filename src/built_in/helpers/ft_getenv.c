@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 16:29:02 by Camille           #+#    #+#             */
-/*   Updated: 2026/05/04 16:13:56 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/08 15:18:51 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*ft_getenv(const char *name, const char **envp)
 	{
 		if (!ft_strncmp(envp[i], name, size))
 		{
+			if (!envp[i][size])
+				return ((char *)(envp[i] + size));
 			if (envp[i][size] == '=')
 				return ((char *)(envp[i] + size + 1));
 		}

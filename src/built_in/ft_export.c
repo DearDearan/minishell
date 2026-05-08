@@ -6,36 +6,11 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 13:40:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/05 15:47:11 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/08 18:24:21 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char	*get_varname(char *str, t_minishell *sh)
-{
-	int		i;
-	int		j;
-	char	*ret;
-
-	i = 0;
-	j = 0;
-	if (!str)
-		return (NULL);
-	while (str[i] && (ft_isalnum(str[i]) == 1 || str[i] == '_'))
-		i++;
-	ret = ft_calloc(i + 1, sizeof(char));
-	if (!ret)
-		error_exit(sh, sh->nb_cmds);
-	i = 0;
-	while (str[i] && (ft_isalnum(str[i]) == 1 || str[i] == '_'))
-	{
-		ret[j] = str[i];
-		j++;
-		i++;
-	}
-	return (ret);
-}
 
 static bool	is_correct_varname(char *var)
 {
@@ -48,7 +23,8 @@ static bool	is_correct_varname(char *var)
 	while (var[i] && var[i] != '=')
 	{
 		if (!ft_isalnum(var[i]) && var[i] != '_'
-			&& var[i] != '\'' && var[i] != '\"')
+			&& var[i] != '\'' && var[i] != '\"'
+			&& (var[i] != '+') && var[i + 1] == '=')
 			return (false);
 		i++;
 	}
@@ -62,7 +38,7 @@ static int	check_for_args(t_minishell *sh, t_cmd *cmd)
 	i = 0;
 	if (cmd->argv[0] && !cmd->argv[1])
 	{
-		while (sh->envp[i])
+		while (sh->envp && sh->envp[i])
 		{
 			printf("declare -x %s\n", sh->envp[i]);
 			i++;
@@ -72,10 +48,23 @@ static int	check_for_args(t_minishell *sh, t_cmd *cmd)
 	return (0);
 }
 
+static bool	check_append(char *var)
+{
+	int	i;
+
+	i = 0;
+	while (var && var[i] && var[i] != '=')
+	{
+		if (var[i] == '+' && var[i + 1] == '=')
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
 int	ft_export(t_minishell *sh, t_cmd *cmd)
 {
 	int		i;
-	char	*var;
 	char	*trim;
 	bool	error;
 
@@ -86,15 +75,15 @@ int	ft_export(t_minishell *sh, t_cmd *cmd)
 	while (cmd->argv[++i])
 	{
 		trim = trim_quotes(cmd->argv[i]);
-		var = get_varname(trim, sh);
 		if (is_correct_varname(trim) == false)
 		{
 			ft_dprintf(2, "export: Error. \"%s\"'s not a valid ID.\n", trim);
 			error = true;
 		}
+		else if (check_append(trim))
+			handle_append(cmd->argv[i], sh);
 		else
 			ft_set_env(cmd->argv[i], sh);
-		free(var);
 		free(trim);
 	}
 	return ((int)error);
