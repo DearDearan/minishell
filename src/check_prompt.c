@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 10:33:30 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/04 16:02:33 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/07 18:20:15 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int	check_for_specials(char *prompt, t_minishell *sh)
 			printf("NavidShell: We're sorry, we don't support '%c' for now.\n",
 				prompt[i]);
 			sh->exit_c = 2;
-			free(sh->prompt);
 			return (1);
 		}
 		i++;
@@ -74,8 +73,41 @@ int	check_for_specials(char *prompt, t_minishell *sh)
 	{
 		printf("NavidShell: You left a quote open, bruh.\n");
 		sh->exit_c = 2;
-		free(sh->prompt);
 		return (1);
 	}
 	return (0);
+}
+
+static bool	is_valid_side(char *prompt, int i, int dir)
+{
+	i += dir;
+	if (i < 0)
+		return (false);
+	while (i >= 0 && prompt[i] == ' ')
+		i += dir;
+	if (i < 0)
+		return (false);
+	return (prompt[i] && prompt[i] != '|');
+}
+
+bool	check_pipe_syntax(char *prompt, t_minishell *sh)
+{
+	int	i;
+
+	i = 0;
+	while (prompt && prompt[i])
+	{
+		if (prompt[i] == '|')
+		{
+			if ((!is_valid_side(prompt, i, -1) || !is_valid_side(prompt, i, 1))
+				&& !is_in_quotes(prompt, i))
+			{
+				ft_dprintf(2, "Syntax Error : | is an invalid token\n");
+				sh->exit_c = 2;
+				return (false);
+			}
+		}
+		i++;
+	}
+	return (true);
 }

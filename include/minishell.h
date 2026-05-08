@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 11:12:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/05 13:12:47 by Camille          ###   ########.fr       */
+/*   Updated: 2026/05/07 16:35:52 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,9 @@ void	get_envp(char **envp, t_minishell *shell);
 /* CHECK_PROMPT_C */
 int		check_for_specials(char *prompt, t_minishell *sh);
 bool	is_in_quotes(char *str, int pos);
+bool	check_pipe_syntax(char *prompt, t_minishell *sh);
+
+/* CHECK_ONLY_SPACES_C */
+bool	check_only_spaces(char *prompt);
 
 #endif

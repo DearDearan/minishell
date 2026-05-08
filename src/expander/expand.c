@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 14:55:55 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/04 17:22:23 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/08 10:06:09 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	expand_var(char *s, char *ret, t_minishell *shell, int *j)
 	i = 0;
 	if (s[i] == '$' && s[i + 1] == '?')
 	{
-		if (!g_signal)
+		if (!g_signal)false
 			var = ft_itoa(shell->exit_c);
 		else
 			var = ft_itoa(g_signal);
@@ -59,6 +59,9 @@ static void	handle_expand(char *s, char *ret, t_minishell *shell)
 		if (s[i] == '$' && !is_in_sq(s, i) && (ft_isalnum(s[i + 1])
 				|| s[i + 1] == '_' || s[i + 1] == '?'))
 			i += expand_var(&s[i], ret, shell, &j);
+		else if (s[i] == '$' && (s[i + 1] == '\"' || s[i + 1] == '\'')
+			&& !is_in_quotes(s, i))
+			i += 1;
 		else
 			ret[j++] = s[i++];
 	}

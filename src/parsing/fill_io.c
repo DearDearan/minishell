@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 16:07:59 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/04 17:23:51 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/07 14:17:14 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ t_lexer	*fill_io(t_minishell *shell, t_lexer *lexed, int i)
 	if (!lexed->next)
 	{
 		ft_dprintf(2, "Error: Filename cannot be empty.\n");
-		shell->parse_err = true;
 		shell->exit_c = 2;
+		shell->parse_err = true;
 		return (NULL);
 	}
 	if (!shell->ios[i]->infile && !shell->ios[i]->outfile)
