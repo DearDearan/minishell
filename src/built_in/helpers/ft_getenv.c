@@ -25,6 +25,8 @@ char	*ft_getenv(const char *name, const char **envp)
 	{
 		if (!ft_strncmp(envp[i], name, size))
 		{
+			if (!envp[i][size])
+				return ((char *)(envp[i] + size));
 			if (envp[i][size] == '=')
 				return ((char *)(envp[i] + size + 1));
 		}
