@@ -6,14 +6,7 @@
    fun:readline
    ...
 }
-{
-   readline
-   Memcheck:Leak
-   match-leak-kinds: definite
-   ...
-   fun:readline
-   ...
-}
+
 {
    readline-history
    Memcheck:Leak

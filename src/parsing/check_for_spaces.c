@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 13:48:44 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/04 17:25:52 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/07 15:46:37 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	is_pipes(char c)
 	return (0);
 }
 
-static	size_t	count_spaces(char *str)
+static size_t	count_spaces(char *str)
 {
 	int	i;
 	int	count;
