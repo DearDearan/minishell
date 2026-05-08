@@ -6,11 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/05/07 17:38:44 by lifranco         ###   ########.fr       */
-=======
-/*   Updated: 2026/05/05 13:42:46 by lifranco         ###   ########.fr       */
->>>>>>> ce0bb57 (fixing some things)
+/*   Updated: 2026/05/08 10:08:27 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +111,5 @@ int	main(int argc, char **argv, char **envp)
 	}
 	final_exit_code = shell->exit_c;
 	cleaning(shell, 0);
-<<<<<<< HEAD
 	return (final_exit_code);
-=======
-	free(shell);
-	return (shell->exit_c);
->>>>>>> ce0bb57 (fixing some things)
 }

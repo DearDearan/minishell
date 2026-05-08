@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 13:44:49 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/08 10:04:24 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/08 10:05:59 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ static int	fill_lexer(t_lexer *new, t_lexer **ret_lex,
 	while (args && args[i])
 	{
 		new = ft_newnode(args[i]);
-		new = NULL;
 		if (!new)
 			error_parsing(*ret_lex, NULL, 0);
 		type = get_type(args[i], type);
