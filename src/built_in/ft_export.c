@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/27 13:40:57 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/08 18:24:21 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/09 15:19:37 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,25 @@ static bool	is_correct_varname(char *var)
 	while (var[i] && var[i] != '=')
 	{
 		if (!ft_isalnum(var[i]) && var[i] != '_'
-			&& var[i] != '\'' && var[i] != '\"'
-			&& (var[i] != '+') && var[i + 1] == '=')
+			&& !(var[i] == '+' && var[i + 1] == '='))
 			return (false);
 		i++;
 	}
 	return (true);
+}
+
+static void	print_with_quotes(char *str)
+{
+	int	i;
+
+	i = -1;
+	printf("declare -x ");
+	while (str && str[++i] != '=')
+		printf("%c", str[i]);
+	printf("%c\"", str[i]);
+	while (str && str[++i])
+		printf("%c", str[i]);
+	printf("\"\n");
 }
 
 static int	check_for_args(t_minishell *sh, t_cmd *cmd)
@@ -40,7 +53,10 @@ static int	check_for_args(t_minishell *sh, t_cmd *cmd)
 	{
 		while (sh->envp && sh->envp[i])
 		{
-			printf("declare -x %s\n", sh->envp[i]);
+			if (ft_strchr(sh->envp[i], '='))
+				print_with_quotes(sh->envp[i]);
+			else
+				printf("declare -x %s\n", sh->envp[i]);
 			i++;
 		}
 		return (1);
@@ -65,7 +81,6 @@ static bool	check_append(char *var)
 int	ft_export(t_minishell *sh, t_cmd *cmd)
 {
 	int		i;
-	char	*trim;
 	bool	error;
 
 	error = false;
@@ -74,17 +89,16 @@ int	ft_export(t_minishell *sh, t_cmd *cmd)
 	i = 0;
 	while (cmd->argv[++i])
 	{
-		trim = trim_quotes(cmd->argv[i]);
-		if (is_correct_varname(trim) == false)
+		if (is_correct_varname(cmd->argv[i]) == false)
 		{
-			ft_dprintf(2, "export: Error. \"%s\"'s not a valid ID.\n", trim);
+			ft_dprintf(2,
+				"export: Error. \"%s\"'s not a valid ID.\n", cmd->argv[i]);
 			error = true;
 		}
-		else if (check_append(trim))
+		else if (check_append(cmd->argv[i]))
 			handle_append(cmd->argv[i], sh);
 		else
 			ft_set_env(cmd->argv[i], sh);
-		free(trim);
 	}
 	return ((int)error);
 }
