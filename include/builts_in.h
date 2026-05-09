@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 13:13:34 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/04 17:30:14 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/08 18:22:00 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ int		ft_unset(t_minishell *sh, t_cmd *cmd);
 
 /* UNSET_C */
 void	ft_unset_env(char *var, t_minishell *sh);
+
+/* HANDLE_APPEND_C */
+void	handle_append(char *var, t_minishell *sh);
+
+/* APPENNDING_C */
+int		append(char *env, char *var, char *name, t_minishell *sh);
 
 // built_in/helpers/get_argc.c
 int		get_argc(char **argv);

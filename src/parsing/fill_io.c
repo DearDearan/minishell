@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 16:07:59 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/07 14:17:14 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/09 14:42:38 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,6 @@ static char	*expand_file(char *content, t_minishell *sh)
 	expanded = expand(content, sh);
 	trim = trim_quotes(expanded);
 	free(expanded);
-	if (trim && (trim[0] == '\"' || trim[0] == '\'') && ft_strlen(trim) == 1)
-	{
-		free(trim);
-		return ("\0");
-	}
 	return (trim);
 }
 

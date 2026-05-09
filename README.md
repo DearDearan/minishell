@@ -115,15 +115,15 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 
 ## TODO
 
-1) checker infos du GDOC sur Environmental variables :
-J'ai notamment reperer ceci :
-export VAR="truc ' bidule"
-echo $VAR
-------> bash affiche le single quote mais pas minishell
 2) gerer les espaces avec ascii entre \t et \r pour tous les endroits ou on doit gerer les espaces
-3) verifier que export = ou += ou env ne marche pas avec $?
 4) regarder le pdf de correction
 5) faire des corrections blanches ? alexandre dispo
+
+Test [.. | .. | ..][KO]
+Status mismatch:
+  Minishell: [126]
+  Bash: [127]
+
 
 ## PRISE DE NOTE EN VRAC
 
