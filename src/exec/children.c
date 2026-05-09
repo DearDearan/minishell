@@ -13,8 +13,8 @@
 #include "minishell.h"
 
 static int	exec_built_in(t_minishell *sh, t_cmd *cmd, int nb_cmds);
-static void	print_error(char *path, char *bin);
-static void	error_exit_child(t_minishell *sh, int nb_cmds);
+static int	print_error(char *path, char *bin);
+static void	error_exit_child(t_minishell *sh, int nb_cmds, int exit_c);
 
 void	make_child(t_minishell *sh, t_cmd *cmd, char **env_path)
 {
@@ -31,8 +31,8 @@ void	make_child(t_minishell *sh, t_cmd *cmd, char **env_path)
 			exit(exec_built_in(sh, cmd, sh->nb_cmds));
 		else if (execve(cmd->path, cmd->argv, sh->envp) == -1)
 		{
-			print_error(cmd->path, cmd->argv[0]);
-			error_exit_child(sh, sh->nb_cmds);
+			wstatus = print_error(cmd->path, cmd->argv[0]);
+			error_exit_child(sh, sh->nb_cmds, wstatus);
 		}
 	}
 	else if (cmd->pid == -1)
@@ -64,16 +64,22 @@ static int	exec_built_in(t_minishell *sh, t_cmd *cmd, int nb_cmds)
 	return (exit_code);
 }
 
-static void	print_error(char *path, char *bin)
+static int	print_error(char *path, char *bin)
 {
 	struct stat	sb;
 
+	if (!*bin)
+	{
+		ft_dprintf(2, "minishell: command not found\n");
+		return (EXIT_NOTFOUND);
+	}
 	if (stat(path, &sb) == -1)
 	{
 		if (ft_strchr(bin, '/'))
 			ft_dprintf(2, "minishell: %s: No such file or directory\n", bin);
 		else
 			ft_dprintf(2, "minishell: %s: command not found\n", bin);
+		return (EXIT_NOTFOUND);
 	}
 	else
 	{
@@ -83,11 +89,12 @@ static void	print_error(char *path, char *bin)
 			ft_dprintf(2, "minishell: %s: permission denied\n", bin);
 		else
 			ft_dprintf(2, "minishell: %s: Not an handled file\n", bin);
+		return (EXIT_NOTEXECUTABLE);
 	}
 }
 
-static void	error_exit_child(t_minishell *sh, int nb_cmds)
+static void	error_exit_child(t_minishell *sh, int nb_cmds, int exit_c)
 {
 	cleaning(sh, nb_cmds);
-	exit(EXIT_NOTFOUND);
+	exit(exit_c);
 }

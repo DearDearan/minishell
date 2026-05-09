@@ -115,26 +115,15 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 
 ## TODO
 
-- utiliser excel discord 42 chan minishell et testeur ndacun pour tests finaux
-- heredoc puis exit
-
-### LEAKS :
-
-dans le cadre d'un pwd ou je sais plus quoi ? explication de liam via ndacun ??
-126    A file to be executed was found, but it was not an executable utility.
-
-NavidShell:/home/cboucher/42 CURSUS/minishell$ << <
-Syntax Error : < is an invalid token
-
-tester avec chaines vides "" et ''
-tester avec pleins de heredooc ouvert
-tester avec desordres de pipes, redirections et commandes params dans tous les sens
-tester avec redirections qui marche et dautres non
-tester avec des dossiers plutot que des fichiers
-tester dautres trucs chelous avec des interupts et redirections
-tester des NULL dans les malloc, calloc, strjoin, strdup, etc...
-simuler des BAD retour de fonctions de la libc
-
+1) checker infos du GDOC sur Environmental variables :
+J'ai notamment reperer ceci :
+export VAR="truc ' bidule"
+echo $VAR
+------> bash affiche le single quote mais pas minishell
+2) gerer les espaces avec ascii entre \t et \r pour tous les endroits ou on doit gerer les espaces
+3) verifier que export = ou += ou env ne marche pas avec $?
+4) regarder le pdf de correction
+5) faire des corrections blanches ? alexandre dispo
 
 ## PRISE DE NOTE EN VRAC
 
@@ -183,4 +172,13 @@ tputs : Envoyer une séquence au terminal
 2 semaine : 1 journee de test comportements bash, 4 jours de code
 3 semaine : 2 jours de code, 1 aprem pour apprendre git rebase -i et squash etc
 4 semaine : 4 jours de code
-5 semaine : 3 gros jours de code
+5 semaine : 5 gros jours de code
+6 semaine : 4 gros jours de debugs
+
+
+ressources :
+https://tiswww.cwru.edu/php/chet/readline/readline.html#index-rl_005fredisplay
+https://tiswww.case.edu/php/chet/readline/history.html
+https://www.conventionalcommits.org/en/v1.0.0/
+https://docs.google.com/document/d/1r0yE7gK12J6lW79mzY8ELyKJEiDqkOeRfXZ6DWSKZVE/
+

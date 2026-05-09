@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 15:31:30 by Camille           #+#    #+#             */
-/*   Updated: 2026/04/22 13:39:03 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/08 15:25:25 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define WARN_EOF "%s at line %d delimited by end-of-file (wanted `%s')\n"
 # define EXIT_NOTFOUND 127
+# define EXIT_NOTEXECUTABLE 126
 
 # include "structs.h"
 
@@ -32,6 +33,9 @@ void	close_fds(int (*fds)[2]);
 void	close_fd(int *fd);
 void	duplicate_fds(t_cmd *cmd);
 void	close_all_fds(t_cmd **cmds, int nb_cmds);
+
+// heredoc.c
+int		get_fd_heredoc(t_minishell *sh, char *limiter);
 
 // pipes.c
 void	set_pipe(t_minishell *sh, int *curr_cmd_fd_out, int *next_cmd_fd_in);

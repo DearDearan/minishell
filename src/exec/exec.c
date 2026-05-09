@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 11:54:27 by Camille           #+#    #+#             */
-/*   Updated: 2026/05/05 12:09:38 by Camille          ###   ########.fr       */
+/*   Updated: 2026/05/08 17:12:07 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ static void	exec_prompt(t_minishell *sh, int nb_cmds, char **env_path)
 	while (g_signal != SIGINT && i < nb_cmds)
 	{
 		cmd = sh->cmds[i];
+		if (i + 1 != nb_cmds)
+			set_pipe(sh, &cmd->fds[1], &sh->cmds[i + 1]->fds[0]);
 		if (set_redirections(sh, cmd, sh->ios[i]))
 		{
 			if (cmd->argv && !set_built_in(cmd, cmd->argv[0]))
@@ -84,8 +86,6 @@ static void	exec_prompt(t_minishell *sh, int nb_cmds, char **env_path)
 				if (!cmd->path)
 					error_exit(sh, nb_cmds);
 			}
-			if (i + 1 != nb_cmds)
-				set_pipe(sh, &cmd->fds[1], &sh->cmds[i + 1]->fds[0]);
 			if (cmd->built_in || cmd->path)
 				make_child(sh, cmd, env_path);
 		}
