@@ -4,81 +4,49 @@ _This project has been created as part of the 42 curriculum by cboucher and lifr
 
 ## Description
 
-Minishell is a project which the main goal is to make a simple terminal Shell.
+minishell is a project which the main goal is to make a simple terminal shell. It takes `bash` has an inspiration but this is not a clone of it.
 
-A Shell is basically a prompt that can execute commands and make redirections. Examples of Shells are Zsh, fish, or what we use as a reference for ours, bash.
+A shell is basically a prompt that can execute commands and make redirections. Examples of shells are `zsh`, `fish`, or what we use as a reference for ours, `bash`.
 
-Minishell should display a prompt when waiting for a new command. It also need to have a <ins>**working history**</ins>.
+In this project we also created built-ins. They act like separate commands or programs but are fully integrated into minishell and can perform different actions (see the section dedicated to built-ins).
 
-Minishell should launch the right executable, whether you input a **relative**, **absolute** or a **PATH inside an environment variable**.
+### Main features
 
-Minishell should handle single quotes, which prevents the shell from interpreting special chars (Dollar sign for example), double quotes, which should prevent the shell from interpreting special characters ***except*** dollar sign. 
+minishell displays a prompt when waiting for a new command. It launches the right executable, whether you input a **relative**, **absolute** or a **PATH inside an environment variable**.
 
-It also **shouldn't** process unclosed quotes or special characters <ins>**not specified by the subject**</ins>.
+It **handles redirections**, which are:
+- `< input_file`: which redirect the input of the command with the content of the specified file.
+- `> output_file`: which redirect the output of the command in the specified file by replacing his content.
+- `<< EOF`: which should be given a delimiter, then read the user's input until a line containing the delimiter is seen then redirect all the inputs of the command.
+- `>> output_file`: which redirect the output of the command in the specified file in **append mode**.
 
-Minishell should handle redirections, which are :
+It also **implement pipes**: `|`. The **output** of each command in the pipeline is connected to the **input** of the next command via a pipe. Except if there are redirections to handle for the corresponding direction.
 
-- ">", which redirect input.
-- "<", which redirect output.
-- ">>", which redirect output in **append mode**.
-- "<<", which should be given a delimiter, then read the input until a line containing the delimiter is seen.
+### Built-ins
 
-It should also implement pipes, "|". The **output** of each command in the pipeline is connected to the **input** of the next command via a pipe.
+All our built-ins except echo do not handle options.
 
-It also **HAVE TO** handle expands, which are environment variables ($HOME for example, which should expand to /home/user). Although, Dollar sign and "?" should expand the exit status of the most recently executed foreground pipeline.
+- `echo`: displays a line of text. The `-n` option erase the newline at the end of the text written. (ex: `echo Bonjour $USER`)
+- `cd`: changes the working directory. (ex: `cd Downloads`)
+- `pwd`: prints the name of the current/working directory.
+- `export`: set the export attribute for variables. (ex: `export foe=bar`)
+- `unset`: unset values and attributes of variables. (ex: `unset foe`)
+- `env`: prints environment variables.
+- `exit`: cause the shell to exit.
 
-Minishell should handle signals of CTRL+C, CTRL+D and CTRL+\
+### Other behaviors
 
+minishell have a <ins>**working history**</ins> during his execution.
+
+It handles single quotes, which prevents the shell from interpreting special characters (`$` for example). It handles double quotes, which prevent the shell from interpreting special characters ***except*** `$`. It also not process unclosed quotes or special characters.
+
+It also handles expands, which are environment variables (`$HOME` for example, expand to `/home/user`). Although, `$?` expand the exit status of the most recently executed foreground pipeline.
+
+minishell handles signals of SIGINT (CTRL+C) and SIGQUIT (CTRL+\):
 - CTRL+C displays a new prompt on a newline.
-- CTRL+D exits the shell **IF** the line is empty.
 - CTRL+\ is absolutely fucking useless.
 
-At last, Minishell has to have built-in commands. Those are the followings :
-
-- echo, **with** or **without** the option "-n". -n should erase the newline at the end of the text written.
-
-- cd, **with** or **without** a relative or absolute path.
-
-- pwd with **no** options.
-
-- export with **no** options.
-
-- unset with **no** options.
-
-- env with <ins>**no options or arguments**</ins>.
-
-- exit with **no** options.
-
-
-### Parsing
-
-The parsing of Minishell is the equivalent of stubbing your toe while stepping on a lego while having a testicular torsion. It's one of the most MISERABLE THING I'VE EVER DONE.
-
-The parsing handles redirections and pipes that are not separated by a space. how ? BY ADDING SPACES	
-
-
-### Fundamental Concepts
-
-todo
-
-from pipex:CTRL+D sends an End-of-File signal, so it must be taken into account when reading from STDIN.
-
-### Bash Comportements and Other Concepts Covered
-
-- la fonction stat et le principe de tout est fichier + notions inode et autres types de fichiers avec sockets, etc (man 7 inode) Macros associes pour gerer les types de fichiers par exemple.
-- les fonctions pour ouverture lecture et fermeture d'un dossier pour recuperer une structure informant sur les contenus d'un dossier.
-- A noter que le heredoc de bash bug completement si on met un \n avec ctrl+v+j dans le heredoc. on ne peut plus quitter le heredoc
-
-from pipex:
-- In a bash session, we can limit the number of processes with `ulimit -u 547`, useful for certain tests.
-- In bash, using `echo $?` retrieves the exit code of the last command executed.
-- In bash, `command 2> errors.log` allows us to redirect the error output to errors.log, for example.
-- For a bash session, using `unset PATH` clears the PATH environment variable and `export PATH="foe"` sets the PATH environment variable to foe.
-- If the PATH environment variable does not exist or is empty, bash will look for the executable in the current directory.
-- The /proc folder contains currently running processes, where we can find the open fds associated with each process.
-- `env -i command` to remove all environment variables for the following command.
-- `pgrep pipex` retrieves the pid corresponding to the pipex program name.
-- `-fsanitize=address` in the compilation rules helps identify memory leaks during program execution without needing to use tools like Valgrind.
+CTRL+D is not a signal. It puts an EOF (End‑Of‑File) character in the prompt. It exits the shell if the line is empty.
 
 ## Instructions
 
@@ -92,93 +60,72 @@ To use the minishell program, simply run minishell. It will wait for a prompt an
 
 ## Technical Choices
 
-On ne gere pas les caracteres speciaux y compris les \n du coups. On les consideres evidemment comme des caracteres a part entieres si ils sont dans les quotes.
+### Parsing (by DearDearan)
 
-On n'executera pas la commande et le child des la premiere redirection invalide
+The parsing of Minishell is the equivalent of stubbing your toe while stepping on a lego while having a testicular torsion. It's one of the most MISERABLE THING I'VE EVER DONE.
 
-todo
+The parsing handles redirections and pipes that are not separated by a space. how ? BY ADDING SPACES
 
-## Improvement Suggestions
+### TODO Handling Signals (by Camille Boucher)
 
-from pipex:
-One potential improvement could be to check if a folder (relative or absolute) has the permissions to display "no such file or directory" instead of "command not found."
-In the bash here_doc, the LIMITER does not contain single quotes or double quotes unless they are encapsulated by the other quotes. This behavior may be potentially necessary for the future minishell project.
-In the case where a newline is injected into the LIMITER with CTRL+v+j, I am currently not counting the \n in my here_doc, but it will likely be necessary in minishell, and in that case, I will not use the get_next_line function. However, I thought about safeguarding this case here.
+talk about signal safety
+I learned that certain functions must be used when handling signals (man 7 signal-safety)
+- `man 7 signal, man 2: sigaction, sigemptyset, sigaddset, kill: to consider for signals...
+
+## TODO ?? Improvement Suggestions
+
+## Other Concepts Covered
+
+- `strace` can be use to inspect bash behaviors in detail.
+
+### Authorised and interesting functions
+
+- `getenv`: retrieve an environment variable (we coded ft_getenv for our custom env).
+- `access`: determine whether a file is accessible and its permissions (using the path and an amode RWXF).
+- `stat`: returns a struct with info about a file/directory via its path; macros usable to know if it is a file, directory, etc. `fstat` is the same thing but via its fd, `lstat` is the same as stat but does not follow symbolic links.
+- `isatty`: to avoid launching minishell through a pipe for example.
+- `getcwd`: get the current working directory corresponding to the running binary.
+- `chdir`: change the current working directory for the running binary.
+- `opendir`, `readdir`, `closedir`: open a directory, read files one by one on each call returning a structure (DO NOT FREE), close the directory.
+- `unlink`: delete a file
+- `wait3` and `wait4`: variants of wait and waitpid with a struct that provides more info.
+- `ioctl`: allows getting the terminal size for example and configuring/managing other things with requests and macros related to the device/terminal. Can be used for example to inject a \n into a readline to terminate it. But not recommended in a signal because the function is not async-signal-safe
+
+### Other niche functions about the terminal
+
+- `tcgetattr`: read the current terminal configuration.
+- `tcsetattr`: change the terminal configuration.
+- `tgetent`: load terminal info from the database.
+- `tgetflag`: check a boolean capability (does it support X?).
+- `tgetnum`: retrieve a numeric value (number of columns).
+- `tgetstr`: get an escape sequence (color code, movement).
+- `tgoto`: convert coordinates into an escape sequence.
+- `tputs`: send a sequence to the terminal.
 
 ## Resources
 
 1.	[Article by Roslyn Michelle](https://www.rozmichelle.com/pipes-forks-dups/)
 2.	[CodeVault's Youtube playlist](https://www.youtube.com/playlist?list=PLfqABt5AS4FkW5mOn2Tn9ZZLLDwA3kZUY)
+3.	[GNU Readline Library](https://tiswww.cwru.edu/php/chet/readline/readline.html#index-rl_005fredisplay)
+4.	[GNU History Library](https://tiswww.case.edu/php/chet/readline/history.html)
+5.	[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+6.	[Minishell testing](https://docs.google.com/document/d/1r0yE7gK12J6lW79mzY8ELyKJEiDqkOeRfXZ6DWSKZVE/) Because 42’s subject isn’t precise enough.
 3.	Peer-to-peer learning.
-4.	man
+4.	man RTFM
 5.	Web research and AI chat for some notions.
 
 ## TODO
 
+1) checker infos du GDOC sur Environmental variables
 2) gerer les espaces avec ascii entre \t et \r pour tous les endroits ou on doit gerer les espaces
-4) regarder le pdf de correction
-5) faire des corrections blanches ? alexandre dispo
+3) regarder le pdf de correction
+4) faire des corrections blanches ? alexandre dispo
+5) ndacun
 Test [.. | .. | ..][KO]
 Status mismatch:
   Minishell: [126]
   Bash: [127]
 6) gaffe aux redirections du style >< truc AND <> bidule
-
-
-## PRISE DE NOTE EN VRAC
-
-- strace pour regarder les commandes de bash
-
-comportements bash:
-- chaque commande de bash gere leurs propres infile et outfile et prends en compte les derniers. ainsi chaque commande de pipe peut gerer son propre infile et oufile.
-- bash gere le desordre : `< infile echo > outfile hello < infile2 world` va par exemple prendre comme infile : infile2, et va echo hello world dans outfile
-- Les infiles et outfiles precedents sont tous testes au niveau des permissions mais sont ignore. le dernier outfile recevra les donnees et les autres seront seulement crees mais reste vide
-- COMPORTEMENT BASH : le 17eme heredoc crash et retourne 2 -> bash: maximum here-document count exceeded
-
-
-fonctions:
-getenv : recup une var d'env
-access : determmine si un fichier est accessible et ses permissions (a laide du path et du amode RWXF)
-stat : retourne une struct pour infos sur un fichier/dossier via son chemin, macros utilisatbles pour savoir si c un fichier, dossier, etc...
-fstat : meme chose mais via son fd
-lstat : meme chose que stat mais ne suit pas les liens symboliques
-isatty : pour eviter de lancer minishell a travers un pipe par exemple
-getcwd : recuperer le dossier de travail actuel correspondant au binaire en execution
-chdir : change le dossier de travail actuel pour le binaire en execution
-opendir, readdir, closedir : ouvre un dossier, lit les fichiers un a un a chaque appel de cette fonction en renvoyant une structure (NE PAS FREE), ferme le dossier
-unlink : supprime un fichier
-wait3 et wait4 : variantes de wait et waitpid avec une structure qui donne plus d'infos
-man 7 signal, man 2 : sigaction, sigemptyset, sigaddset, kill : a voir pour les signaux...
-
-SIGINT = ctrl+C
-SIGQUIT = ctrl + \
-jai appris quil faut utiliser certaines fonctions dans la gestion des signaux (man 7 signal-safety)
-
-
-
-ioctl : permet d'avoir la taille du terminal par exemple et configurer, gerer d'autres trucs avec des requetes et macros par rapport au device/terminal -> peut servir par exemple a injecter un \n dans un readline pour le terminer par exemple. Mais pas conseille dans un signal car la fonction est pas async safe
-tcgetattr : Lire la configuration actuelle du terminal
-tcsetattr : Modifier la configuration du terminal
-tgetent : Charger les infos du terminal depuis la base de données
-tgetflag    : Vérifier une capacité booléenne (supporte-t-il X ?)
-tgetnum : Récupérer une valeur numérique (nombre de colonnes)
-tgetstr : Obtenir une séquence d'échappement (code couleur, déplacement)
-tgoto : Convertir des coordonnées en séquence d'échappement
-tputs : Envoyer une séquence au terminal
-
-## Travail de Camille, starting minishell lundi 30:
-
-1 semaine : 4 jours de reflexion en commun et prototypage des structures
-2 semaine : 1 journee de test comportements bash, 4 jours de code
-3 semaine : 2 jours de code, 1 aprem pour apprendre git rebase -i et squash etc
-4 semaine : 4 jours de code
-5 semaine : 5 gros jours de code
-6 semaine : 4 gros jours de debugs
-
-
-ressources :
-https://tiswww.cwru.edu/php/chet/readline/readline.html#index-rl_005fredisplay
-https://tiswww.case.edu/php/chet/readline/history.html
-https://www.conventionalcommits.org/en/v1.0.0/
-https://docs.google.com/document/d/1r0yE7gK12J6lW79mzY8ELyKJEiDqkOeRfXZ6DWSKZVE/
-
+7) tester characters speciaux ? \n etc ?
+8) tester mailoc failed ? https://github.com/seekrs/breakage
+9) tester https://github.com/froz42/funcheck
