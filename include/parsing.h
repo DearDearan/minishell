@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 16:25:21 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/07 14:03:50 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/11 10:00:30 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "structs.h"
 
 /* LEXER_C */
-t_lexer	*lex(char *argv);
+t_lexer	*lex(char *argv, t_minishell *sh);
 void	ft_lex_addback(t_lexer **lst, t_lexer *node);
 int		w_cnt(t_lexer *lexed);
 
@@ -66,7 +66,7 @@ void	fill_argv(t_minishell *sh, t_cmd *cmd, char *word);
 void	error_parsing(t_lexer *lex, t_minishell *sh, int nb_cmds);
 
 /* CHECK_FOR_SPACES_C */
-char	*add_spaces_around_ops(char *line);
+char	*add_spaces_around_ops(char *line), t_minishell *sh;
 int		is_redir(char c);
 int		is_pipes(char c);
 

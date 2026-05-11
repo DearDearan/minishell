@@ -118,11 +118,11 @@ In the case where a newline is injected into the LIMITER with CTRL+v+j, I am cur
 2) gerer les espaces avec ascii entre \t et \r pour tous les endroits ou on doit gerer les espaces
 4) regarder le pdf de correction
 5) faire des corrections blanches ? alexandre dispo
-
 Test [.. | .. | ..][KO]
 Status mismatch:
   Minishell: [126]
   Bash: [127]
+6) gaffe aux redirections du style >< truc AND <> bidule
 
 
 ## PRISE DE NOTE EN VRAC

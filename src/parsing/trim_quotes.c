@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 14:34:46 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/10 12:12:37 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/10 15:04:17 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	check_and_fill(char *str, char *trim, int i, int j)
 	else if (str[i] == '\x02')
 		trim[j++] = '\'';
 	else
-		trim[j++] = str[i];	
+		trim[j++] = str[i];
 }
 
 static void	fill_trim(char *str, char *trim, int i, int j)
@@ -82,6 +82,8 @@ char	*trim_quotes(char *str)
 {
 	char	*trim;
 
+	if (!str)
+		return (NULL);
 	trim = ft_calloc(ft_strlen(str) + 1, sizeof(char));
 	if (!trim)
 		return (NULL);
