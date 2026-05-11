@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 13:49:21 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/09 15:21:29 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/10 15:04:25 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	**process_word(char *content, t_minishell *parse)
 	is_quote = is_quoted(content, 0);
 	expanded = expand(content, parse);
 	trim = trim_quotes(expanded);
-	if (!expanded)
+	if (!trim)
 		return (NULL);
 	free(expanded);
 	if (is_quote == false)

@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/06 14:34:46 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/09 14:40:22 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/10 15:04:17 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,30 @@ static bool	has_closing_sq(char *str, int pos)
 	return (false);
 }
 
+static bool	has_closing_dq(char *str, int pos)
+{
+	int	i;
+
+	i = pos + 1;
+	while (str[i])
+	{
+		if (str[i] == '\"')
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
+static void	check_and_fill(char *str, char *trim, int i, int j)
+{
+	if (str[i] == '\x01')
+		trim[j++] = '\"';
+	else if (str[i] == '\x02')
+		trim[j++] = '\'';
+	else
+		trim[j++] = str[i];
+}
+
 static void	fill_trim(char *str, char *trim, int i, int j)
 {
 	bool	in_sq;
@@ -40,15 +64,16 @@ static void	fill_trim(char *str, char *trim, int i, int j)
 			in_sq = !in_sq;
 			i++;
 		}
-		else if (str[i] == '"' && !in_sq)
+		else if (str[i] == '"' && !in_sq && (in_dq || has_closing_dq(str, i)))
 		{
 			in_dq = !in_dq;
 			i++;
 		}
 		else
 		{
-			trim[j++] = str[i];
+			check_and_fill(str, trim, i, j);
 			i++;
+			j++;
 		}
 	}
 }
@@ -57,6 +82,8 @@ char	*trim_quotes(char *str)
 {
 	char	*trim;
 
+	if (!str)
+		return (NULL);
 	trim = ft_calloc(ft_strlen(str) + 1, sizeof(char));
 	if (!trim)
 		return (NULL);

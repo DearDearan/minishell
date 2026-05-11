@@ -6,19 +6,21 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 16:07:59 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/09 14:42:38 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/11 10:11:17 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*expand_file(char *content, t_minishell *sh)
+static char	*expand_file(char *content, t_minishell *sh, t_lexer *lex)
 {
 	char	*trim;
 	char	*expanded;
 
 	expanded = expand(content, sh);
 	trim = trim_quotes(expanded);
+	if (!trim)
+		error_parsing(lex, sh, sh->nb_cmds);
 	free(expanded);
 	return (trim);
 }
@@ -41,22 +43,22 @@ static t_io	*add_io(t_lexer *lexed, t_minishell *sh)
 	io = ft_newnode(sh, lexed);
 	if (lexed->type == IN && lexed->next != NULL)
 	{
-		io->infile = expand_file(lexed->next->content, sh);
+		io->infile = expand_file(lexed->next->content, sh, lexed);
 		io->is_lim = false;
 	}
 	else if (lexed->type == OUT && lexed->next != NULL)
 	{
-		io->outfile = expand_file(lexed->next->content, sh);
+		io->outfile = expand_file(lexed->next->content, sh), lexed;
 		io->outfile_flags = O_CREAT | O_TRUNC | O_WRONLY;
 	}
 	else if (lexed->type == LIM && lexed->next != NULL)
 	{
-		io->infile = expand_file(lexed->next->content, sh);
+		io->infile = expand_file(lexed->next->content, sh, lexed);
 		io->is_lim = true;
 	}
 	else if (lexed->type == APP && lexed->next != NULL)
 	{
-		io->outfile = expand_file(lexed->next->content, sh);
+		io->outfile = expand_file(lexed->next->content, sh, lexed);
 		io->outfile_flags = O_CREAT | O_APPEND | O_WRONLY;
 	}
 	return (io);

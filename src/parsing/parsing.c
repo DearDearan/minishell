@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 15:12:38 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/07 14:05:53 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/11 09:50:58 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	parse(char *line, t_minishell *parsing)
 	t_lexer	*lexed;
 	char	*new_line;
 
-	new_line = add_spaces_around_ops(line);
+	new_line = add_spaces_around_ops(line, parsing);
 	lexed = lex(new_line);
 	if (!lexed)
 	{

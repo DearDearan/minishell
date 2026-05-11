@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/07 14:55:55 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/08 10:11:05 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/10 13:15:21 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,15 @@ static void	copy_value(char *ret, int *j, char *val)
 
 	i = 0;
 	while (val && val[i])
-		ret[(*j)++] = val[i++];
+	{
+		if (val[i] == '\"')
+			ret[(*j)++] = '\x01';
+		else if (val[i] == '\'')
+			ret[(*j)++] = '\x02';
+		else
+			ret[(*j)++] = val[i];
+		i++;
+	}
 }
 
 static int	expand_var(char *s, char *ret, t_minishell *shell, int *j)

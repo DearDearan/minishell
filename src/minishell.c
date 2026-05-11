@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/08 10:08:27 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/10 13:46:00 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,13 @@ static t_minishell	*init_sh(char **envp)
 	set_signals(false);
 	shell = ft_calloc(1, sizeof(t_minishell));
 	if (!shell)
-		return (NULL);
-	if (!shell->envp && envp)
+	{
+		perror("minishell");
+		exit(2);
+	}
+	if (envp)
 		get_envp(envp, shell);
-	else if (!envp)
+	else
 		shell->envp = NULL;
 	shell->first_home_dir_path = getenv("HOME");
 	return (shell);

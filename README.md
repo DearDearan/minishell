@@ -125,12 +125,7 @@ Test [.. | .. | ..][KO]
 Status mismatch:
   Minishell: [126]
   Bash: [127]
-6) tester characters speciaux ? \n etc ?
-7) tester mailoc failed ? https://github.com/seekrs/breakage
-8) tester https://github.com/froz42/funcheck
-
-### TRIER CECI ENCORE
-
-    the stat function and the principle that everything is a file + notions of inode and other file types including sockets, etc. (man 7 inode) Associated macros to handle file types for example.
-    the functions to open, read and close a directory to obtain a structure informing about the directory contents.
-    Note that bash heredoc completely breaks if you put a literal newline with ctrl+v+j inside the heredoc — you can no longer exit the heredoc.
+6) gaffe aux redirections du style >< truc AND <> bidule
+7) tester characters speciaux ? \n etc ?
+8) tester mailoc failed ? https://github.com/seekrs/breakage
+9) tester https://github.com/froz42/funcheck

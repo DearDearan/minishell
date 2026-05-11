@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 13:44:49 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/08 10:05:59 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/11 10:01:44 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	get_type(char *arg, int delim)
 }
 
 static int	fill_lexer(t_lexer *new, t_lexer **ret_lex,
-		char **args)
+		char **args, t_minishell *sh)
 {
 	int	i;
 	int	type;
@@ -79,7 +79,7 @@ static int	fill_lexer(t_lexer *new, t_lexer **ret_lex,
 	{
 		new = ft_newnode(args[i]);
 		if (!new)
-			error_parsing(*ret_lex, NULL, 0);
+			error_parsing(*ret_lex, sh, sh->nb_cmds);
 		type = get_type(args[i], type);
 		new->type = type;
 		if (new->type == -1)
@@ -94,7 +94,7 @@ static int	fill_lexer(t_lexer *new, t_lexer **ret_lex,
 	return (1);
 }
 
-t_lexer	*lex(char *argv)
+t_lexer	*lex(char *argv, t_minishell *sh)
 {
 	t_lexer	*new;
 	t_lexer	*ret_lex;
@@ -102,9 +102,9 @@ t_lexer	*lex(char *argv)
 
 	ret_lex = NULL;
 	new = NULL;
-	args = ft_split_outquote(argv, ' ');
+	args = ft_split_outquote(argv, ' '); // gerer tabs etc
 	if (!args)
-		error_parsing(NULL, NULL, 0);
+		error_parsing(NULL, sh, sh->nb_cmds);
 	if (!fill_lexer(new, &ret_lex, args))
 	{
 		ft_free_strs(args);

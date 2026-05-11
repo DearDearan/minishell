@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 13:48:44 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/09 13:33:03 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/11 10:00:03 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void	add_spaces(char *line, char *new, int *i, int *j)
 	(*i)++;
 }
 
-char	*add_spaces_around_ops(char *line)
+char	*add_spaces_around_ops(char *line, t_minishell *sh)
 {
 	int		i;
 	int		j;
@@ -89,7 +89,7 @@ char	*add_spaces_around_ops(char *line)
 	j = 0;
 	new = ft_calloc(sizeof(char *), ft_strlen(line) + count_spaces(line) + 1);
 	if (!new)
-		error_parsing(NULL, NULL, 0);
+		error_exit(sh, sh->nb_cmds);
 	while (line && line[i])
 		add_spaces(line, new, &i, &j);
 	return (new);
