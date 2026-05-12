@@ -6,14 +6,12 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 16:25:21 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/12 13:22:34 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/12 16:03:01 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
-
-# include "structs.h"
 
 /* LEXER_C */
 t_lexer	*lex(char *argv, t_minishell *sh);

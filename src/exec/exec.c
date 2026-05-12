@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 11:54:27 by Camille           #+#    #+#             */
-/*   Updated: 2026/05/08 17:12:07 by Camille          ###   ########.fr       */
+/*   Updated: 2026/05/12 15:50:50 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,9 @@ int	exec(t_minishell *sh, int nb_cmds)
 	char	**env_path;
 	int		wstatus;
 
-	if (nb_cmds == 1 && sh->cmds[0]->argv
-		&& set_built_in(sh->cmds[0], sh->cmds[0]->argv[0]))
+	if (nb_cmds == 1 && is_builtin_ft_exit(sh->cmds[0], sh->cmds[0]->argv[0]))
 	{
-		if (g_signal == SIGINT)
-			sh->exit_c = SIGINT + 128;
-		else
+		if (set_redirections(sh, sh->cmds[0], sh->ios[0]))
 			sh->exit_c = sh->cmds[0]->built_in(sh, sh->cmds[0]);
 	}
 	else
@@ -86,8 +83,7 @@ static void	exec_prompt(t_minishell *sh, int nb_cmds, char **env_path)
 				if (!cmd->path)
 					error_exit(sh, nb_cmds);
 			}
-			if (cmd->built_in || cmd->path)
-				make_child(sh, cmd, env_path);
+			make_child(sh, cmd, env_path);
 		}
 		close_fds(&cmd->fds);
 		i++;

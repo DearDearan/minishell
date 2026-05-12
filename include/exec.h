@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 15:31:30 by Camille           #+#    #+#             */
-/*   Updated: 2026/05/08 15:25:25 by Camille          ###   ########.fr       */
+/*   Updated: 2026/05/12 16:02:49 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,11 @@
 # define EXIT_NOTFOUND 127
 # define EXIT_NOTEXECUTABLE 126
 
-# include "structs.h"
-
 // exec.c
 int		exec(t_minishell *sh, int nb_cmds);
 
 // built-in.c
+bool	is_builtin_ft_exit(t_cmd *cmd, char *bin);
 bool	set_built_in(t_cmd *cmd, char *bin);
 
 // redirections.c

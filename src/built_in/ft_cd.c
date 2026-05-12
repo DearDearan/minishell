@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 14:19:39 by Camille           #+#    #+#             */
-/*   Updated: 2026/05/05 15:40:01 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/12 14:25:45 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_cd(t_minishell *sh, t_cmd *cmd)
 	char	*oldpwd_path;
 	char	*newpwd_path;
 
-	if (sh->nb_cmds > 1)
+	if (sh->nb_cmds > 1 && handle_pipes_for_cd(sh, sh->nb_cmds, cmd->argv))
 		return (EXIT_FAILURE);
 	oldpwd_path = getcwd(NULL, 0);
 	if (!can_execute_cd(cmd->argv, sh))

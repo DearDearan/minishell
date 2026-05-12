@@ -26,7 +26,7 @@ int	get_fd_heredoc(t_minishell *sh, char *limiter)
 	line = NULL;
 	set_signals(true);
 	heredoc_loop(sh, line, limiter, &fds);
-	set_signals(false);
+	ignore_signals();
 	close(fds[1]);
 	return (fds[0]);
 }

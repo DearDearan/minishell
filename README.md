@@ -66,13 +66,15 @@ The parsing of Minishell is the equivalent of stubbing your toe while stepping o
 
 The parsing handles redirections and pipes that are not separated by a space. how ? BY ADDING SPACES
 
-### TODO Handling Signals (by Camille Boucher)
+### Handling Signals (by Camille Boucher)
 
-talk about signal safety
-I learned that certain functions must be used when handling signals (man 7 signal-safety)
-- `man 7 signal, man 2: sigaction, sigemptyset, sigaddset, kill: to consider for signals...
+When handling signal management in C, it’s important to use async-signal-safe functions. To avoid undefined behavior when code is interrupted by a signal, the POSIX standard defines a list of usable functions (see `man 7 signal-safety`). Therefore, it is strongly discouraged to use stdio functions such as printf, to name just one example.
 
-## TODO ?? Improvement Suggestions
+- `man 7 signal` and `sigaction`, `sigemptyset`, `sigaddset`, `kill`: manual and functions to help understand the use of signals.
+
+### Execution part (by Camille Boucher)
+
+During execution, I used the stat function to handle non‑executable files, files not found, or files without sufficient permissions. This allowed me to better understand the Linux paradigm "Everything is a file" and to begin exploring the inode structure of files (`man 7 inode`). I was also able to see concepts such as sockets and the macros used to handle file types, for example.
 
 ## Other Concepts Covered
 
@@ -113,19 +115,3 @@ I learned that certain functions must be used when handling signals (man 7 signa
 3.	Peer-to-peer learning.
 4.	man RTFM
 5.	Web research and AI chat for some notions.
-
-## TODO
-
-1) checker infos du GDOC sur Environmental variables
-2) gerer les espaces avec ascii entre \t et \r pour tous les endroits ou on doit gerer les espaces
-3) regarder le pdf de correction
-4) faire des corrections blanches ? alexandre dispo
-5) ndacun
-Test [.. | .. | ..][KO]
-Status mismatch:
-  Minishell: [126]
-  Bash: [127]
-6) gaffe aux redirections du style >< truc AND <> bidule
-7) tester characters speciaux ? \n etc ?
-8) tester mailoc failed ? https://github.com/seekrs/breakage
-9) tester https://github.com/froz42/funcheck

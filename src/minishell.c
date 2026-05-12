@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 14:24:39 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/10 13:46:00 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/12 16:05:39 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static t_minishell	*init_sh(char **envp)
 {
 	t_minishell	*shell;
 
-	set_signals(false);
 	shell = ft_calloc(1, sizeof(t_minishell));
 	if (!shell)
 	{
@@ -66,10 +65,9 @@ static bool	read_exec(t_minishell *shell)
 {
 	char	*line;
 
+	set_signals(false);
 	line = readline(shell->prompt);
-	if (g_signal == SIGINT)
-		shell->exit_c = SIGINT + 128;
-	g_signal = 0;
+	ignore_signals_and_handle_sigint(shell);
 	if (!line)
 		return (false);
 	if (line[0] != '\0')
@@ -100,7 +98,6 @@ int	main(int argc, char **argv, char **envp)
 	i = 0;
 	(void) argc;
 	(void) argv;
-	final_exit_code = EXIT_SUCCESS;
 	shell = init_sh(envp);
 	while (1)
 	{
