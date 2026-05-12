@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 11:37:54 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/08 16:54:22 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/12 14:23:10 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,17 @@ static char	*remove_plus(char *var, t_minishell *sh)
 		error_exit(sh, sh->nb_cmds);
 	i = 0;
 	j = 0;
-	while (var && var[i])
+	while (var && var[i] != '=')
 	{
-		if (var[i] == '+')
+		if (var[i] == '+' && var[i + 1] == '=')
+		{
 			i++;
-		new[j] = var[i];
-		i++;
-		j++;
+			break ;
+		}
+		new[j++] = var[i++];
 	}
+	while (var && var[i])
+		new[j++] = var[i++];
 	return (new);
 }
 

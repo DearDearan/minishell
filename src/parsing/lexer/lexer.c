@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 13:44:49 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/11 10:01:44 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/12 13:54:28 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,10 @@ t_lexer	*lex(char *argv, t_minishell *sh)
 
 	ret_lex = NULL;
 	new = NULL;
-	args = ft_split_outquote(argv, ' '); // gerer tabs etc
+	args = ft_split_outquote(argv);
 	if (!args)
 		error_parsing(NULL, sh, sh->nb_cmds);
-	if (!fill_lexer(new, &ret_lex, args))
+	if (!fill_lexer(new, &ret_lex, args, sh))
 	{
 		ft_free_strs(args);
 		return (NULL);

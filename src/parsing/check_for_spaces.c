@@ -6,25 +6,11 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/03 13:48:44 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/11 10:00:03 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/11 16:45:00 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	is_redir(char c)
-{
-	if (c == '<' || c == '>')
-		return (1);
-	return (0);
-}
-
-int	is_pipes(char c)
-{
-	if (c == '|')
-		return (1);
-	return (0);
-}
 
 static size_t	count_spaces(char *str)
 {
@@ -37,9 +23,11 @@ static size_t	count_spaces(char *str)
 	{
 		if (is_redir(str[i]) && !is_in_quotes(str, i))
 		{
-			if (i > 0 && str[i - 1] != ' ' && !is_redir(str[i - 1]))
+			if (i > 0 && str[i - 1] != ' '
+				&& (str[i - 1] != str[i] || is_third_op(str, i)))
 				count++;
-			if (str[i + 1] && str[i + 1] != ' ' && !is_redir(str[i + 1]))
+			if (str[i + 1] && str[i + 1] != ' '
+				&& (str[i + 1] != str[i] || is_double_op(str, i)))
 				count++;
 		}
 		else if (is_pipes(str[i]) && !is_in_quotes(str, i))
@@ -57,13 +45,12 @@ static void	add_spaces(char *line, char *new, int *i, int *j)
 {
 	if (is_redir(line[*i]) && !is_in_quotes(line, *i))
 	{
-		if (*i > 0 && line[*i - 1] != ' ' && !is_redir(line[*i - 1]))
-		{
+		if (*i > 0 && line[*i - 1] != ' '
+			&& (line[*i - 1] != line[*i] || is_third_op(line, *i)))
 			new[(*j)++] = ' ';
-		}
 		new[(*j)++] = line[*i];
 		if (line[*i + 1] && line[*i + 1] != ' '
-			&& !is_redir(line[*i + 1]))
+			&& (line[*i + 1] != line[*i] || is_double_op(line, *i)))
 			new[(*j)++] = ' ';
 	}
 	else if (is_pipes(line[*i]) && !is_in_quotes(line, *i))
