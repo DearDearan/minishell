@@ -13,7 +13,7 @@
 #ifndef EXEC_H
 # define EXEC_H
 
-# define WARN_EOF "%s at line %d delimited by end-of-file (wanted `%s')\n"
+# define WARN_EOF "mini%s at line %d delimited by end-of-file (wanted `%s')\n"
 # define EXIT_NOTFOUND 127
 # define EXIT_NOTEXECUTABLE 126
 
@@ -34,7 +34,7 @@ void	duplicate_fds(t_cmd *cmd);
 void	close_all_fds(t_cmd **cmds, int nb_cmds);
 
 // heredoc.c
-int		get_fd_heredoc(t_minishell *sh, char *limiter);
+int		get_fd_heredoc(t_minishell *sh, t_io *io);
 
 // pipes.c
 void	set_pipe(t_minishell *sh, int *curr_cmd_fd_out, int *next_cmd_fd_in);

@@ -22,7 +22,7 @@ bool	set_redirections(t_minishell *sh, t_cmd *cmd, t_io *io)
 		{
 			close_fd(&cmd->fds[0]);
 			if (io->is_lim)
-				cmd->fds[0] = get_fd_heredoc(sh, io->infile);
+				cmd->fds[0] = get_fd_heredoc(sh, io);
 			else
 				cmd->fds[0] = open_io(io->infile, O_RDONLY, true, &io->invalid);
 			if (cmd->fds[0] == -1)
