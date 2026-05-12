@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/12 14:25:25 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/04 17:30:52 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/12 16:56:55 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_io
 	char		*infile;
 	char		*outfile;
 	bool		is_lim;
+	bool		expand_heredoc;
 	int			outfile_flags;
 	bool		invalid;
 	struct s_io	*next;

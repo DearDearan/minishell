@@ -6,18 +6,28 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 16:07:59 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/11 15:23:53 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/12 17:17:25 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*expand_file(char *content, t_minishell *sh, t_lexer *lex)
+static char	*expand_file(char *str, t_minishell *sh, t_lexer *lex, t_io *io)
 {
 	char	*trim;
 	char	*expanded;
 
-	expanded = expand(content, sh);
+	if (lex->type == FILENAME)
+	{
+		if (ft_strchr(str, '\"') || ft_strchr(str, '\''))
+		{
+			io->expand_heredoc = true;
+			trim = trim_quotes(str);
+			return (trim);
+		}
+		return (str);
+	}
+	expanded = expand(str, sh);
 	trim = trim_quotes(expanded);
 	if (!trim)
 		error_parsing(lex, sh, sh->nb_cmds);
@@ -43,22 +53,22 @@ static t_io	*add_io(t_lexer *lexed, t_minishell *sh)
 	io = ft_newnode(sh, lexed);
 	if (lexed->type == IN && lexed->next != NULL)
 	{
-		io->infile = expand_file(lexed->next->content, sh, lexed);
+		io->infile = expand_file(lexed->next->content, sh, lexed, io);
 		io->is_lim = false;
 	}
 	else if (lexed->type == OUT && lexed->next != NULL)
 	{
-		io->outfile = expand_file(lexed->next->content, sh, lexed);
+		io->outfile = expand_file(lexed->next->content, sh, lexed, io);
 		io->outfile_flags = O_CREAT | O_TRUNC | O_WRONLY;
 	}
 	else if (lexed->type == LIM && lexed->next != NULL)
 	{
-		io->infile = expand_file(lexed->next->content, sh, lexed);
+		io->infile = expand_file(lexed->next->content, sh, lexed, io);
 		io->is_lim = true;
 	}
 	else if (lexed->type == APP && lexed->next != NULL)
 	{
-		io->outfile = expand_file(lexed->next->content, sh, lexed);
+		io->outfile = expand_file(lexed->next->content, sh, lexed, io);
 		io->outfile_flags = O_CREAT | O_APPEND | O_WRONLY;
 	}
 	return (io);
