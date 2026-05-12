@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 16:07:59 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/11 10:11:17 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/11 15:23:53 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static t_io	*add_io(t_lexer *lexed, t_minishell *sh)
 	}
 	else if (lexed->type == OUT && lexed->next != NULL)
 	{
-		io->outfile = expand_file(lexed->next->content, sh), lexed;
+		io->outfile = expand_file(lexed->next->content, sh, lexed);
 		io->outfile_flags = O_CREAT | O_TRUNC | O_WRONLY;
 	}
 	else if (lexed->type == LIM && lexed->next != NULL)

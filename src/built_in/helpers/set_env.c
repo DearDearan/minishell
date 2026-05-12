@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/16 15:16:55 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/08 18:22:23 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/12 10:49:52 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void	ft_set_env(char *var, t_minishell *sh)
 	int		i;
 
 	name = get_varname(var);
+	if (!name)
+		error_exit(sh, sh->nb_cmds);
 	if (name && !ft_strchr(var, '='))
 	{
 		if (get_env_index(sh->envp, name) == -1)

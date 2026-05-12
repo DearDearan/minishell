@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/30 16:25:21 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/11 10:00:30 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/12 13:22:34 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_lex_addback(t_lexer **lst, t_lexer *node);
 int		w_cnt(t_lexer *lexed);
 
 /* SPLIT_QUOTES_C*/
-char	**ft_split_outquote(char const *s, char c);
+char	**ft_split_outquote(char const *s);
 
 /* FT_LEXLAST_C */
 t_lexer	*ft_lexlast(t_lexer *lst);
@@ -66,9 +66,14 @@ void	fill_argv(t_minishell *sh, t_cmd *cmd, char *word);
 void	error_parsing(t_lexer *lex, t_minishell *sh, int nb_cmds);
 
 /* CHECK_FOR_SPACES_C */
-char	*add_spaces_around_ops(char *line), t_minishell *sh;
+char	*add_spaces_around_ops(char *line, t_minishell *sh);
+
+/* IS_HELPERS_C */
 int		is_redir(char c);
 int		is_pipes(char c);
+int		is_double_op(char *str, int i);
+int		is_third_op(char *str, int i);
+bool	is_wspace(char c);
 
 /* CHECK_FILENAME_C */
 int		check_filename(char *str);
