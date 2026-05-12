@@ -21,7 +21,7 @@
 int		exec(t_minishell *sh, int nb_cmds);
 
 // built-in.c
-bool	is_builtin_ft_exit(t_cmd *cmd, char *bin);
+bool	is_builtin_for_parent(t_cmd *cmd, char *bin);
 bool	set_built_in(t_cmd *cmd, char *bin);
 
 // redirections.c

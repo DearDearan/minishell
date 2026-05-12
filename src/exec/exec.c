@@ -23,10 +23,12 @@ int	exec(t_minishell *sh, int nb_cmds)
 	int		wstatus;
 
 	if (nb_cmds == 1 && sh->cmds[0]->argv
-		&& is_builtin_ft_exit(sh->cmds[0], sh->cmds[0]->argv[0]))
+		&& is_builtin_for_parent(sh->cmds[0], sh->cmds[0]->argv[0]))
 	{
 		if (set_redirections(sh, sh->cmds[0], sh->ios[0]))
 			sh->exit_c = sh->cmds[0]->built_in(sh, sh->cmds[0]);
+		else
+			sh->exit_c = EXIT_FAILURE;
 	}
 	else
 	{

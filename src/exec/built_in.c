@@ -12,21 +12,22 @@
 
 #include "minishell.h"
 
-bool	is_builtin_ft_exit(t_cmd *cmd, char *bin)
+bool	is_builtin_for_parent(t_cmd *cmd, char *bin)
 {
 	int	size;
 
-	if (!bin)
-		return (false);
 	size = ft_strlen(bin);
 	if (!size)
 		return (false);
 	if (size == 4 && !ft_strncmp(bin, "exit", size))
-	{
 		cmd->built_in = ft_exit;
-		return (true);
-	}
-	return (false);
+	else if (size == 6 && !ft_strncmp(bin, "export", size))
+		cmd->built_in = ft_export;
+	else if (size == 5 && !ft_strncmp(bin, "unset", size))
+		cmd->built_in = ft_unset;
+	else
+		return (false);
+	return (true);
 }
 
 bool	set_built_in(t_cmd *cmd, char *bin)
