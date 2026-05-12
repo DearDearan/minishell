@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 15:54:50 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/08 10:20:30 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/12 15:38:07 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_exit(t_minishell *sh, t_cmd *cmd)
 		return (EXIT_FAILURE);
 	}
 	else if (argc == 1)
-		exit_if_in_parent(sh, sh->nb_cmds, EXIT_SUCCESS);
+		exit_if_in_parent(sh, sh->nb_cmds, sh->exit_c);
 	if (sh->nb_cmds == 1)
 		exit_if_in_parent(sh, sh->nb_cmds, exit_c);
 	return (exit_c);
@@ -55,7 +55,7 @@ static void	exit_if_number_invalid(t_minishell *sh, char *number)
 		else
 		{
 			if (sh->nb_cmds == 1)
-				printf("exit\n");
+				ft_dprintf(2, "exit\n");
 			ft_dprintf(2, "minishell: exit: ");
 			ft_dprintf(2, "%s: numeric argument required\n", number);
 			cleaning(sh, sh->nb_cmds);
@@ -80,7 +80,7 @@ static long	extract_exit_code(t_minishell *sh, char *number)
 	if (overflowed)
 	{
 		if (sh->nb_cmds == 1)
-			printf("exit\n");
+			ft_dprintf(2, "exit\n");
 		ft_dprintf(2, "minishell: exit: ");
 		ft_dprintf(2, "%s: numeric argument required\n", number);
 		cleaning(sh, sh->nb_cmds);
@@ -94,7 +94,7 @@ static long	extract_exit_code(t_minishell *sh, char *number)
 static void	exit_if_in_parent(t_minishell *sh, int nb_cmds, long exit_c)
 {
 	if (nb_cmds == 1)
-		printf("exit\n");
+		ft_dprintf(2, "exit\n");
 	cleaning(sh, sh->nb_cmds);
 	exit(exit_c);
 }

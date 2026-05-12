@@ -55,7 +55,7 @@ long	ft_strtol(char *nptr, char **endptr)
 	*endptr = NULL;
 	nptr = skip_space(nptr);
 	if (number_is_min(nptr))
-		return (-9223372036854775807 -1);
+		return (-9223372036854775807 - 1);
 	nptr = skip_sign_and_set(nptr, &sign);
 	while (ft_isdigit(*nptr))
 	{

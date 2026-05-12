@@ -29,6 +29,17 @@ void	set_signals(bool heredoc)
 	sigaction(SIGQUIT, &sa, NULL);
 }
 
+void	ignore_signals(void)
+{
+	struct sigaction	sa;
+
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sa.sa_handler = SIG_IGN;
+	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGQUIT, &sa, NULL);
+}
+
 void	reset_signals(void)
 {
 	struct sigaction	sa;

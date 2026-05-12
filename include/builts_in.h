@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 13:13:34 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/08 18:22:00 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/12 16:02:35 by Camille          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,8 @@ int		get_argc(char **argv);
 
 // built_in/helpers/ft_getenv.c
 char	*ft_getenv(const char *name, const char **envp);
+
+// built_in/helpers/handling_pipes_for_cd.c
+bool	handle_pipes_for_cd(t_minishell *sh, int nb_cmds, char **argv);
 
 #endif
