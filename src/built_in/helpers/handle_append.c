@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 11:37:54 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/12 14:23:10 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/12 15:51:22 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char	*remove_plus(char *var, t_minishell *sh)
 	int		j;
 	char	*new;
 
-	new = ft_calloc(ft_strlen(var), sizeof(char));
+	new = ft_calloc(ft_strlen(var) + 1, sizeof(char));
 	if (!new)
 		error_exit(sh, sh->nb_cmds);
 	i = 0;

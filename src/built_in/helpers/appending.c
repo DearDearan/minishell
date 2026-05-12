@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 16:30:34 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/08 16:49:01 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/12 15:51:38 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	*get_varname_with_equal(char *str)
 		return (NULL);
 	while (str[i] && (ft_isalnum(str[i]) == 1 || str[i] == '_'))
 		i++;
-	ret = ft_calloc(i + 1, sizeof(char));
+	ret = ft_calloc(i + 2, sizeof(char));
 	if (!ret)
 		return (NULL);
 	i = 0;
