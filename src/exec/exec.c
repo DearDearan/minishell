@@ -85,8 +85,9 @@ static void	exec_prompt(t_minishell *sh, int nb_cmds, char **env_path)
 				cmd->path = get_executable_path(cmd->argv[0], env_path);
 				if (!cmd->path)
 					error_exit(sh, nb_cmds);
-				make_child(sh, cmd, env_path);
 			}
+			if (cmd->argv)
+				make_child(sh, cmd, env_path);
 		}
 		close_fds(&cmd->fds);
 		i++;
