@@ -6,7 +6,7 @@
 #    By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/20 10:13:22 by Camille           #+#    #+#              #
-#    Updated: 2026/05/12 18:13:38 by lifranco         ###   ########.fr        #
+#    Updated: 2026/05/16 14:56:17 by lifranco         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@$(MAKE) -C $(LIBFT_DIR) fclean
-	@printf "Cleaned everything!\n"
+	@printf "$(GREEN)Cleaned everything!\n$(RESET)Enjoy the Free Space!\n"
 re: fclean all
 
 .PHONY: all clean fclean re
