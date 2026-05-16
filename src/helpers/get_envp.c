@@ -12,17 +12,7 @@
 
 #include "minishell.h"
 
-static int	get_env_size(char **str)
-{
-	int	i;
-
-	if (!str || !*str)
-		return (-1);
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
+static int	get_env_size(char **str);
 
 void	get_envp(char **envp, t_minishell *shell)
 {
@@ -47,4 +37,16 @@ void	get_envp(char **envp, t_minishell *shell)
 	}
 	env[i] = NULL;
 	shell->envp = env;
+}
+
+static int	get_env_size(char **str)
+{
+	int	i;
+
+	if (!str || !*str)
+		return (-1);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
