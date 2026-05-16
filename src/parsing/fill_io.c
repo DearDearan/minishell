@@ -17,15 +17,14 @@ static char	*expand_file(char *str, t_minishell *sh, t_lexer *lex, t_io *io)
 	char	*trim;
 	char	*expanded;
 
-	if (lex->type == FILENAME)
+	if (lex->next->type == FILENAME)
 	{
-		if (ft_strchr(str, '\"') || ft_strchr(str, '\''))
-		{
+		if (!ft_strchr(str, '\"') && !ft_strchr(str, '\''))
 			io->expand_heredoc = true;
-			trim = trim_quotes(str);
-			return (trim);
-		}
-		return (str);
+		trim = trim_quotes(str);
+		if (!trim)
+			error_parsing(lex, sh, sh->nb_cmds);
+		return (trim);
 	}
 	expanded = expand(str, sh);
 	trim = trim_quotes(expanded);
