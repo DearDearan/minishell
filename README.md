@@ -50,21 +50,37 @@ CTRL+D is not a signal. It puts an EOF (End‑Of‑File) character in the prompt
 
 ## Instructions
 
-### Compilation
-
-Use `make` or `make re` to compile the program. To clean generated files use `make clean` or `make fclean`.
-
 ### Usage
 
-To use the minishell program, simply run minishell. It will wait for a prompt and you can uses it like bash.
+To use our Minishell, you should clone our project with
+
+`git clone`
+
+then, use `make` or `make re` to compile the program. To clean generated files use `make clean` or `make fclean`.
+
+finally, simply run our Minishell by using 
+
+`./minishell`
+
+It will wait for a prompt and you can uses it like bash.
 
 ## Technical Choices
 
-### Parsing (by DearDearan)
+### Parsing (by Liam François)
 
-The parsing of Minishell is the equivalent of stubbing your toe while stepping on a lego while having a testicular torsion. It's one of the most MISERABLE THING I'VE EVER DONE.
+The parsing of Minishell is the equivalent of stubbing your toe while stepping on a lego while having a testicular torsion. <ins>**It's one of the most MISERABLE THING I'VE EVER DONE IN MY ENTIRE LIFE**</ins>.
 
-The parsing handles redirections and pipes that are not separated by a space. how ? BY ADDING SPACES
+*ahem*, after this crashout, here's how the Parsing handles everything.
+
+The parsing handles redirections and pipes that are not separated by a space. how ? by simply adding spaces to them.
+
+The parsing also checks for syntax errors in the limiters. There is a seperate parsing for syntax error (Quotes or unhandled chars) that is done before anything.
+
+After checking everything is right, it divides everything written by whitespaces, except if inside quotes, and it gets tokenized (redirections characters are assigned the right type, filenames are checked, pipes creates new command and the rests are words.)
+
+Then it puts everything back in place, putting commands in their right pipe, in the right redir etc.
+
+Finally, it sends it to the Execution part, after cleaning the tokenizer.
 
 ### Handling Signals (by Camille Boucher)
 
@@ -80,7 +96,7 @@ During execution, I used the stat function to handle non‑executable files, fil
 
 - `strace` can be use to inspect bash behaviors in detail.
 
-### Authorised and interesting functions
+### Authorized and interesting functions
 
 - `getenv`: retrieve an environment variable (we coded ft_getenv for our custom env).
 - `access`: determine whether a file is accessible and its permissions (using the path and an amode RWXF).
@@ -115,3 +131,17 @@ During execution, I used the stat function to handle non‑executable files, fil
 3.	Peer-to-peer learning.
 4.	man RTFM
 5.	Web research and AI chat for some notions.
+
+## The End
+
+- Well, what did you think of this project Camille ?
+
+* [Met ce que tu veux]
+
+- Good ! Well, i thought it was awesome, although very unexplained...
+
+So, to finish in style, here's a Liam/Dearanfun fact!
+
+Did you know? The group is after the book of the same name! This book, written by Mark Z. Danielewski, inspired the whole Backrooms mythology and also was the biggest inspiration of the best Doom II Mod ever made : MyHouse.pk3! 
+
+[Si tu veux met un fun fact aussi.]
