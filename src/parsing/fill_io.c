@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 16:07:59 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/12 18:00:30 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/16 14:22:52 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,14 @@ static char	*expand_file(char *str, t_minishell *sh, t_lexer *lex, t_io *io)
 	char	*trim;
 	char	*expanded;
 
-	if (lex->type == FILENAME)
+	if (lex->type == LIM)
 	{
-		if (ft_strchr(str, '\"') || ft_strchr(str, '\''))
-		{
-			io->expand_heredoc = false;
-			trim = trim_quotes(str);
-			return (trim);
-		}
-		return (str);
+		if (!ft_strchr(str, '\"') && !ft_strchr(str, '\''))
+			io->expand_heredoc = true;
+		trim = trim_quotes(str);
+		if (!trim)
+			error_parsing(lex, sh, sh->nb_cmds);
+		return (trim);
 	}
 	expanded = expand(str, sh);
 	trim = trim_quotes(expanded);
@@ -42,7 +41,6 @@ static t_io	*ft_newnode(t_minishell *sh, t_lexer *lex)
 	node = ft_calloc(sizeof(t_io), 1);
 	if (!node)
 		error_parsing(lex, sh, sh->nb_cmds);
-	node->expand_heredoc = true;
 	node->next = NULL;
 	return (node);
 }
@@ -82,7 +80,6 @@ static void	replace_first_io(t_minishell *sh, t_lexer *lexed, int i)
 	tmp = add_io(lexed, sh);
 	if (!tmp)
 		return ;
-	tmp->ios[i]->expand_heredoc = true;
 	free(sh->ios[i]);
 	sh->ios[i] = tmp;
 }
