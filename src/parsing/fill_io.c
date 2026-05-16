@@ -6,7 +6,7 @@
 /*   By: lifranco <lifranco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/02 16:07:59 by lifranco          #+#    #+#             */
-/*   Updated: 2026/05/12 17:17:25 by lifranco         ###   ########.fr       */
+/*   Updated: 2026/05/16 14:22:52 by lifranco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,14 @@ static char	*expand_file(char *str, t_minishell *sh, t_lexer *lex, t_io *io)
 	char	*trim;
 	char	*expanded;
 
-	if (lex->type == FILENAME)
+	if (lex->type == LIM)
 	{
-		if (ft_strchr(str, '\"') || ft_strchr(str, '\''))
-		{
+		if (!ft_strchr(str, '\"') && !ft_strchr(str, '\''))
 			io->expand_heredoc = true;
-			trim = trim_quotes(str);
-			return (trim);
-		}
-		return (str);
+		trim = trim_quotes(str);
+		if (!trim)
+			error_parsing(lex, sh, sh->nb_cmds);
+		return (trim);
 	}
 	expanded = expand(str, sh);
 	trim = trim_quotes(expanded);
