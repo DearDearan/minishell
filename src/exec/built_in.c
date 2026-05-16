@@ -19,7 +19,9 @@ bool	is_builtin_for_parent(t_cmd *cmd, char *bin)
 	size = ft_strlen(bin);
 	if (!size)
 		return (false);
-	if (size == 4 && !ft_strncmp(bin, "exit", size))
+	if (size == 2 && !ft_strncmp(bin, "cd", size))
+		cmd->built_in = ft_cd;
+	else if (size == 4 && !ft_strncmp(bin, "exit", size))
 		cmd->built_in = ft_exit;
 	else if (size == 6 && !ft_strncmp(bin, "export", size))
 		cmd->built_in = ft_export;
