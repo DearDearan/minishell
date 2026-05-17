@@ -90,7 +90,7 @@ When handling signal management in C, it’s important to use async-signal-safe 
 
 ### Execution part (by Camille Boucher)
 
-During execution, I used the stat function to handle non‑executable files, files not found, or files without sufficient permissions. This allowed me to better understand the Linux paradigm "Everything is a file" and to begin exploring the inode structure of files (`man 7 inode`). I was also able to see concepts such as sockets and the macros used to handle file types, for example.
+During execution, I used the stat function to handle non‑executable files, files not found, or files without sufficient permissions. This allowed me to better understand the Linux paradigm "Everything is a file" and to begin exploring the inode structure of files (`man 7 inode`). I was also able to see concepts such as sockets, FIFO (pipes for example : First In First Out) and the macros used to handle file types, for example.
 
 ## Other Concepts Covered
 
@@ -136,12 +136,10 @@ During execution, I used the stat function to handle non‑executable files, fil
 
 - Well, what did you think of this project Camille ?
 
-* [Met ce que tu veux]
+- The project is very cool. I loved working on the part about system calls with signals, using pipes, and making children, etc... I think the topic could have been more precise because a lot of things are open to interpretation, but that's also what's interesting; it stimulates discussion and different viewpoints.
 
 - Good ! Well, i thought it was awesome, although very unexplained...
 
 So, to finish in style, here's a Liam/Dearanfun fact!
 
-Did you know? The group is after the book of the same name! This book, written by Mark Z. Danielewski, inspired the whole Backrooms mythology and also was the biggest inspiration of the best Doom II Mod ever made : MyHouse.pk3! 
-
-[Si tu veux met un fun fact aussi.]
+Did you know? The group is after the book of the same name! This book, written by Mark Z. Danielewski, inspired the whole Backrooms mythology and also was the biggest inspiration of the best Doom II Mod ever made : MyHouse.pk3!
