@@ -26,13 +26,13 @@ It also **implement pipes**: `|`. The **output** of each command in the pipeline
 
 All our built-ins except echo do not handle options.
 
-- `echo`: displays a line of text. The `-n` option erase the newline at the end of the text written. (ex: `echo Bonjour $USER`)
+- `echo`: displays a line of text. The `-n` option erase the newline at the end of the text written. (ex: `echo Bonjour $USER` donne `Bonjour USER\n`)
 - `cd`: changes the working directory. (ex: `cd Downloads`)
 - `pwd`: prints the name of the current/working directory.
-- `export`: set the export attribute for variables. (ex: `export foe=bar`)
+- `export`: set the export attribute for variables. Also prints every environment variables, including hidden ones. (ex: `export foe=bar`, `export foe+=42`)
 - `unset`: unset values and attributes of variables. (ex: `unset foe`)
-- `env`: prints environment variables.
-- `exit`: cause the shell to exit.
+- `env`: prints environment variables except hidden ones.
+- `exit`: cause the shell to exit, except if inside a pipe.
 
 ### Other behaviors
 
@@ -42,9 +42,9 @@ It handles single quotes, which prevents the shell from interpreting special cha
 
 It also handles expands, which are environment variables (`$HOME` for example, expand to `/home/user`). Although, `$?` expand the exit status of the most recently executed foreground pipeline.
 
-minishell handles signals of SIGINT (CTRL+C) and SIGQUIT (CTRL+\):
-- CTRL+C displays a new prompt on a newline.
-- CTRL+\ is absolutely fucking useless.
+minishell handles signals of SIGINT (CTRL + C) and SIGQUIT (CTRL + \ ):
+- CTRL + C displays a new prompt on a newline.
+- CTRL + \ is absolutely fucking useless.
 
 CTRL+D is not a signal. It puts an EOF (End‑Of‑File) character in the prompt. It exits the shell if the line is empty.
 
@@ -70,7 +70,7 @@ It will wait for a prompt and you can uses it like bash.
 
 The parsing of Minishell is the equivalent of stubbing your toe while stepping on a lego while having a testicular torsion. <ins>**It's one of the most MISERABLE THING I'VE EVER DONE IN MY ENTIRE LIFE**</ins>.
 
-*ahem*, after this crashout, here's how the Parsing handles everything.
+*ahem*, after this justified crashout, here's how the Parsing handles everything.
 
 The parsing handles redirections and pipes that are not separated by a space. how ? by simply adding spaces to them.
 
