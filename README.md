@@ -124,22 +124,23 @@ During execution, I used the stat function to handle non‑executable files, fil
 
 1.	[Article by Roslyn Michelle](https://www.rozmichelle.com/pipes-forks-dups/)
 2.	[CodeVault's Youtube playlist](https://www.youtube.com/playlist?list=PLfqABt5AS4FkW5mOn2Tn9ZZLLDwA3kZUY)
-3.	[GNU Readline Library](https://tiswww.cwru.edu/php/chet/readline/readline.html#index-rl_005fredisplay)
-4.	[GNU History Library](https://tiswww.case.edu/php/chet/readline/history.html)
-5.	[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
-6.	[Minishell testing](https://docs.google.com/document/d/1r0yE7gK12J6lW79mzY8ELyKJEiDqkOeRfXZ6DWSKZVE/) Because 42’s subject isn’t precise enough.
-3.	Peer-to-peer learning.
-4.	man RTFM
-5.	Web research and AI chat for some notions.
+3.	[Mes conseils si je devais recommencer minishell by Mostafa Omrane](https://medium.com/@mostafa.omrane/mes-conseils-si-je-devais-recommencer-minishell-a9783c51ba1b)
+4.	[GNU Readline Library](https://tiswww.cwru.edu/php/chet/readline/readline.html#index-rl_005fredisplay)
+5.	[GNU History Library](https://tiswww.case.edu/php/chet/readline/history.html)
+6.	[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+7.	[Minishell testing](https://docs.google.com/document/d/1r0yE7gK12J6lW79mzY8ELyKJEiDqkOeRfXZ6DWSKZVE/) Because 42’s subject isn’t precise enough.
+8.	Peer-to-peer learning.
+9.	man RTFM
+10.	Web research and AI chat for some notions.
 
 ## The End
 
-- Well, what did you think of this project Camille ?
+- Well, what did you think of this project Camille?
 
 - The project is very cool. I loved working on the part about system calls with signals, using pipes, and making children, etc... I think the topic could have been more precise because a lot of things are open to interpretation, but that's also what's interesting; it stimulates discussion and different viewpoints.
 
 - Good ! Well, i thought it was awesome, although very unexplained...
 
-So, to finish in style, here's a Liam/Dearanfun fact!
+So, to finish in style, here's a Liam/Dearan fun fact!
 
-Did you know? The group is after the book of the same name! This book, written by Mark Z. Danielewski, inspired the whole Backrooms mythology and also was the biggest inspiration of the best Doom II Mod ever made : MyHouse.pk3!
+Did you know? The group is named after the book of the same name! This book, written by Mark Z. Danielewski, inspired the whole Backrooms mythology and also was the biggest inspiration of the best Doom II Mod ever made : MyHouse.pk3!
